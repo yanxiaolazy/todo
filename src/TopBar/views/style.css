@@ -1,0 +1,65 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+}
+.user-container {
+  position: relative;
+}
+.user {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: relative;
+}
+.pannel {
+  position: absolute;
+  display: none;
+  z-index: 20;
+  width: 100px;
+  height: 150px;
+  background-color: #fff;
+  right: -10px;
+  top: 45px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px #b2bec3;
+  animation: pannel .5s;
+  color: #636e72;
+}
+.pannel::before {
+  content: '';
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  border-left: 8px solid transparent;
+  top: -15px;
+  right: 20px;
+}
+
+@keyframes pannel {
+  from {
+    top: 55px;
+  }
+  to {
+    top: 45px;
+  }
+}
+.logout-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+.logout-btn:hover {
+  background-color: rgba(112, 182, 115, .8);
+}
