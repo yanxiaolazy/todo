@@ -6,12 +6,12 @@ import './style.css';
 
 const FormItem = Form.Item;
 
-export default function Login({loginStatus, onFinish}) {
+export default function Login({loading, loginStatus, onFinish}) {
 
   return(
     <div className='login'>
       <QueueAnim delay={300} type='bottom'>
-        <Spin spinning={loginStatus} key='login'>
+        <Spin spinning={loading} key='login'>
           <Form 
             className='form-container' 
             labelCol={{span: 18}} 

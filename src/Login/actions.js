@@ -1,4 +1,4 @@
-import { LOGIN_STATUS, USER_LOGIN } from "./actionTypes";
+import { LOGIN_STATUS, USER_LOGIN, LOADING } from "./actionTypes";
 
 export function setLoginStatus(status) {
   return {
@@ -11,5 +11,12 @@ export function setUserValue(user) {
   return {
     type: USER_LOGIN,
     user
+  }
+}
+
+export function setLoading(loading) {
+  return {
+    type: LOADING,
+    loading
   }
 }

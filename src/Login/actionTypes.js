@@ -1,2 +1,3 @@
-export const LOGIN_STATUS = 'Login/LOGIN_STATUS';
-export const USER_LOGIN = 'Login/USER_LOGIN';
+export const LOGIN_STATUS = 'LOGIN/LOGIN_STATUS';
+export const LOADING = 'LOGIN/LOADING';
+export const USER_LOGIN = 'LOGIN/USER_LOGIN';
