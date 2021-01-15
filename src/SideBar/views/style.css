@@ -1,0 +1,25 @@
+.sidebar {
+  display: flex;
+  justify-content: flex-start;
+  /* align-items: center; */
+  flex-flow: column nowrap;
+}
+.sidebar
+div {
+  padding: 10px 30%;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.sidebar
+a {
+  color: #636e72;
+  transition: all .5s;
+}
+
+.sidebar
+a:hover {
+  color: #fff;
+  background-color: rgba(112, 182, 115, .8);
+}

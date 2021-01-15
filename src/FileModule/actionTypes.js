@@ -1,0 +1,2 @@
+export const ADD_FILE = 'FILEMODULE/ADD_FILE';
+export const IS_OPEN_MODAL = 'FILEMODULE/IS_OPEN_MODAL';

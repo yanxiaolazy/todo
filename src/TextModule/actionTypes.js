@@ -1,0 +1,1 @@
+export const ADD_VALUE = 'TEXTMODULE/ADD_VALUE';

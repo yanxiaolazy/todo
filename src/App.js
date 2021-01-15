@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import QueueAnim from "rc-queue-anim";
 import Login, { actions as loginAction } from "./Login";
-import AddProject from "./AddProject";
+import EditProject from "./EditProject";
 import TopBar from './TopBar';
 import SideBar from "./SideBar";
-import './App.css';
 
 const LayoutHeader = Layout.Header,
       LayoutSider = Layout.Sider,
@@ -37,7 +36,7 @@ function App({loginStatus, dispatch}) {
     } else {
       dispatch(loginAction.setLoginStatus(true));
     }
-  }, [history, loginStatus]);
+  }, [history, loginStatus, dispatch]);
 
   return (
     <>
@@ -58,7 +57,7 @@ function App({loginStatus, dispatch}) {
             <QueueAnim type='bottom' delay='150'>
               <Switch key='content'>
                 <Route exact path='/' />
-                <Route path='/new' component={AddProject} />
+                <Route path='/new' component={EditProject} />
                 {/* <Route component={NotFound} /> */}
               </Switch>
             </QueueAnim>

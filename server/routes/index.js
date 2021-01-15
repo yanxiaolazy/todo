@@ -1,26 +1,26 @@
 const Router = require('@koa/router');
-const {login} = require('./middleware');
+const {login, upload, deleteFile} = require('./middleware');
 
-const route = new Router({prefix: '/api'});
+const router = new Router({prefix: '/api'});
 
-module.exports = route;
-
-// route
+// router
 //   .get('/view/project', viewProject)
 //   .get('/view/date', viewDate);
 
-route
+router
   .post('/login', login)
   // .post('/logout', logout)
-  // .post('/upload', upload)
+  .post('/upload', upload)
   // .post('/new/user', newUser)
   // .post('/new/project', newProject)
   // .post('/verify/username', verifyUsername)
   // .post('/verify/token', verifyToken);
 
 
-// route
-//   .delete('/delete/file', deleteFile)
+// router
+  .delete('/delete/file', deleteFile)
 //   .delete('/delete/project', deleteProject)
-//   .delete('/delete/image', deleteImage)
 //   .delete('/delete/user', deleteUser);
+
+
+module.exports = router;

@@ -34,7 +34,10 @@ export const baseConfig = {
   // }],
 
   // `headers` are custom headers to be sent
-  // headers: {'X-Requested-With': 'XMLHttpRequest'},
+  headers: {
+    // 'X-Requested-With': 'XMLHttpRequest',
+    // 'Access-Control-Allow-Origin': 'http://localhost:3000'
+  },
 
   // `params` are the URL parameters to be sent with the request
   // Must be a plain object or a URLSearchParams object
@@ -199,7 +202,6 @@ export function request(url:string, method:string, data:object, config:object) {
       resolve(response);
     })
     .catch(error => {
-      reject();
       if (error.response) {
         const response = error.response;
         if (response.status === 401) {
@@ -209,7 +211,7 @@ export function request(url:string, method:string, data:object, config:object) {
         } else if (response.status === 404) {
           message.error('请求资源不存在');
         } else {
-          message.error('Error');
+          message.error(`Error ${response.data.msg}`);
         }
       } else if (error.request) {
         message.error(`Error ${error.message}`);
@@ -217,8 +219,8 @@ export function request(url:string, method:string, data:object, config:object) {
         message.error(`Error ${error.message}`);
       }
       console.log(error.config);
-    });
-        
+      reject();
+    });        
   }
 }
 

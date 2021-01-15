@@ -1,0 +1,11 @@
+.text-module {
+  width: 700px;
+  min-height: 300px;
+}
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+  border: none;
+}
+.ql-toolbar.ql-snow {
+  border-bottom: 1px solid rgba(112, 182, 115, .5);
+}

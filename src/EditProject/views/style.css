@@ -1,0 +1,88 @@
+.add-project {
+  margin: 30px;
+}
+
+.add-title {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.add-title-display {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 500px;
+}
+.add-title-display
+span:first-child {
+  font-size: 20px;
+  font-weight: 500;
+}
+.add-title-input {
+  width: 500px !important;
+}
+
+.add-title>span:last-child {
+  margin-left: 20px;
+  color: var(--theme-color);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  padding: 5px;
+  border-radius: 5px;
+  transition: all .5s;
+  display: inline-block;
+  line-height: 20px;
+}
+.add-title>span:last-child:hover {
+  background-color: var(--bck-color);
+  color: var(--font-hover-color);
+}
+.add-modules>div {
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+.add-modules>div:last-child {
+  border: none;
+}
+
+/* AddItem.js */
+.add-module-btns {
+  display: inline-block;
+  /* justify-content: flex-start;
+  align-items: center; */
+  line-height: 25px;
+}
+
+.add-module-btns>span {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--theme-color);
+  padding: 0 7px;
+  margin: 0 5px;
+  transition: all .5s;
+}
+
+.add-module-btns>span:hover {
+  background-color: var(--bck-color);
+  color: var(--font-hover-color);
+}
+
+.module-title
+span:first-child {
+  font-size: 16px;
+}
+.module-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  /* align-items: flex-start; */
+}
+.module-content
+.text-module {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  margin: 20px;
+}
