@@ -26,6 +26,7 @@ function addFileModule(state, action) {
   temp.forEach(f => {
     if (f.moduleId === action.moduleId) {
       f.fileList= updateFile(f.fileList, action);
+      isNew = false;
     }
   });
 
@@ -50,6 +51,7 @@ function updateModalStatus(state, action) {
   temp.forEach(f => {
     if (f.moduleId === action.moduleId) {
       f.isOpenModal = action.isOpenModal;
+      isNew = false;
     }
   });
 
