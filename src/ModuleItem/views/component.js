@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Input, Card} from "antd";
+import './style.css';
 
 function getFileBase64(file) {
   return new Promise((resolve, reject) => {
@@ -69,7 +70,7 @@ export default function AddItem({
   }
 
   return(
-    <Card {...{id}}>
+    <Card key='module-item' {...{id}} className='module-item animate-bottom'>
       <div className='add-title'>
         {isDisplay ? 
         <div className='add-title-display module-title'>

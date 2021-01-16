@@ -15,6 +15,7 @@ export default function FileModule({
       visible={isOpen}
       maskClosable={false}
       title='添加文件'
+      className={isOpen ? 'animate-bottom' : ''}
       {...{onCancel, onOk}}
     >
       <Upload

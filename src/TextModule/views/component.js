@@ -10,7 +10,7 @@ const styles = {
 export default function TextModule({value, onChange}) {
 
   return(
-    <div className='text-module'>
+    <div className='text-module animate-bottom'>
       <ReactQuill {...{value, onChange}} style={styles.quill}/>
     </div>
   );

@@ -54,13 +54,11 @@ function App({loginStatus, dispatch}) {
             </QueueAnim>
           </LayoutSider>
           <LayoutContent style={styles.content}>
-            <QueueAnim type='bottom' delay='150'>
-              <Switch key='content'>
-                <Route exact path='/' />
-                <Route path='/new' component={EditProject} />
-                {/* <Route component={NotFound} /> */}
-              </Switch>
-            </QueueAnim>
+            <Switch key='content'>
+              <Route exact path='/' />
+              <Route path='/new' component={EditProject} />
+              {/* <Route component={NotFound} /> */}
+            </Switch>
           </LayoutContent>
         </Layout>
       </Layout>}

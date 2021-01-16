@@ -35,8 +35,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   const {history} = ownProps,
         createModuleId = generateId();
-  console.log('dispatch -- ',dispatch)
-  console.log('ownProps --- ', ownProps)
+
   return {
     // 这里统一处理数据
     addModuleItem() {

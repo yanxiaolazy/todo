@@ -1,5 +1,5 @@
-import { Button, Input } from "antd";
 import { useEffect, useState, useRef } from "react";
+import { Button, Input } from "antd";
 import './style.css';
 
 export default function AddProject({
@@ -33,7 +33,7 @@ export default function AddProject({
   }
 
   return(
-    <div className='add-project'>
+    <div className='edit-project animate-bottom'>
       <Button type='primary' htmlType='button' onClick={addModuleItem}>Add Module</Button>
       <div className='add-title'>
         {isDisplay ? 
@@ -56,8 +56,9 @@ export default function AddProject({
             return (item.moduleItem);
           })
         }
-        <div>
+        <div className='edit-project-btns'>
           <Button type='primary' htmlType='button' onClick={onPublish}>publish</Button>
+          <Button type='primary' htmlType='button' onClick={addModuleItem}>Add Module</Button>
         </div>
       </div>
     </div>

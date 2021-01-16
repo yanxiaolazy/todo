@@ -1,0 +1,46 @@
+.ant-card.module-item {
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.module-title
+span:first-child {
+  font-size: 16px;
+}
+
+.add-module-btns {
+  display: inline-block;
+  /* justify-content: flex-start;
+  align-items: center; */
+  line-height: 25px;
+}
+
+.add-module-btns>span {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--theme-color);
+  padding: 0 7px;
+  margin: 0 5px;
+  transition: all .5s;
+}
+
+.add-module-btns>span:hover {
+  background-color: var(--bck-color);
+  color: var(--font-hover-color);
+}
+
+.module-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  /* align-items: flex-start; */
+}
+
+.module-content
+.text-module {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  margin: 20px;
+}

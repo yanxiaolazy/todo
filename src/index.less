@@ -20,3 +20,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.animate-bottom {
+  transform: translateY(0px) !important;
+  -ms-transform: translateY(0px) !important;
+  -webkit-transform: translateY(0px) !important;
+  animation: bottom .5s ease-in-out !important;
+  -moz-animation: bottom .5s ease-in-out !important;
+  -webkit-animation: bottom .5s ease-in-out !important;
+  opacity: 1 !important;
+}
+@-moz-keyframes bottom {
+  from {
+    transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    -webkit-transform: translateY(50px);
+    opacity: 0;
+  }
+}
+@keyframes bottom {
+  from {
+    transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    -webkit-transform: translateY(50px);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes bottom {
+  from {
+    transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    -webkit-transform: translateY(50px);
+    opacity: 0;
+  }
+}
