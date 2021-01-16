@@ -25,3 +25,9 @@ export function addModuleTitle(moduleId, moduleTitle) {
     moduleTitle
   }
 }
+
+export function reset() {
+  return {
+    type: actionTypes.RESET
+  }
+}

@@ -48,6 +48,27 @@ function addModule(state, action) {
   return temp;
 }
 
+function addFileModule(state, action) {
+  const temp = state.concat();
+  let isNew = true;
+
+  temp.forEach(f => {
+    if (f.moduleId === action.moduleId) {
+      f.fileModule = action.fileModule;
+      isNew = false;
+    }
+  });
+
+  if (isNew) {
+    temp.push({
+      moduleId: action.moduleId, 
+      fileModule: action.fileModule
+    });
+  }
+
+  return temp;
+}
+
 
 function addModuleTitle(state, action) {
   const temp = state.concat();
@@ -69,11 +90,13 @@ function addModuleTitle(state, action) {
 export default function reducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_FILE_MODULE:
-      return addModule(state, action)
+      return addFileModule(state, action)
     case actionTypes.ADD_TEXT_MODULE:
       return addModule(state, action)
     case actionTypes.MODULE_TITLE:
       return addModuleTitle(state, action)
+    case actionTypes.RESET:
+      return []
     default:
       return state
   }

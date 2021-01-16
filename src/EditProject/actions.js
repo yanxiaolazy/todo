@@ -14,3 +14,9 @@ export function addModuleItem(moduleId, moduleItem) {
     moduleItem
   }
 }
+
+export function reset() {
+  return {
+    type: actionTypes.RESET
+  }
+}

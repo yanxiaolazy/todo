@@ -19,11 +19,13 @@ function getModuleItem(state, moduleId, type) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const {moduleId} = ownProps;
+  const {moduleId} = ownProps,
+        {moduleItem, fileModule} = state;
   
   return {
-    textModules: getModuleItem(state.moduleItem, moduleId, 'textModule'),
-    fileModules: getModuleItem(state.moduleItem, moduleId, 'fileModule')
+    textModules: getModuleItem(moduleItem, moduleId, 'textModule'),
+    fileModule: getModuleItem(moduleItem, moduleId, 'fileModule'),
+    fileList: getModuleItem(fileModule, moduleId, 'fileList')
   }
 }
 

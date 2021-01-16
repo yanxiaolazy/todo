@@ -1,5 +1,5 @@
 const Router = require('@koa/router');
-const {login, upload, deleteFile} = require('./middleware');
+const {login, upload, newProject, deleteFile} = require('./middleware');
 
 const router = new Router({prefix: '/api'});
 
@@ -12,7 +12,7 @@ router
   // .post('/logout', logout)
   .post('/upload', upload)
   // .post('/new/user', newUser)
-  // .post('/new/project', newProject)
+  .post('/new/project', newProject)
   // .post('/verify/username', verifyUsername)
   // .post('/verify/token', verifyToken);
 

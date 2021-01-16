@@ -34,7 +34,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   const {id, moduleId} = ownProps;
-  console.log(id, moduleId)
+
   return {
     onChange(content) {
       dispatch(actions.addValue(moduleId, id, content));

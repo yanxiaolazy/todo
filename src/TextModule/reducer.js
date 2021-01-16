@@ -38,7 +38,7 @@ function addTextModule(state, action) {
       }]
     });
   }
-  console.log('temp --- ', temp)
+
   return temp;
 }
 
@@ -46,6 +46,8 @@ export default function reducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_VALUE:
       return addTextModule(state, action)
+      case actionTypes.RESET:
+        return []
     default:
       return state
   }

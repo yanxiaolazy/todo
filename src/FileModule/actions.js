@@ -17,3 +17,9 @@ export function addModalStatus(moduleId, id, isOpenModal) {
     isOpenModal
   }
 }
+
+export function reset() {
+  return {
+    type: actionTypes.RESET
+  }
+}

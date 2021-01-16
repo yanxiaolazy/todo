@@ -3,6 +3,7 @@ import { UploadOutlined } from "@ant-design/icons";
 
 export default function FileModule({
   isOpen, 
+  fileList,
   uploadAction, 
   onChange, 
   onRemove,
@@ -21,7 +22,7 @@ export default function FileModule({
         multiple={true}
         // withCredentials
         action={uploadAction}
-        {...{onRemove, onChange}}
+        {...{fileList, onRemove, onChange}}
       >
         <Button icon={<UploadOutlined />}>Add File</Button>  
       </Upload>

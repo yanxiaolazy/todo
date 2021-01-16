@@ -5,7 +5,8 @@ import './style.css';
 export default function AddProject({
   moduleItems,
   addModuleItem,
-  onAddProjectTitle
+  onAddProjectTitle,
+  onPublish
 }) {
   const [projectTitle, setProjectTitle] = useState(null);
   const [isDisplay, setIsDisplay] = useState(false);
@@ -56,7 +57,7 @@ export default function AddProject({
           })
         }
         <div>
-          <Button type='primary' htmlType='button'>publish</Button>
+          <Button type='primary' htmlType='button' onClick={onPublish}>publish</Button>
         </div>
       </div>
     </div>

@@ -3,19 +3,21 @@ import { uploadApi, deleteFileApi } from "../../utils/api";
 import FileModule from "./component";
 import * as actions from "../actions";
 
-function getModalStatus(state, moduleId, id) {
+function getFileModule(state, moduleId, type) {
   const temp = state.concat();
 
   const modal =  temp.filter(f => f.moduleId === moduleId);
 
   if (modal.length === 0) return false;
-  return modal[0].isOpenModal;
+  return modal[0][type];
 }
 
 function mapStateToProps(state, ownProps) {
-  const {moduleId, id} = ownProps;
+  const {moduleId} = ownProps,
+        {fileModule} = state;
   return {
-    isOpen: getModalStatus(state.fileModule, moduleId, id)
+    isOpen: getFileModule(fileModule, moduleId, 'isOpenModal'),
+    fileList: getFileModule(fileModule, moduleId, 'fileList')
   }
 }
 
@@ -40,10 +42,10 @@ function mapDispatchToProps(dispatch, ownProps) {
           isRemove = true;
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
 
-      return isRemove
+      return isRemove;
     },
     onCancel() {
       dispatch(actions.addModalStatus(moduleId, id, false));

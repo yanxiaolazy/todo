@@ -8,3 +8,9 @@ export function addValue(moduleId, id, value) {
     text: value
   }
 }
+
+export function reset() {
+  return {
+    type: actionTypes.RESET
+  }
+}

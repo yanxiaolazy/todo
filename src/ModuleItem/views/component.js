@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Input, Card} from "antd";
-import FileModule from "../../FileModule";
 
 function getFileBase64(file) {
   return new Promise((resolve, reject) => {
@@ -16,7 +15,7 @@ function getFileBase64(file) {
 }
 
 async function showFiles(fileList, saveFiles) {
-  const files = fileList?.concat();
+  const files = fileList.concat();
   if (!files) return;
 
   let temps =  files.map(async file => {
@@ -46,7 +45,7 @@ async function showFiles(fileList, saveFiles) {
 export default function AddItem({
   id,
   textModules, 
-  fileModules,
+  fileModule,
   onClick,
   fileList,
   onSaveModuleTitle
@@ -91,8 +90,8 @@ export default function AddItem({
       </div>
       <div className='module-content'>
         {/* <FileModule {...{id}}/> */}
-        {/* {fileViews?.map(file => file)} */}
-        {fileModules?.map(module => module.list)}
+        {fileViews?.map(file => file)}
+        {fileModule}
         {textModules?.map(module => module.list)}
       </div>
     </Card>

@@ -27,6 +27,8 @@ export default function reducer(state = {}, action) {
       }
     case actionTypes.PROJECT_TITLE:
       return {...state, projectTitle: action.projectTitle}
+    case actionTypes.RESET:
+      return {}
     default:
       return state;
   }
