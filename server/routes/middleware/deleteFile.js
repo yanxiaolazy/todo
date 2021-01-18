@@ -20,7 +20,7 @@ async function deleteFile(ctx, next) {
       ctx.body = {code: 200, msg: 'ok', params: {}, sucess: true};
     }
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     ctx.status = 404;
     ctx.type = 'json';
     ctx.body = {code: 404, msg: 'not found', params: {}, sucess: true};
