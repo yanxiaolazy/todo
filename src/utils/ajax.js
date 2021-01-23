@@ -181,9 +181,9 @@ export const baseConfig = {
 
 }
 
-export function request(url:string, method:string, data:object, config:object) {
+export function request(url, method, data, config) {
   
-  return (resolve:Function, reject:Function) => {
+  return (resolve, reject) => {
     const conf = Object.assign({}, baseConfig, config);
 
     if (url) {
@@ -233,7 +233,7 @@ export function request(url:string, method:string, data:object, config:object) {
  * @param {?string} data
  * 
  */
-export const createApi =  (url:string, method?:string, defaultConfig?:object) => (config?:object) => (data?:object) => {
+export const createApi =  (url, method, defaultConfig) => (config) => (data) => {
   let conf = config;
 
   if (config && (Object.prototype.toString.call(config) === '[object Object]')) {

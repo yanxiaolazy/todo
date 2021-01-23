@@ -23,3 +23,19 @@ export function reset() {
     type: actionTypes.RESET
   }
 }
+
+export function deleteFile(moduleId, file) {
+  return {
+    type: actionTypes.DELETE,
+    moduleId,
+    file
+  }
+}
+
+export function init(init) {
+  return {
+    type: actionTypes.INIT,
+    init
+  }
+}
+

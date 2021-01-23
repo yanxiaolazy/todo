@@ -1,20 +1,10 @@
 import * as actionTypes from "./actionTypes";
 
-export function addTextModule(moduleId, id, textModule) {
+export function addTextModule(moduleId, id) {
   return {
     type: actionTypes.ADD_TEXT_MODULE,
     moduleId,
-    id,
-    textModule
-  }
-}
-
-export function addFileModule(moduleId, id, fileModule) {
-  return {
-    type: actionTypes.ADD_FILE_MODULE,
-    moduleId,
-    id,
-    fileModule
+    id
   }
 }
 
@@ -31,3 +21,20 @@ export function reset() {
     type: actionTypes.RESET
   }
 }
+
+export function deleteTextModule(moduleId, id) {
+  return {
+    type: actionTypes.DELETE_TEXT_MODULE,
+    moduleId,
+    id
+  }
+}
+
+export function init(init) {
+  return {
+    type: actionTypes.INIT,
+    init
+  }
+}
+
+

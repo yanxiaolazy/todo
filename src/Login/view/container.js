@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import Login from "./component";
 import * as actions from "../actions";
 import {loginApi} from "../../utils/api";
+import { setUser } from "../../utils/parse";
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -27,6 +28,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     onFinish(value) {
+      setUser('login', value);
       dispatch(actions.setLoading(true));
       dispatch(actions.setUserValue(value));
       loginApi()({login: value})(resolve, reject);

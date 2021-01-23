@@ -2,18 +2,8 @@ import * as actionTypes from "./actionTypes";
 
 function addModuleItem(state, action) {
   const temp = state?.concat() || [];
-  let isNew = true;
-
-  temp.forEach(f => {
-    if (f.moduleId === action.moduleId) {
-      f.moduleItem = action.moduleItem;
-      isNew = false;
-    }
-  })
-
-  if (isNew) {
-    temp.push({moduleId: action.moduleId, moduleItem: action.moduleItem})
-  }
+ 
+  temp.push({moduleId: action.moduleId});
 
   return temp;
 }
@@ -29,6 +19,8 @@ export default function reducer(state = {}, action) {
       return {...state, projectTitle: action.projectTitle}
     case actionTypes.RESET:
       return {}
+    case actionTypes.INIT:
+      return {...action.init}
     default:
       return state;
   }
