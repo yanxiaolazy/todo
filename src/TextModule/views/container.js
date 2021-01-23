@@ -1,24 +1,26 @@
 import { connect } from "react-redux";
 import TextModule from './component';
 import * as actions from '../actions';
+import { getUser } from "../../utils/parse";
+import { actions as moduleItemActions } from "../../ModuleItem";
 
-function getTextModule(state, moduleId, id) {
+function getTextModule(state, moduleId, id, type) {
   let temp;
 
   state.forEach(f => {
     if (f.moduleId === moduleId) {
-      temp = getText(f.textList, id);
+      temp = getText(f.textList, id, type);
     }
   });
   return temp;
 }
 
-function getText(state, id) {
+function getText(state, id, type) {
   let temp;
 
   state.forEach(f => {
     if (f.id === id) {
-      temp = f.text;
+      temp = f[type];
     }
   });
 
@@ -28,7 +30,9 @@ function getText(state, id) {
 function mapStateToProps(state, ownProps) {
   const {id, moduleId} = ownProps;
   return {
-    value: getTextModule(state.textModule, moduleId, id)
+    value: getTextModule(state.textModule, moduleId, id, 'text'),
+    username: getTextModule(state.textModule, moduleId, id, 'username'),
+    lastTime: getTextModule(state.textModule, moduleId, id, 'lastTime')
   }
 }
 
@@ -38,6 +42,11 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     onChange(content) {
       dispatch(actions.addValue(moduleId, id, content));
+      dispatch(actions.addInfo(moduleId, id, getUser('login'), Date.now()));
+    },
+    onDelete() {
+      dispatch(moduleItemActions.deleteTextModule(moduleId, id));
+      dispatch(actions.deleteText(moduleId, id));
     }
   }
 }

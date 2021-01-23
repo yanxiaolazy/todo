@@ -1,12 +1,27 @@
 const status = require('../status');
+const db = require('../../db');
 
 module .exports = login;
 
-
 async function login(ctx, next) {
   const body = ctx.request.body,
-        response = Object.assign({}, status['200'], {params: {admin: true}});
+        result = await db.login(body.login.username, body.login.password, body.login.email);
   
-  ctx.type = 'json';
-  ctx.body = response;
+  if (result.error) {
+    const response = Object.assign({}, status['404'], {params: {error: result.error}});
+    ctx.status = 404;
+    ctx.type = 'json';
+    ctx.body = response;
+  } else {
+    const params = {
+      admin: result.admin, 
+      token: result.token
+    };
+
+    const response = Object.assign({}, status['200'], {params});
+    ctx.type = 'json';
+    ctx.body = response;
+  }
+
+  await next();
 }

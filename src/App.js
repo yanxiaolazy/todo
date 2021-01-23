@@ -7,6 +7,8 @@ import Login, { actions as loginAction } from "./Login";
 import EditProject from "./EditProject";
 import TopBar from './TopBar';
 import SideBar from "./SideBar";
+import ProjectsScanning from "./ProjectsScanning";
+import ViewProject from './ViewProject';
 
 const LayoutHeader = Layout.Header,
       LayoutSider = Layout.Sider,
@@ -56,7 +58,9 @@ function App({loginStatus, dispatch}) {
           <LayoutContent style={styles.content}>
             <Switch key='content'>
               <Route exact path='/' />
-              <Route path='/new' component={EditProject} />
+              <Route exact path='/new' component={EditProject} />
+              <Route exact path='/view' component={ProjectsScanning} />
+              <Route exact path='/view/:projectId(\d+)' component={ViewProject} />
               {/* <Route component={NotFound} /> */}
             </Switch>
           </LayoutContent>

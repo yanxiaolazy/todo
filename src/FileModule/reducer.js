@@ -39,6 +39,18 @@ function updateModalStatus(state, action) {
   return temp;
 }
 
+function deleteFile(state, action) {
+  const temp = state.concat();
+
+  temp.map(m => {
+    if (m.moduleId === action.moduleId) {
+      m.fileList = m.fileList.filter(f => f.response.params.file !== action.file);
+    }
+  });
+  
+  return temp;
+}
+
 export default function reducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_FILE:
@@ -47,6 +59,10 @@ export default function reducer(state = [], action) {
       return updateModalStatus(state, action)
     case actionTypes.RESET:
       return []
+    case actionTypes.DELETE:
+      return deleteFile(state, action)
+    case actionTypes.INIT:
+      return action.init
     default:
       return state
   }

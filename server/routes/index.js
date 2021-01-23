@@ -1,10 +1,16 @@
 const Router = require('@koa/router');
-const {login, upload, newProject, deleteFile} = require('./middleware');
+const {
+  login, 
+  upload, 
+  newProject, 
+  deleteFile,
+  viewProject
+} = require('./middleware');
 
 const router = new Router({prefix: '/api'});
 
-// router
-//   .get('/view/project', viewProject)
+router
+  .get('/view/project', viewProject)
 //   .get('/view/date', viewDate);
 
 router

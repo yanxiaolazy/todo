@@ -39,6 +39,10 @@ span:first-child {
   width: 500px !important;
 }
 
+.add-modules {
+  overflow: hidden;
+}
+
 .add-modules>div:last-child {
   border: none;
 }

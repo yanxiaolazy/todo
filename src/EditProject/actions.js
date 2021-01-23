@@ -7,16 +7,22 @@ export function addProjectTitle(projectTitle) {
   }
 }
 
-export function addModuleItem(moduleId, moduleItem) {
+export function addModuleItem(moduleId) {
   return {
     type: actionTypes.MODULE_ITEM,
-    moduleId,
-    moduleItem
+    moduleId  
   }
 }
 
 export function reset() {
   return {
     type: actionTypes.RESET
+  }
+}
+
+export function init(init) {
+  return {
+    type: actionTypes.INIT,
+    init
   }
 }

@@ -1,0 +1,69 @@
+.show-module {
+  margin: 10px 0;
+}
+.show-module-container{
+  display: grid;
+  grid-template-columns: 200px 3fr 1fr 30px;
+  grid-template-rows: 50px;
+}
+.show-module-container {
+  transition: all .5s;
+}
+.show-module-container:hover {
+  background-color: rgba(223, 230, 233, .5);
+}
+.show-module-container:hover
+.delete {
+  opacity: 1;
+}
+.upload-info,
+.checked,
+.approval-status,
+.delete {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.checked-item {
+  padding: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.checked-item>span:last-child {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.checked>input,
+.delete {
+  cursor: pointer;
+}
+
+.upload-info span:last-child {
+  margin-left: 10px;
+}
+
+.uploader,
+.upload-time,
+.delete {
+  color: #b2bec3;
+}
+.delete {
+  opacity: 0;
+  transition: all .5s;
+}
+
+.approval-status-pending {
+  color: #fdcb6e;
+}
+
+.approval-status-pass {
+  color: var(--green);
+}
+
+.approval-status-not-pass {
+  color: #ff7675;
+  opacity: .7;
+}

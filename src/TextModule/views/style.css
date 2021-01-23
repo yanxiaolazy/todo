@@ -7,5 +7,31 @@
   border: none;
 }
 .ql-toolbar.ql-snow {
+  height: 42px;
+}
+.ql-container.ql-snow {
+  height: 230px;
+}
+.ql-toolbar.ql-snow {
   border-bottom: 1px solid rgba(112, 182, 115, .5);
+}
+.delete-container {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  opacity: .5;
+  transition: all .5s;
+}
+.delete-container:hover {
+  opacity: 1;
+}
+
+.text-module-info {
+  margin: 25px 0 0 25px;
+}
+.text-module-info
+span:not(.uploader) {
+  padding: 0 20px;
 }
