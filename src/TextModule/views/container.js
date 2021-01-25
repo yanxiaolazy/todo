@@ -42,7 +42,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     onChange(content) {
       dispatch(actions.addValue(moduleId, id, content));
-      dispatch(actions.addInfo(moduleId, id, getUser('login'), Date.now()));
+      dispatch(actions.addInfo(moduleId, id, getUser('todo-login'), Date.now()));
     },
     onDelete() {
       dispatch(moduleItemActions.deleteTextModule(moduleId, id));
