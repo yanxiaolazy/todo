@@ -3,7 +3,7 @@ import { Button, Input } from "antd";
 import './style.css';
 import ModuleItem from "../../ModuleItem";
 
-export default function AddProject({
+export default function EditProject({
   moduleItems,
   title,
   addModuleItem,

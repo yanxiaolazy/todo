@@ -45,7 +45,7 @@ export default function ModuleItem({
       <div className='module-content'>
         <FileModule {...{moduleId}}/>
         <ShowFiles {...{moduleId}} />
-        {textModules?.map(module => (<TextModule {...{moduleId}} id={module.id}/>))}
+        {textModules?.map(module => (<TextModule key={module.id} {...{moduleId}} id={module.id}/>))}
       </div>
     </Card>
   );
