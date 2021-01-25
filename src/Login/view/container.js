@@ -14,10 +14,12 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   const {history} = ownProps;
   
-  const resolve = (token) => {
+  const resolve = response => {
+    const {params} = response;
+
     dispatch(actions.setLoading(false));
     dispatch(actions.setLoginStatus(true));
-    sessionStorage.setItem('token', JSON.stringify(token))
+    sessionStorage.setItem('token', params.token);
     history.push('/');
   }
   const reject = () => {
