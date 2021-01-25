@@ -30,7 +30,6 @@ export default function ProjectsScanning() {
 
   useEffect(() => {
     if (projects) {
-      console.log(projects);
       const {params} = projects;
 
       if (!params.titles) return;
