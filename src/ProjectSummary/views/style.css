@@ -1,0 +1,41 @@
+.view-projects {
+  padding: 30px;
+  overflow-x: hidden;
+}
+.view-projects>ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.view-projects
+.view-projects-items {
+  overflow-x: hidden;
+  min-width: 1200px;
+  border: 1px solid rgba(178, 190, 195, .5);
+}
+.view-projects
+.view-projects-items>li {
+  line-height: 60px;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+}
+.view-projects
+.view-projects-items>li:nth-child(even) {
+  background-color: #fff;
+}
+
+.view-projects
+.view-projects-titles {
+  overflow-x: hidden;
+  min-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 30px;
+  background-color: #fff;
+  line-height: 40px;
+  border: 1px solid rgba(178, 190, 195, .5);
+  border-bottom: none;
+}

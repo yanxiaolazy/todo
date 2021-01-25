@@ -2,6 +2,7 @@ import { Empty, message } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { viewProjectApi } from "../../utils/api";
+import "./style.css";
 
 const styles = {
   empty: {
@@ -20,7 +21,7 @@ function getAllProjectTitle(fn) {
   viewProjectApi()()(resolve, reject);
 }
 
-export default function ProjectsScanning() {
+export default function ProjectSummary() {
   const [projects, setProjects] = useState(null);
   const [titles, setTitles] = useState(null);
 
@@ -55,7 +56,13 @@ export default function ProjectsScanning() {
 
   return(
     <div className='view-projects'>
-      <ul>
+      <ul className='view-projects-titles'>
+        <li>Project</li>
+        <li>Publish Time</li>
+        <li>Update Time</li>
+        <li>Progress</li>
+      </ul>
+      <ul className='view-projects-items'>
         {views}
       </ul>
     </div>
