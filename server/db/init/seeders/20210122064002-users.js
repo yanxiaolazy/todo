@@ -1,3 +1,5 @@
+const createHash = require('../../../utils/createHash');
+
 'use strict';
 
 module.exports = {
@@ -16,7 +18,7 @@ module.exports = {
       {
         id: 0,
         username: 'rookie',
-        password: 'admin',
+        password: createHash('admin'),
         email: 'rookie@heltec.cn',
         createTime: new Date(),
         updateTime: new Date(),

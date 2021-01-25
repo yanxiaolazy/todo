@@ -1,6 +1,7 @@
 const {UsersTable, secret} = require('../config/db');
 const {Op} = require('sequelize');
 const  jwt = require('jsonwebtoken');
+const createHash = require('../utils/createHash');
 
 
 async function login(username, password, email) {
@@ -8,7 +9,7 @@ async function login(username, password, email) {
     return {error: 'not valid username or password or email'}
   }
 
-  const where = {[Op.and]: [{username}, {password}, {email}]};
+  const where = {[Op.and]: [{username}, {email}]};
   let results;
   
   try {
@@ -26,12 +27,18 @@ async function login(username, password, email) {
     return {error: 'wrong user name or password'};
   }
 
-  const {dataValues} = results[0]; 
+  const {dataValues} = results[0],
+  //获取盐值
+        salt = dataValues.password.split('$')[1];
 
-  return {
-    token: createToken(username), 
-    admin: dataValues.admin
+  if (createHash(password, salt) === dataValues.password) {
+    return {
+      token: createToken(username), 
+      admin: dataValues.admin
+    }
   }
+
+  return {error: 'wrong user name or password'};
 }
 
 function createToken(username) {
