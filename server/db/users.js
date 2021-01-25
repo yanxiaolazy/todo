@@ -22,6 +22,10 @@ async function login(username, password, email) {
     return {error: 'internal data storage error'};
   } 
 
+  if (results.length === 0) {
+    return {error: 'wrong user name or password'};
+  }
+
   const {dataValues} = results[0]; 
 
   return {
