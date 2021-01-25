@@ -220,6 +220,14 @@ export function request(url, method, data, config) {
       }
       console.log(error.config);
       reject();
+    });
+    //请求拦截配置
+    axios.interceptors.request.use(config => {
+      const token = sessionStorage.getItem('token');
+      config.headers = {
+        Authorization: `Bearer ${token}`
+      }
+      return config;
     });        
   }
 }

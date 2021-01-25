@@ -87,8 +87,10 @@ const ProjectTable = sequelize.define('todo_project', {
 });
 
 
+const secret = 'thisisasecret-yanxiaolazy';
 
 module.exports = {
+  secret,
   sequelize,
   UsersTable,
   ProjectTable

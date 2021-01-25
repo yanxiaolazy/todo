@@ -1,8 +1,7 @@
-const {UsersTable} = require('../config/db');
+const {UsersTable, secret} = require('../config/db');
 const {Op} = require('sequelize');
 const  jwt = require('jsonwebtoken');
 
-const secret = 'thisisasecret-yanxiaolazy';
 
 async function login(username, password, email) {
   if (!username || !password || !email) {
@@ -48,21 +47,5 @@ function createToken(username) {
   return jwt.sign(payload, secret);
 }
 
-function verifyToken(token) {
-  let payload;
-
-  try {
-    payload = jwt.verify(token, secret);
-  } catch(error) {
-
-  }
-  console.log(payload);
-
-  return '待完善......'
-}
-
 module.exports = login;
-exports = {
-  verifyToken
-}
 
