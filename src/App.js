@@ -9,6 +9,7 @@ import TopBar from './TopBar';
 import SideBar from "./SideBar";
 import ProjectsScanning from "./ProjectsScanning";
 import ViewProject from './ViewProject';
+import { getKeyValue } from "./utils/parse";
 
 const LayoutHeader = Layout.Header,
       LayoutSider = Layout.Sider,
@@ -31,7 +32,7 @@ function App({loginStatus, dispatch}) {
   const history = useHistory();
 
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
+    const token = getKeyValue('todo-token');
 
     if (!token) {
       history.push('/login');

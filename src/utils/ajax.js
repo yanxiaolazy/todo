@@ -1,5 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
+import { getKeyValue } from "./parse";
 
 console.log('Using environment "' + process.env.NODE_ENV + '".');
 export const baseConfig = {
@@ -127,7 +128,7 @@ export const baseConfig = {
   // HTTP response status code. If `validateStatus` returns `true` (or is set to `null`
   // or `undefined`), the promise will be resolved; otherwise, the promise will be
   // rejected.
-  validateStatus: function (status:number) {
+  validateStatus: function (status) {
     return status >= 200 && status < 300; // default
   },
 
@@ -223,7 +224,7 @@ export function request(url, method, data, config) {
     });
     //请求拦截配置
     axios.interceptors.request.use(config => {
-      const token = sessionStorage.getItem('token');
+      const token = getKeyValue('todo-token');
       config.headers = {
         Authorization: `Bearer ${token}`
       }
