@@ -5,7 +5,7 @@ import * as actions from "../actions";
 import { actions as moduleItemActions } from "../../ModuleItem";
 import { actions as fileModuleActions } from "../../FileModule";
 import { actions as textModuleActions } from "../../TextModule";
-import { newProjectApi } from "../../utils/api";
+import { newProjectApi, updateProjectApi } from "../../utils/api";
 import { message } from "antd";
 
 const resolve = function (dispatch, history) {
@@ -25,7 +25,6 @@ const resolve = function (dispatch, history) {
 const reject = error => console.log(error);
 
 function mapStateToProps(state) {
-
   return {
     moduleItems:state.project?.modules || [],
     title: state.project.projectTitle,
@@ -34,9 +33,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const {history, location} = ownProps,
+  const {history, match} = ownProps,
         createModuleId = generateId();
-
+  
   return {
     // 这里统一处理数据
     addModuleItem() {
@@ -50,7 +49,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       //数据提交给后台
       //do something
       const {project, moduleItem, fileModule, textModule} = props;
-      console.log(project)
+
       const editProject ={
         projectTitle: project.projectTitle,
         project,
@@ -65,11 +64,13 @@ function mapDispatchToProps(dispatch, ownProps) {
       }
 
       const params = {};
-      if (location.search) {
-        params.id = location.search;
-      }
+      if (match.params.projectId) {
+        params.id = match.params.projectId;
 
-      newProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), reject);
+        updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), reject);
+      } else {
+        newProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), reject);
+      }
     }
   }
 }

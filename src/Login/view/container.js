@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Login from "./component";
 import * as actions from "../actions";
 import {loginApi} from "../../utils/api";
-import { setUser } from "../../utils/parse";
+import { setKeyValue, setUser } from "../../utils/parse";
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -14,10 +14,13 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   const {history} = ownProps;
   
-  const resolve = (token) => {
+  const resolve = response => {
+    const {params} = response;
+
     dispatch(actions.setLoading(false));
     dispatch(actions.setLoginStatus(true));
-    sessionStorage.setItem('token', JSON.stringify(token))
+    setKeyValue('todo-token', params.token);
+    setKeyValue('todo-admin', params.admin);
     history.push('/');
   }
   const reject = () => {
@@ -28,7 +31,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     onFinish(value) {
-      setUser('login', value);
+      setUser('todo-login', value);
       dispatch(actions.setLoading(true));
       dispatch(actions.setUserValue(value));
       loginApi()({login: value})(resolve, reject);

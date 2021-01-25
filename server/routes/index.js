@@ -4,7 +4,8 @@ const {
   upload, 
   newProject, 
   deleteFile,
-  viewProject
+  viewProject,
+  updateProject
 } = require('./middleware');
 
 const router = new Router({prefix: '/api'});
@@ -19,6 +20,7 @@ router
   .post('/upload', upload)
   // .post('/new/user', newUser)
   .post('/new/project', newProject)
+  .post('/update/project', updateProject)
   // .post('/verify/username', verifyUsername)
   // .post('/verify/token', verifyToken);
 

@@ -3874,6 +3874,13 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
+crypto-random-string@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-3.3.0.tgz#c7a4682b2a87146a1f8b7378ea2606f95775e7e6"
+  integrity sha512-teWAwfMb1d6brahYyKqcBEb5Yp8PJPvPOdOonXDnvaKOTmKDFNVE8E3Y2XQuzjNV/3XMwHbrX9fHWvrhRKt4Gg==
+  dependencies:
+    type-fest "^0.8.1"
+
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/css-blank-pseudo/-/css-blank-pseudo-0.1.4.tgz#dfdefd3254bf8a82027993674ccf35483bfcb3c5"
@@ -7397,6 +7404,15 @@ koa-convert@^1.2.0:
     co "^4.6.0"
     koa-compose "^3.0.0"
 
+koa-jwt@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/koa-jwt/-/koa-jwt-4.0.0.tgz#4cac70cde5e225bc961a266303d4b6e873cba9bc"
+  integrity sha512-n56AG98tWQDtvVZwtVFKuPn1pGPOvtkKFEotSPRsdqKmZJqRdppDRD0toiiK7kefMLnVBzFbocaPyaI5WK/iyQ==
+  dependencies:
+    jsonwebtoken "^8.5.1"
+    koa-unless "^1.0.7"
+    p-any "^2.1.0"
+
 koa-logger@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/koa-logger/-/koa-logger-3.2.1.tgz#ab9db879526db3837cc9ce4fd983c025b1689f22"
@@ -7406,6 +7422,11 @@ koa-logger@^3.2.1:
     chalk "^2.4.2"
     humanize-number "0.0.2"
     passthrough-counter "^1.0.0"
+
+koa-unless@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/koa-unless/-/koa-unless-1.0.7.tgz#b9df375e2b4da3043918d48622520c2c0b79f032"
+  integrity sha1-ud83XitNowQ5GNSGIlIMLAt58DI=
 
 koa2-cors@^2.0.6:
   version "2.0.6"
@@ -8526,10 +8547,24 @@ os-browserify@^0.3.0:
   resolved "https://registry.yarnpkg.com/os-browserify/-/os-browserify-0.3.0.tgz#854373c7f5c2315914fc9bfc6bd8238fdda1ec27"
   integrity sha1-hUNzx/XCMVkU/Jv8a9gjj92h7Cc=
 
+p-any@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/p-any/-/p-any-2.1.0.tgz#719489408e14f5f941a748f1e817f5c71cab35cb"
+  integrity sha512-JAERcaMBLYKMq+voYw36+x5Dgh47+/o7yuv2oQYuSSUml4YeqJEFznBrY2UeEkoSHqBua6hz518n/PsowTYLLg==
+  dependencies:
+    p-cancelable "^2.0.0"
+    p-some "^4.0.0"
+    type-fest "^0.3.0"
+
 p-cancelable@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-1.1.0.tgz#d078d15a3af409220c886f1d9a0ca2e441ab26cc"
   integrity sha512-s73XxOZ4zpt1edZYZzvhqFa6uvQc1vwUa0K0BdtIZgQMAJj9IbebH+JkgKZc9h+B05PKHLOTl4ajG1BmNrVZlw==
+
+p-cancelable@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-2.0.0.tgz#4a3740f5bdaf5ed5d7c3e34882c6fb5d6b266a6e"
+  integrity sha512-wvPXDmbMmu2ksjkB4Z3nZWTSkJEb9lqVdMaCKpZUGJG9TMiNp9XcbG3fn9fPKjem04fJMJnXoyFPk2FmgiaiNg==
 
 p-each-series@^2.1.0:
   version "2.2.0"
@@ -8601,6 +8636,14 @@ p-retry@^3.0.1:
   integrity sha512-XE6G4+YTTkT2a0UWb2kjZe8xNwf8bIbnqpc/IS/idOBVhyves0mK5OJgeocjx7q5pvX/6m23xuzVPYT1uGM73w==
   dependencies:
     retry "^0.12.0"
+
+p-some@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/p-some/-/p-some-4.1.0.tgz#28e73bc1e0d62db54c2ed513acd03acba30d5c04"
+  integrity sha512-MF/HIbq6GeBqTrTIl5OJubzkGU+qfFhAFi0gnTAK6rgEIJIknEiABHOTtQu4e6JiXjIwuMPMUFQzyHh5QjCl1g==
+  dependencies:
+    aggregate-error "^3.0.0"
+    p-cancelable "^2.0.0"
 
 p-try@^1.0.0:
   version "1.0.0"
@@ -12154,7 +12197,7 @@ type-fest@^0.11.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.11.0.tgz#97abf0872310fed88a5c466b25681576145e33f1"
   integrity sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
 
-type-fest@^0.3.1:
+type-fest@^0.3.0, type-fest@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.3.1.tgz#63d00d204e059474fe5e1b7c011112bbd1dc29e1"
   integrity sha512-cUGJnCdr4STbePCgqNFbpVNCepa+kAVohJs1sLhxzdH+gnEoOd8VhbYa7pD3zZYGiURWM2xzEII3fQcRizDkYQ==

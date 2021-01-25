@@ -1,15 +1,15 @@
-const {UsersTable} = require('../config/db');
+const {UsersTable, secret} = require('../config/db');
 const {Op} = require('sequelize');
 const  jwt = require('jsonwebtoken');
+const createHash = require('../utils/createHash');
 
-const secret = 'thisisasecret-yanxiaolazy';
 
 async function login(username, password, email) {
   if (!username || !password || !email) {
     return {error: 'not valid username or password or email'}
   }
 
-  const where = {[Op.and]: [{username}, {password}, {email}]};
+  const where = {[Op.and]: [{username}, {email}]};
   let results;
   
   try {
@@ -23,12 +23,22 @@ async function login(username, password, email) {
     return {error: 'internal data storage error'};
   } 
 
-  const {dataValues} = results[0]; 
-
-  return {
-    token: createToken(username), 
-    admin: dataValues.admin
+  if (results.length === 0) {
+    return {error: 'wrong user name or password'};
   }
+
+  const {dataValues} = results[0],
+  //获取盐值
+        salt = dataValues.password.split('$')[1];
+
+  if (createHash(password, salt) === dataValues.password) {
+    return {
+      token: createToken(username), 
+      admin: dataValues.admin
+    }
+  }
+
+  return {error: 'wrong user name or password'};
 }
 
 function createToken(username) {
@@ -48,21 +58,5 @@ function createToken(username) {
   return jwt.sign(payload, secret);
 }
 
-function verifyToken(token) {
-  let payload;
-
-  try {
-    payload = jwt.verify(token, secret);
-  } catch(error) {
-
-  }
-  console.log(payload);
-
-  return '待完善......'
-}
-
 module.exports = login;
-exports = {
-  verifyToken
-}
 

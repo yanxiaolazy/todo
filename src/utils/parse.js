@@ -1,13 +1,9 @@
-export function getAdmin(key) {
-  let token = sessionStorage.getItem(key);
+export function getKeyValue(key) {
+  return sessionStorage.getItem(key);
+}
 
-  try {
-    token = JSON.parse(token).params.admin;
-  } catch (error) { 
-    console.log(error)
-  }
-
-  return token;
+export function setKeyValue(key, value) {
+  sessionStorage.setItem(key, value);
 }
 
 export function getUser(key) {

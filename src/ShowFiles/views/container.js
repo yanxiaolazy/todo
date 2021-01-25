@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getAdmin } from "../../utils/parse";
+import { getKeyValue } from "../../utils/parse";
 import { deleteFileApi } from "../../utils/api";
 import ShowModule from "./component";
 import { actions as fileModuleActions } from "../../FileModule";
@@ -30,7 +30,7 @@ function mapStateToProps(state, ownProps) {
   
   return {
     lists: getModuleItem(fileModule, moduleId, 'fileList'),
-    admin: getAdmin('token')
+    admin: getKeyValue('todo-admin')
   }
 }
 
