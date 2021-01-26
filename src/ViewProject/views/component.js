@@ -18,27 +18,30 @@ const resolve = (fn) => {
 
 export default function ViewProject() {
   const [projectData, setProjectData] = useState(null);
+  const [moduleIdValue, setModuleIdValue] = useState(undefined);
   const match = useRouteMatch();
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch()
+    //eslint-next
     const params = {id: match.params.projectId};
     viewProjectApi({params})()(resolve(setProjectData), () => {});
-  }, []);
+  }, [match]);
 
   useEffect(() => {
     if (projectData) {
       const parseData = JSON.parse(projectData.params.project);
       const {project, moduleItem, fileModule, textModule} = parseData;
 
+      setModuleIdValue(project.moduleId);
       dispatch(editProjectActions.init(project));
       dispatch(moduleItemActions.init(moduleItem));
       dispatch(fileModuleActions.init(fileModule));
       dispatch(textModuleActions.init(textModule));
     }
-  }, [projectData]);
+  }, [projectData, dispatch]);
 
   if (!projectData) {
     return(<div></div>);
@@ -46,7 +49,7 @@ export default function ViewProject() {
 
   return(
     <div>
-      <EditProject {...{match, history}}/>
+      <EditProject {...{match, history}} initModuleId={moduleIdValue}/>
     </div>
   );
 }

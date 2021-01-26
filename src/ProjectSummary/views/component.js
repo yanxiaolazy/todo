@@ -37,7 +37,7 @@ export default function ProjectSummary() {
       
       setTitles(params.titles);
     }
-  });
+  }, [projects]);
 
   if (!titles) {
     return(<div style={styles.empty}><Empty /></div>);

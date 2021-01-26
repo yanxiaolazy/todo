@@ -63,6 +63,23 @@ function deleteTextModule(state, action) {
   return temp;
 }
 
+function recordId(state, action) {
+  const temp = state.concat();
+  let isNew = true;
+
+  temp.forEach(f => {
+    if (f.moduleId === action.moduleId) {
+      f.id = action.id;
+      isNew = false;
+    }
+  });
+
+  if (isNew) {
+    temp.push({moduleId: action.moduleId, id: action.id});
+  }
+  return temp;
+}
+
 export default function reducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_TEXT_MODULE:
@@ -75,6 +92,8 @@ export default function reducer(state = [], action) {
       return deleteTextModule(state, action)
     case actionTypes.INIT:
       return action.init
+    case actionTypes.RECORD_ID:
+      return recordId(state, action)
     default:
       return state
   }

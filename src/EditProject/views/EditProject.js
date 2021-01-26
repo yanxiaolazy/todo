@@ -28,6 +28,13 @@ export default function EditProject({
     }
   }, [isDisplay, projectTitle, onAddProjectTitle]);
 
+  useEffect(() => {
+    if (title) {
+      setProjectTitle(title);
+      setIsDisplay(true);
+    }
+  }, [title]);
+
   function handleProjectTitleChange(e) {
     setProjectTitle(e.target.value);
   }
@@ -38,7 +45,7 @@ export default function EditProject({
   function handlePublish() {
     onPublish(stateStore);
   }
-  
+
   return(
     <div className='edit-project animate-bottom'>
       <Button type='primary' htmlType='button' onClick={addModuleItem}>Add Module</Button>

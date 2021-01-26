@@ -21,6 +21,8 @@ export default function reducer(state = {}, action) {
       return {}
     case actionTypes.INIT:
       return {...action.init}
+    case actionTypes.RECORD_MODULE_ID:
+      return {...state, moduleId: action.moduleId}
     default:
       return state;
   }

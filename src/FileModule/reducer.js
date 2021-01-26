@@ -42,7 +42,7 @@ function updateModalStatus(state, action) {
 function deleteFile(state, action) {
   const temp = state.concat();
 
-  temp.map(m => {
+  temp.forEach(m => {
     if (m.moduleId === action.moduleId) {
       m.fileList = m.fileList.filter(f => f.response.params.file !== action.file);
     }

@@ -26,3 +26,10 @@ export function init(init) {
     init
   }
 }
+
+export function recordModuleId(moduleId) {
+  return {
+    type: actionTypes.RECORD_MODULE_ID,
+    moduleId
+  }
+}
