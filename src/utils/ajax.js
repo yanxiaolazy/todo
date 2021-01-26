@@ -197,6 +197,15 @@ export function request(url, method, data, config) {
       conf.data = data
     }
 
+    //请求拦截配置
+    axios.interceptors.request.use(config => {
+      const token = getKeyValue('todo-token');
+      config.headers = {
+        Authorization: `Bearer ${token}`
+      }
+      return config;
+    });   
+
     axios(conf)
     .then(response => response.data)
     .then(response => {
@@ -221,15 +230,7 @@ export function request(url, method, data, config) {
       }
       console.log(error.config);
       reject();
-    });
-    //请求拦截配置
-    axios.interceptors.request.use(config => {
-      const token = getKeyValue('todo-token');
-      config.headers = {
-        Authorization: `Bearer ${token}`
-      }
-      return config;
-    });        
+    });     
   }
 }
 
