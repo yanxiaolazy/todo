@@ -1,6 +1,6 @@
 import { Button, Modal, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { getKeyValue } from "../../utils/parse";
+import { getKeyValue, getUser } from "../../utils/parse";
 
 export default function FileModule({
   isOpen, 
@@ -25,6 +25,7 @@ export default function FileModule({
         // withCredentials
         action={uploadAction}
         headers={{Authorization: `Bearer ${getKeyValue('todo-token')}`}}
+        data={{uploader: getUser('todo-login'), uploadTime: Date.now(), todoStatus: 'pending'}}
         {...{fileList, onRemove, onChange}}
       >
         <Button icon={<UploadOutlined />}>Add File</Button>  

@@ -21,7 +21,7 @@ export default function TopBar({onLogout}) {
   }
   return(
     <div className='topbar'>
-      <div className='logo'><img width='45' src='https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3100819712,3434737581&fm=26&gp=0.jpg'/></div>
+      <div className='logo'><img  alt='' width='45' src='https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3100819712,3434737581&fm=26&gp=0.jpg'/></div>
       <div className='user-container'>
         <div className='user'  {...{onClick}}>
           <UserOutlined className='icon' style={styles.icon}/>

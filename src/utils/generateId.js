@@ -1,5 +1,5 @@
-export default function generateId() {
-  let count = 0;
+export default function generateId(init) {
+  let count = init ?? 0;
 
   return () => {
     return ++count;

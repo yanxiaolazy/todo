@@ -4,6 +4,7 @@ import './style.css';
 import ModuleItem from "../../ModuleItem";
 
 export default function EditProject({
+  initModuleId,
   moduleItems,
   title,
   addModuleItem,
@@ -28,6 +29,13 @@ export default function EditProject({
     }
   }, [isDisplay, projectTitle, onAddProjectTitle]);
 
+  useEffect(() => {
+    if (title) {
+      setProjectTitle(title);
+      setIsDisplay(true);
+    }
+  }, [title]);
+
   function handleProjectTitleChange(e) {
     setProjectTitle(e.target.value);
   }
@@ -38,10 +46,14 @@ export default function EditProject({
   function handlePublish() {
     onPublish(stateStore);
   }
-  
+
+  function handleAddModuleClick() {
+    addModuleItem(initModuleId)
+  }
+
   return(
     <div className='edit-project animate-bottom'>
-      <Button type='primary' htmlType='button' onClick={addModuleItem}>Add Module</Button>
+      <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
       <div className='add-title'>
         {isDisplay ? 
         <div className='add-title-display'>
@@ -67,7 +79,7 @@ export default function EditProject({
         }
         <div className='edit-project-btns'>
           <Button type='primary' htmlType='button' onClick={handlePublish}>publish</Button>
-          <Button type='primary' htmlType='button' onClick={addModuleItem}>Add Module</Button>
+          <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
         </div>
       </div>
     </div>

@@ -61,7 +61,8 @@ function App({loginStatus, dispatch}) {
               <Route exact path='/' />
               <Route exact path='/new' component={EditProject} />
               <Route exact path='/view' component={ProjectSummary} />
-              <Route exact path='/view/:projectId(\d+)' component={ViewProject} />
+              <Route exact path='/view/:projectId(\d+)/edit' component={EditProject} />
+              <Route path='/view/:projectId(\d+)' component={ViewProject} />
               {/* <Route component={NotFound} /> */}
             </Switch>
           </LayoutContent>

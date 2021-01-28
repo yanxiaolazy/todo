@@ -4,6 +4,7 @@ const newProject = require('./newProject');
 const deleteFile = require('./deleteFile');
 const viewProject = require('./viewProject');
 const updateProject = require('./updateProject');
+const viewFile = require('./viewFile');
 
 module.exports = {
   login,
@@ -11,5 +12,6 @@ module.exports = {
   newProject,
   deleteFile,
   viewProject,
-  updateProject
+  updateProject,
+  viewFile
 }

@@ -7,15 +7,15 @@ export function setKeyValue(key, value) {
 }
 
 export function getUser(key) {
-  let token = sessionStorage.getItem(key);
+  let username = sessionStorage.getItem(key);
 
   try {
-    token = JSON.parse(token).username;
+    username = JSON.parse(username).username;
   } catch (error) { 
     console.log(error)
   }
 
-  return token;
+  return username;
 }
 
 export function setUser(key, value) {

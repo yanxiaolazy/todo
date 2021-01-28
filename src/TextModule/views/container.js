@@ -40,9 +40,14 @@ function mapDispatchToProps(dispatch, ownProps) {
   const {id, moduleId} = ownProps;
 
   return {
-    onChange(content) {
-      dispatch(actions.addValue(moduleId, id, content));
-      dispatch(actions.addInfo(moduleId, id, getUser('todo-login'), Date.now()));
+    onChange(text) {
+      const payload = {
+        text, 
+        username: getUser('todo-login'), 
+        lastTime: Date.now(), 
+        todoStatus: 'pending'
+      }
+      dispatch(actions.addValue(moduleId, id, payload));
     },
     onDelete() {
       dispatch(moduleItemActions.deleteTextModule(moduleId, id));

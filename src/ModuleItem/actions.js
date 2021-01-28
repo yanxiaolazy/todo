@@ -37,4 +37,12 @@ export function init(init) {
   }
 }
 
+export function recordId(moduleId, id) {
+  return {
+    type: actionTypes.RECORD_ID,
+    moduleId,
+    id
+  }
+}
+
 

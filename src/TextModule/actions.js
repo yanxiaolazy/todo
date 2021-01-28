@@ -1,11 +1,11 @@
 import * as actionTypes from "./actionTypes";
 
-export function addValue(moduleId, id, value) {
+export function addValue(moduleId, id, payload) {
   return {
     type: actionTypes.ADD_VALUE,
     moduleId,
     id,
-    text: value
+    payload
   }
 }
 
@@ -37,5 +37,23 @@ export function deleteText(moduleId, id) {
     type: actionTypes.DELETE,
     moduleId,
     id
+  }
+}
+
+export function addStatus(moduleId, id, todoStatus) {
+  return {
+    type: actionTypes.ADD_STATUS,
+    moduleId,
+    id,
+    todoStatus
+  }
+}
+
+export function changeTodoStatus(moduleId, id, status) {
+  return {
+    type: actionTypes.CHANGE_TODO_STATUS,
+    moduleId,
+    id,
+    status
   }
 }

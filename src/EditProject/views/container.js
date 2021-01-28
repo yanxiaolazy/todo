@@ -28,19 +28,21 @@ function mapStateToProps(state) {
   return {
     moduleItems:state.project?.modules || [],
     title: state.project.projectTitle,
+    initModuleId: state.project.moduleId,
     stateStore: state
   }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const {history, match} = ownProps,
-        createModuleId = generateId();
-  
+  const {history, match} = ownProps;
+
   return {
     // 这里统一处理数据
-    addModuleItem() {
-      const moduleId = createModuleId();
-      dispatch(actions.addModuleItem(moduleId))
+    addModuleItem(initModuleId) {
+      const moduleId = generateId(initModuleId)();
+
+      dispatch(actions.addModuleItem(moduleId));
+      dispatch(actions.recordModuleId(moduleId));
     },
     onAddProjectTitle(projectTitle) {
       dispatch(actions.addProjectTitle(projectTitle));
@@ -52,6 +54,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
       const editProject ={
         projectTitle: project.projectTitle,
+        moduleId: project.moduleId,
         project,
         moduleItem,
         fileModule,
