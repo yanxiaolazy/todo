@@ -39,3 +39,12 @@ export function init(init) {
   }
 }
 
+export function changeTodoStatus(moduleId, filename, status) {
+  return {
+    type: actionTypes.CHANGE_TODO_STATUS,
+    moduleId,
+    filename,
+    status
+  }
+}
+

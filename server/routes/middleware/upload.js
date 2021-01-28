@@ -4,7 +4,10 @@ const {resolve, extname, basename} = require('path');
 module.exports = upload;
 
 async function upload(ctx, next) {
+  const body = ctx.request.body;
+  console.log(body)
   const {file} = ctx.request.files, 
+        {uploader, uploadTime, todoStatus} = ctx.request.body
         _basePath = resolve(__dirname, `../../static/upload`),
         //检查目录是否存在
         isExist = fs.existsSync(_basePath);
@@ -12,7 +15,7 @@ async function upload(ctx, next) {
   const _path = createFileExist(_basePath, file.name);
 
   try {
-    if (isExist && file) {
+    if (uploader && uploadTime && isExist && file) {
 
       const reader = fs.createReadStream(file.path),
             stream = fs.createWriteStream(_path);
@@ -20,7 +23,7 @@ async function upload(ctx, next) {
       //将_path存入数据库？
 
       ctx.type = 'json';
-      ctx.body = {code: 200, msg: 'ok', params: {uploadTime: Date.now(), uploader: 'yanxiaolazy', file: basename(_path)}, sucess: true};
+      ctx.body = {code: 200, msg: 'ok', params: {uploadTime, uploader, todoStatus, file: basename(_path)}, sucess: true};
     } else {
       if (!isExist) {
         throw new Error(`'${_basePath}' is not a valid folder`);

@@ -55,7 +55,7 @@ export default function ProjectSummary() {
   });
 
   return(
-    <div className='view-projects'>
+    <div className='view-projects animate-bottom'>
       <ul className='view-projects-titles'>
         <li>Project</li>
         <li>Publish Time</li>

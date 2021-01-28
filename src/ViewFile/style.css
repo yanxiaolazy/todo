@@ -1,0 +1,19 @@
+.view-file-900 {
+  width: 900px !important;
+}
+.view-file-520 {
+  width: 520px;
+}
+.view-file-image {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+.view-file-file {
+  /* width: 200px; */
+  /* height: 200px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

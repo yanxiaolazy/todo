@@ -31,17 +31,16 @@ export default function ShowFiles({
     <div className='show-module'>
       {
         lists?.map(list => {
-          // console.log(list)
           const {response} = list;
           if (!response) return [];
           const {params} = response;
-          if (!params) return [];
-          const timeString = new Date(params.uploadTime).toLocaleTimeString();
-          const dateString = new Date(params.uploadTime).toLocaleDateString();
+          if (!params) return []; 
+          const time = new Date(parseInt(params.uploadTime)),
+                timeString = time.toLocaleTimeString(),
+                dateString = time.toLocaleDateString();
           return(
             <div className='show-module-container' key={list.uid}>
               <div className='checked'>
-                {/* <input type='checkbox' data-id={params.file} onClick={onCheck}/> */}
                 <DisplayType dataId={params.file} className='checked-item' file={list.name} {...{onView}}/>
               </div>
               <div className='upload-info'>

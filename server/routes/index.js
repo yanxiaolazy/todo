@@ -5,7 +5,8 @@ const {
   newProject, 
   deleteFile,
   viewProject,
-  updateProject
+  updateProject,
+  viewFile
 } = require('./middleware');
 
 const router = new Router({prefix: '/api'});
@@ -13,6 +14,8 @@ const router = new Router({prefix: '/api'});
 router
   .get('/view/project', viewProject)
 //   .get('/view/date', viewDate);
+.get('/view/file', viewFile)
+
 
 router
   .post('/login', login)
@@ -22,7 +25,7 @@ router
   .post('/new/project', newProject)
   .post('/update/project', updateProject)
   // .post('/verify/username', verifyUsername)
-  // .post('/verify/token', verifyToken);
+  // .post('/verify/token', verifyToken)
 
 
 // router

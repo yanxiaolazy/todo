@@ -29,6 +29,7 @@ export const deleteFileApi = createApi(`${_baseURL}/delete/file`, 'DELETE', dele
 export const deleteProjectApi = createApi(`${_baseURL}/delete/project`, 'DELETE', deleteProjectConfig);
 export const viewProjectApi = createApi(`${_baseURL}/view/project`, 'GET', viewProjectConfig);
 export const viewDateApi = createApi(`${_baseURL}/view/date`, 'GET');
+export const viewFileApi = createApi(`${_baseURL}/view/file`, 'GET');
 export const newProjectApi = createApi(`${_baseURL}/new/project`, 'POST');
 export const newUserApi = createApi(`${_baseURL}/new/user`, 'POST');
 export const updateProjectApi = createApi(`${_baseURL}/update/project`, 'POST');

@@ -51,6 +51,22 @@ function deleteFile(state, action) {
   return temp;
 }
 
+function changeTodoStatus(state, action) {
+  const temp = state.concat();
+  
+  temp.forEach(f => {
+    if (f.moduleId === action.moduleId) {
+      f.fileList = f.fileList.map(m => {
+        if (m.response.params.file === action.filename) {
+          m.response.params.todoStatus = action.status
+        }
+      });
+    }
+  });
+
+  return temp;
+}
+
 export default function reducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_FILE:
@@ -63,6 +79,8 @@ export default function reducer(state = [], action) {
       return deleteFile(state, action)
     case actionTypes.INIT:
       return action.init
+    case actionTypes.CHANGE_TODO_STATUS:
+      return changeTodoStatus(state, action)
     default:
       return state
   }

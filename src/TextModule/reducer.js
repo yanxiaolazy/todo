@@ -3,16 +3,20 @@ import * as actionTypes from "./actionTypes";
 function addText(state, action) {
   const temp = state.concat();
   let isNew = true;
+  const payload = action.payload;
 
   temp.forEach(f => {
     if (f.id === action.id) {
-      f.text = action.text;
+      f.text = payload.text;
+      f.username = payload.username;
+      f.lastTime = payload.lastTime;
+      f.todoStatus = payload.todoStatus;
       isNew = false;
     }
   });
 
   if (isNew) {
-    temp.push({text:action.text, id: action.id});
+    temp.push({...{payload}, id: action.id});
   }
 
   return temp;
@@ -97,6 +101,34 @@ function deleteText(state, action) {
   return temp;
 }
 
+function addStatus(state, action) {
+  const temp = state.concat();
+
+  temp.forEach(f => {
+    if (f.moduleId === action.moduleId) {
+
+    }
+  });
+
+  return temp;
+}
+
+function changeTodoStatus(state, action) {
+  const temp = state.concat();
+
+  temp.forEach(f => {
+    if (f.moduleId === action.moduleId) {
+      f.textList.map(m => {
+        if (m.id === action.id) {
+          m.todoStatus = action.status
+        }
+      });
+    }
+  });
+
+  return temp;
+}
+
 
 export default function reducer(state = [], action) {
   switch (action.type) {
@@ -110,6 +142,10 @@ export default function reducer(state = [], action) {
       return action.init
     case actionTypes.DELETE:
       return deleteText(state, action)
+    case actionTypes.ADD_STATUS:
+      return addStatus(state, action)
+    case actionTypes.CHANGE_TODO_STATUS:
+      return changeTodoStatus(state, action)
     default:
       return state
   }
