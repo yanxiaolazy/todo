@@ -2,11 +2,10 @@ import { connect } from "react-redux";
 import Login from "./component";
 import * as actions from "../actions";
 import {loginApi} from "../../utils/api";
-import { setKeyValue, setUser } from "../../utils/parse";
+import { setToken, setLogin, setAdmin } from "../../utils/parse";
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
-    loginStatus: state.login.loginStatus,
     loading: state.login.loading
   }
 }
@@ -19,8 +18,8 @@ function mapDispatchToProps(dispatch, ownProps) {
 
     dispatch(actions.setLoading(false));
     dispatch(actions.setLoginStatus(true));
-    setKeyValue('todo-token', params.token);
-    setKeyValue('todo-admin', params.admin);
+    setToken(params.token);
+    setAdmin(params.admin);
     history.push('/');
   }
   const reject = () => {
@@ -31,9 +30,10 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     onFinish(value) {
-      setUser('todo-login', value);
+      const {password, ...other} = value;
+      setLogin(other);
       dispatch(actions.setLoading(true));
-      dispatch(actions.setUserValue(value));
+      dispatch(actions.setUserValue(other));
       loginApi()({login: value})(resolve, reject);
     }
   }

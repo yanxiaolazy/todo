@@ -1,9 +1,13 @@
 import { useEffect, useState, useRef } from "react";
-import { Button, Input } from "antd";
-import './style.css';
+import { Button, Input, Skeleton } from "antd";
 import ModuleItem from "../../ModuleItem";
+import useGetProjectData from "../../components/useGetProjectData";
+import './style.css';
+
+const prefix = 'edit-project';
 
 export default function EditProject({
+  isEdit,
   initModuleId,
   moduleItems,
   title,
@@ -15,6 +19,7 @@ export default function EditProject({
   const [projectTitle, setProjectTitle] = useState(null);
   const [isDisplay, setIsDisplay] = useState(false);
   const projectNameRef = useRef(null);
+  const {project} = useGetProjectData(isEdit);
 
   useEffect(() => {
     if (projectNameRef?.current) {
@@ -48,11 +53,15 @@ export default function EditProject({
   }
 
   function handleAddModuleClick() {
-    addModuleItem(initModuleId)
+    addModuleItem(initModuleId);
+  }
+  //作为编辑组件判定
+  if (isEdit && !project.modules) {
+    return(<Skeleton active round loading paragraph={{rows: 8}} className={`${prefix}-skeleton`}/>);
   }
 
   return(
-    <div className='edit-project animate-bottom'>
+    <div className={`${prefix} animate-bottom`}>
       <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
       <div className='add-title'>
         {isDisplay ? 

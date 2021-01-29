@@ -6,7 +6,7 @@ import './style.css';
 
 const FormItem = Form.Item;
 
-export default function Login({loading, loginStatus, onFinish}) {
+export default function Login({loading, onFinish}) {
 
   return(
     <div className='login'>

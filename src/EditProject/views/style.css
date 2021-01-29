@@ -1,6 +1,9 @@
 .edit-project {
   margin: 30px;
 }
+.edit-project-skeleton {
+  padding: 50px;
+}
 
 .add-title {
   min-height: 70px;

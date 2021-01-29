@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
-import { getKeyValue } from "../../utils/parse";
+import { getAdmin } from "../../utils/parse";
 import { deleteFileApi } from "../../utils/api";
 import ShowModule from "./component";
 import { actions as fileModuleActions } from "../../FileModule";
 import './style.css';
 
-function getModuleItem(state, moduleId, type) {
+function getModuleItem(state, moduleId) {
   let temp;
 
   state.forEach(f => {
     if (f.moduleId === moduleId) {
-      temp = f[type];
+      temp = f.fileList;
     }
   });
 
@@ -29,8 +29,8 @@ function mapStateToProps(state, ownProps) {
         {moduleId} = ownProps;
   
   return {
-    lists: getModuleItem(fileModule, moduleId, 'fileList'),
-    admin: getKeyValue('todo-admin')
+    lists: getModuleItem(fileModule, moduleId),
+    admin: getAdmin()
   }
 }
 
@@ -38,9 +38,6 @@ function mapDispatchToProps(dispatch, ownProps) {
   const {moduleId} = ownProps;
 
   return {
-    onView(e) {
-      console.log('view --- ', e.target)
-    },
     onDelete(e) {
       const target = e.target,
             file = target.dataset['id'];

@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { getKeyValue } from "./parse";
+import { getToken } from "./parse";
 
 console.log('Using environment "' + process.env.NODE_ENV + '".');
 export const baseConfig = {
@@ -199,7 +199,7 @@ export function request(url, method, data, config) {
 
     //请求拦截配置
     axios.interceptors.request.use(config => {
-      const token = getKeyValue('todo-token');
+      const token = getToken();
       config.headers = {
         Authorization: `Bearer ${token}`
       }

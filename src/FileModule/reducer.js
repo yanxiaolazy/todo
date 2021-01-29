@@ -56,7 +56,7 @@ function changeTodoStatus(state, action) {
   
   temp.forEach(f => {
     if (f.moduleId === action.moduleId) {
-      f.fileList = f.fileList.map(m => {
+      f.fileList.forEach(m => {
         if (m.response.params.file === action.filename) {
           m.response.params.todoStatus = action.status
         }

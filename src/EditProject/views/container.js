@@ -24,11 +24,14 @@ const resolve = function (dispatch, history) {
 }
 const reject = error => console.log(error);
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  const {isEdit} = ownProps;
+
   return {
     moduleItems:state.project?.modules || [],
     title: state.project.projectTitle,
     initModuleId: state.project.moduleId,
+    isEdit,
     stateStore: state
   }
 }

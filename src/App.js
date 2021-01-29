@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import QueueAnim from "rc-queue-anim";
 import Login, { actions as loginAction } from "./Login";
@@ -9,7 +9,7 @@ import TopBar from './TopBar';
 import SideBar from "./SideBar";
 import ProjectSummary from "./ProjectSummary";
 import ViewProject from './ViewProject';
-import { getKeyValue } from "./utils/parse";
+import { getToken } from "./utils/parse";
 
 const LayoutHeader = Layout.Header,
       LayoutSider = Layout.Sider,
@@ -28,18 +28,23 @@ const styles = {
   }
 }
 
-function App({loginStatus, dispatch}) {
-  const history = useHistory();
+function App() {
+  const history = useHistory(),
+        match = useRouteMatch(),
+        dispatch = useDispatch(),
+        loginStatus = useSelector(state => state.login.loginStatus)
 
   useEffect(() => {
-    const token = getKeyValue('todo-token');
-
+    const token = getToken();
+    
     if (!token) {
-      history.push('/login');
+      if (window.location.pathname !== '/login') {
+        history.push('/login');
+      }
     } else {
       dispatch(loginAction.setLoginStatus(true));
     }
-  }, [history, loginStatus, dispatch]);
+  }, [history, loginStatus, dispatch, match]);
 
   return (
     <>
@@ -61,7 +66,7 @@ function App({loginStatus, dispatch}) {
               <Route exact path='/' />
               <Route exact path='/new' component={EditProject} />
               <Route exact path='/view' component={ProjectSummary} />
-              <Route exact path='/view/:projectId(\d+)/edit' component={EditProject} />
+              <Route exact path='/view/:projectId(\d+)/edit' render={props => <EditProject isEdit={true} {...props}/>} />
               <Route path='/view/:projectId(\d+)' component={ViewProject} />
               {/* <Route component={NotFound} /> */}
             </Switch>
@@ -73,10 +78,4 @@ function App({loginStatus, dispatch}) {
   );
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    loginStatus: state.login.loginStatus
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

@@ -37,8 +37,11 @@ function addTextModule(state, action) {
     temp.push({
       moduleId: action.moduleId, 
       textList: [{
-        text:action.text,
-        id: action.id
+        text:action.payload.text,
+        id: action.id,
+        username: action.payload.username,
+        lastTime: action.payload.lastTime,
+        todoStatus: action.payload.todoStatus
       }]
     });
   }
@@ -118,7 +121,7 @@ function changeTodoStatus(state, action) {
 
   temp.forEach(f => {
     if (f.moduleId === action.moduleId) {
-      f.textList.map(m => {
+      f.textList.forEach(m => {
         if (m.id === action.id) {
           m.todoStatus = action.status
         }

@@ -32,7 +32,8 @@ function mapStateToProps(state, ownProps) {
   return {
     value: getTextModule(state.textModule, moduleId, id, 'text'),
     username: getTextModule(state.textModule, moduleId, id, 'username'),
-    lastTime: getTextModule(state.textModule, moduleId, id, 'lastTime')
+    lastTime: getTextModule(state.textModule, moduleId, id, 'lastTime'),
+    todoStatus: getTextModule(state.textModule, moduleId, id, 'todoStatus')
   }
 }
 
@@ -43,7 +44,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     onChange(text) {
       const payload = {
         text, 
-        username: getUser('todo-login'), 
+        username: getUser(), 
         lastTime: Date.now(), 
         todoStatus: 'pending'
       }
