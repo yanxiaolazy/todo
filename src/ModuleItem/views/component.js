@@ -5,6 +5,8 @@ import ShowFiles from "../../ShowFiles";
 import FileModule from "../../FileModule";
 import TextModule from "../../TextModule";
 
+const prefix = 'module-item';
+
 export default function ModuleItem({
   id,
   moduleId,
@@ -36,10 +38,10 @@ export default function ModuleItem({
   }
 
   return(
-    <Card key='module-item' className='module-item animate-bottom'>
+    <Card key='module-item' className={`${prefix} animate-bottom`}>
       <div className='add-title'>
         {isDisplay ? 
-        <div className='add-title-display module-title'>
+        <div className={`${prefix}-title add-title-display`}>
           <span>{title}</span>
         </div> :
         <Input 
@@ -51,11 +53,11 @@ export default function ModuleItem({
         />}
         <span onClick={handleModuleTitleModify}>{isDisplay ? '修改' : '保存'}</span>
       </div>
-      <div className='add-module-btns' onClick={handleClick}>
+      <div className={`${prefix}-add-module-btns`} onClick={handleClick}>
         <span id='add-text'>Add Text</span>
         <span id='add-file'>Add File</span>
       </div>
-      <div className='module-content'>
+      <div className={`${prefix}-content`}>
         <FileModule {...{moduleId}}/>
         <ShowFiles {...{moduleId}} />
         {textModules?.map(module => (<TextModule key={module.id} {...{moduleId}} id={module.id}/>))}

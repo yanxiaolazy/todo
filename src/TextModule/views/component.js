@@ -1,5 +1,7 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useEffect, useState } from 'react';
+import useDebounce from "../../components/useDebounce";
 import './style.css';
 
 const styles = {
@@ -15,11 +17,27 @@ export default function TextModule({
   onChange, 
   onDelete
 }) {
+  const [debounceValue, setDebounceValue] = useDebounce(500);
+  const [quillValue, setQuillValue] = useState(value);
 
+  useEffect(() =>{
+    if (quillValue) {
+      setDebounceValue(quillValue);
+    }
+  }, [quillValue, setDebounceValue]);
+  useEffect(() => {
+    if (debounceValue) {
+      onChange(debounceValue);
+    }
+  }, [debounceValue, onChange]);
+
+  function handleChange(text) {
+    setQuillValue(text);
+  }
   return(
     <div className='text-module animate-bottom'>
       <div className='delete-container' onClick={onDelete}><span>删除</span></div>
-      <ReactQuill {...{value, onChange}} style={styles.quill}/>
+      <ReactQuill onChange={handleChange} value={quillValue} style={styles.quill}/>
       {lastTime && <div className='upload-info text-module-info'>
         <span className='uploader'>编辑者：{username}</span>
         <span className='upload-time'>最后一次更改时间：{`${new Date(lastTime).toLocaleDateString()}/${new Date(lastTime).toLocaleTimeString()}`}</span>
@@ -28,3 +46,4 @@ export default function TextModule({
     </div>
   );
 }
+

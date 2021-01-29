@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
-import QueueAnim from "rc-queue-anim";
 import Login, { actions as loginAction } from "./Login";
 import EditProject from "./EditProject";
 import TopBar from './TopBar';
@@ -51,15 +50,11 @@ function App() {
       {loginStatus && 
       <Layout >
         <LayoutHeader style={styles.header}>
-          <QueueAnim type='top' delay='100'>
-            <TopBar key='topbar'/>
-          </QueueAnim>
+          <TopBar key='topbar'/>
         </LayoutHeader>
         <Layout>
           <LayoutSider theme='light' style={styles.sider}>
-            <QueueAnim type='left' delay='100'>
-              <SideBar key='sider'/>
-            </QueueAnim>
+            <SideBar key='sider'/>
           </LayoutSider>
           <LayoutContent style={styles.content}>
             <Switch key='content'>

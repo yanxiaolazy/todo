@@ -26,7 +26,8 @@ span {
 
 .view-project-module-title,
 .view-project-module-file,
-.view-project-module-text {
+.view-project-module-text,
+.view-project-publish {
   padding: 10px;
 }
 .view-project-edit,

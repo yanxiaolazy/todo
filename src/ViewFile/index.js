@@ -18,13 +18,13 @@ function downloadFile(setFileURL) {
   }
 }
 
+const prefix = 'view-file';
 
 export default function ViewFile({filename, isOpen, onClick}) {
   const [fileBase64, setFileBase64] = useState(null),
         [fileUrl, setFileURL] = useState(''),
         [styleWidth, setStyleWidth] = useState(520),
-        [fileSrc, setFileSrc] = useState(null),
-        prefix = 'view-file';
+        [fileSrc, setFileSrc] = useState(null)
 
   useEffect(() => {
     if (filename) {

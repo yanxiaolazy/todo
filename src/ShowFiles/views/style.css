@@ -1,69 +1,69 @@
-.show-module {
+.show-files {
   margin: 10px 0;
 }
-.show-module-container{
+.show-files-container{
   display: grid;
   grid-template-columns: 200px 3fr 1fr 30px;
   grid-template-rows: 50px;
 }
-.show-module-container {
+.show-files-container {
   transition: all .5s;
 }
-.show-module-container:hover {
+.show-files-container:hover {
   background-color: rgba(223, 230, 233, .5);
 }
-.show-module-container:hover
-.delete {
+.show-files-container:hover
+.show-files-delete {
   opacity: 1;
 }
-.upload-info,
-.checked,
-.approval-status,
-.delete {
+.upload-info,/*全局属性*/
+.show-files-checked,
+.approval-status,/*全局属性*/
+.show-files-delete {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.checked-item {
+.show-files-checked-item {
   padding: 0 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.checked-item>span:last-child {
+.show-files-checked-item>span:last-child {
   padding: 0 10px;
   cursor: pointer;
 }
 
-.checked>input,
-.delete {
+.show-files-checked>input,
+.show-files-delete {
   cursor: pointer;
 }
-
+/*全局属性*/
 .upload-info span:last-child {
   margin-left: 10px;
 }
 
-.uploader,
-.upload-time,
-.delete {
+.uploader,/*全局属性*/
+.upload-time,/*全局属性*/
+.show-files-delete {
   color: #b2bec3;
 }
-.delete {
+.show-files-delete {
   opacity: 0;
   transition: all .5s;
 }
 
-.approval-status-pending {
+.approval-status-pending {/*全局属性*/
   color: #fdcb6e;
 }
 
-.approval-status-pass {
+.approval-status-pass {/*全局属性*/
   color: var(--green);
 }
 
-.approval-status-not-pass {
+.approval-status-not-pass {/*全局属性*/
   color: #ff7675;
   opacity: .7;
 }

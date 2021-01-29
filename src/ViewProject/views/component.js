@@ -186,8 +186,13 @@ export default function ViewProject() {
       <div className={`${prefix}-edit`}>
         <span onClick={handleEditClick}>Edit</span>
       </div>
+      {isAdmin && <div className={`${prefix}-publish`}>
+        <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
+      </div>}
       {modules}
-      {isAdmin && <Button type='primary' htmlType='button' onClick={onPublish}>publish</Button>}
+      {isAdmin && <div className={`${prefix}-publish`}>
+        <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
+      </div>}
       <ViewFile {...{filename}} isOpen={modalOpen} onClick={handleModalOpen}/>
     </div>
   );

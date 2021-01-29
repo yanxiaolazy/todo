@@ -62,14 +62,17 @@ export default function EditProject({
 
   return(
     <div className={`${prefix} animate-bottom`}>
-      <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
-      <div className='add-title'>
+      <div className={`${prefix}-btns`}>
+        <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
+        <Button type='primary' htmlType='button' onClick={handlePublish}>publish</Button>
+      </div>
+      <div className={`add-title`}>
         {isDisplay ? 
-        <div className='add-title-display'>
+        <div className={`add-title-display`}>
           <span>{title}</span>
         </div> :
         <Input 
-          className='add-title-input' 
+          className={`add-title-input`} 
           name='projectTitle' 
           value={projectTitle} 
           ref={projectNameRef} 
@@ -78,7 +81,7 @@ export default function EditProject({
         />}
         <span onClick={handleProjectNameModify}>{isDisplay ? '修改' : '保存'}</span>
       </div>
-      <div className='add-modules'>
+      <div className={`${prefix}-add-modules`}>
         {
           moduleItems && moduleItems.map(item => {
             return (
@@ -86,9 +89,9 @@ export default function EditProject({
             );
           })
         }
-        <div className='edit-project-btns'>
-          <Button type='primary' htmlType='button' onClick={handlePublish}>publish</Button>
+        <div className={`${prefix}-btns`}>
           <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
+          <Button type='primary' htmlType='button' onClick={handlePublish}>publish</Button>
         </div>
       </div>
     </div>
