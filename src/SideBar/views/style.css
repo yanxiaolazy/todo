@@ -1,8 +1,10 @@
 .sidebar {
   display: flex;
   justify-content: flex-start;
-  /* align-items: center; */
   flex-flow: column nowrap;
+}
+.sidebar a:first-child {
+  margin: 5px 0 0 0;
 }
 .sidebar
 div {
@@ -15,11 +17,23 @@ div {
 .sidebar
 a {
   color: #636e72;
-  transition: all .5s;
+  transition: color .3s;
 }
 
 .sidebar
 a:hover {
   color: #fff;
-  background-color: rgba(112, 182, 115, .8);
+  background-color: var(--green);
+}
+.sidebar-link-checked {
+  background-color: var(--green);
+}
+a.sidebar-link-checked {
+  color: #fff;
+}
+.sidebar-link {
+  background-color: #fff;
+}
+a.sidebar-link {
+  color: #636e72;
 }

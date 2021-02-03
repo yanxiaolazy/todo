@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
@@ -8,7 +8,9 @@ import TopBar from './TopBar';
 import SideBar from "./SideBar";
 import ProjectSummary from "./ProjectSummary";
 import ViewProject from './ViewProject';
-import { getToken } from "./utils/parse";
+import UsersLayout from "./UsersLayout";
+import CreateUser from "./CreateUser";
+import { getAdmin, getToken } from "./utils/parse";
 
 const LayoutHeader = Layout.Header,
       LayoutSider = Layout.Sider,
@@ -31,7 +33,8 @@ function App() {
   const history = useHistory(),
         match = useRouteMatch(),
         dispatch = useDispatch(),
-        loginStatus = useSelector(state => state.login.loginStatus)
+        loginStatus = useSelector(state => state.login.loginStatus),
+        [isAdmin] = useState(() => getAdmin());
 
   useEffect(() => {
     const token = getToken();
@@ -63,6 +66,10 @@ function App() {
               <Route exact path='/view' component={ProjectSummary} />
               <Route exact path='/view/:projectId(\d+)/edit' render={props => <EditProject isEdit={true} {...props}/>} />
               <Route path='/view/:projectId(\d+)' component={ViewProject} />
+              {isAdmin && <>
+                <Route exact path='/user' component={UsersLayout} />
+                <Route exact path='/user/create-user' component={CreateUser} />
+              </>}
               {/* <Route component={NotFound} /> */}
             </Switch>
           </LayoutContent>

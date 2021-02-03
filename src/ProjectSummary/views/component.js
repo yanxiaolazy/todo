@@ -1,4 +1,4 @@
-import { Empty, message } from "antd";
+import { Empty, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { viewProjectApi } from "../../utils/api";
@@ -10,25 +10,21 @@ const styles = {
   }
 }
 
-function getAllProjectTitle(fn) {
-  if (typeof fn !== 'function') {
-    message.error('');
-    return;
-  }
-  const resolve = response => fn(response);
-  const reject = error => console.log(error);
-
-  viewProjectApi()()(resolve, reject);
-}
+const resolveProjectSummary = (setProjects, setLoading) => response => {
+  setProjects(response);
+  setLoading(false);
+};
+const rejectProjectSummary = setLoading => () => setLoading(false);
 
 const prefix = 'project-summary';
 
 export default function ProjectSummary() {
-  const [projects, setProjects] = useState(null);
-  const [titles, setTitles] = useState(null);
+  const [projects, setProjects] = useState(null),
+        [titles, setTitles] = useState(null),
+        [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllProjectTitle(setProjects);
+    viewProjectApi()()(resolveProjectSummary(setProjects, setLoading), rejectProjectSummary(setLoading));
   }, []);
 
   useEffect(() => {
@@ -40,6 +36,11 @@ export default function ProjectSummary() {
       setTitles(params.titles);
     }
   }, [projects]);
+
+  if (loading) {
+    return(<Skeleton className={`${prefix}`} active loading round paragraph={{rows: 6}}/>);
+  }
+
 
   if (!titles) {
     return(<div style={styles.empty}><Empty /></div>);

@@ -4,8 +4,6 @@ const {resolve, extname, basename} = require('path');
 module.exports = upload;
 
 async function upload(ctx, next) {
-  const body = ctx.request.body;
-  console.log(body)
   const {file} = ctx.request.files, 
         {uploader, uploadTime, todoStatus} = ctx.request.body
         _basePath = resolve(__dirname, `../../static/upload`),

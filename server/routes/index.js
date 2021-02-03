@@ -6,7 +6,10 @@ const {
   deleteFile,
   viewProject,
   updateProject,
-  viewFile
+  viewFile,
+  viewAllUsers,
+  newUser,
+  deleteUser
 } = require('./middleware');
 
 const router = new Router({prefix: '/api'});
@@ -14,14 +17,15 @@ const router = new Router({prefix: '/api'});
 router
   .get('/view/project', viewProject)
 //   .get('/view/date', viewDate);
-.get('/view/file', viewFile)
+  .get('/view/file', viewFile)
+  .get('/view/users', viewAllUsers)
 
 
 router
   .post('/login', login)
   // .post('/logout', logout)
   .post('/upload', upload)
-  // .post('/new/user', newUser)
+  .post('/new/user', newUser)
   .post('/new/project', newProject)
   .post('/update/project', updateProject)
   // .post('/verify/username', verifyUsername)
@@ -31,7 +35,7 @@ router
 // router
   .delete('/delete/file', deleteFile)
 //   .delete('/delete/project', deleteProject)
-//   .delete('/delete/user', deleteUser);
+  .delete('/delete/user', deleteUser);
 
 
 module.exports = router;

@@ -209,12 +209,16 @@ export function request(url, method, data, config) {
     axios(conf)
     .then(response => response.data)
     .then(response => {
-      resolve(response);
+      if (typeof resolve === 'function') {
+        resolve(response);
+      }
     })
     .catch(error => {
       if (error.response) {
         const response = error.response;
-        if (response.status === 401) {
+        if (response.status === 400) {
+          message.error(`${response.data.params.exist}`);
+        } else if (response.status === 401) {
           message.error('没有权限');
         } else if (response.status === 403) {
           message.error('请求被禁止');
@@ -228,8 +232,10 @@ export function request(url, method, data, config) {
       } else {
         message.error(`Error ${error.message}`);
       }
-      console.log(error.config);
-      reject();
+
+      if (typeof reject === 'function') {
+        reject(error.config);
+      }
     });     
   }
 }
