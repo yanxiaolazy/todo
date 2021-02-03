@@ -18,22 +18,33 @@ export default function TextModule({
   onDelete
 }) {
   const [debounceValue, setDebounceValue] = useDebounce(500);
-  const [quillValue, setQuillValue] = useState(value);
+  const [quillValue, setQuillValue] = useState(value),
+        [change, setChange] = useState(false)
 
   useEffect(() =>{
     if (quillValue) {
       setDebounceValue(quillValue);
     }
-  }, [quillValue, setDebounceValue]);
+  }, [quillValue, setDebounceValue, change]);
+
   useEffect(() => {
-    if (debounceValue) {
+    if (change && debounceValue) {
       onChange(debounceValue);
     }
   }, [debounceValue, onChange]);
 
+  //等到防抖数据回来再改变change状态，防止无法连续输入
+  useEffect(() => {
+    if (debounceValue) {
+      setChange(true);
+    }
+    return () => setChange(false);
+  }, [debounceValue]);
+
   function handleChange(text) {
     setQuillValue(text);
   }
+
   return(
     <div className='text-module animate-bottom'>
       <div className='delete-container' onClick={onDelete}><span>删除</span></div>
