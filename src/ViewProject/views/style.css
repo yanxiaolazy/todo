@@ -45,6 +45,6 @@ span {
 .view-project-edit:hover {
   color: var(--green);
 }
-.view-project-module-text>div:first-child {
+.view-project-module-text>div {
   word-wrap: break-word;
 }
