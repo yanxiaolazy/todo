@@ -24,7 +24,8 @@ export function setLogin(value) {
 //admin
 export function getAdmin() {
   const login = getKeyValue('todo-login');
-  return JSON.parse(login).admin;
+  //未登录状态时，没有 `admin`
+  return JSON.parse(login)?.admin;
 }
 
 export function setAdmin(value) {
