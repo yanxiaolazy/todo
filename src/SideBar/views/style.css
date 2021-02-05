@@ -3,9 +3,11 @@
   justify-content: flex-start;
   flex-flow: column nowrap;
 }
+
 .sidebar a:first-child {
   margin: 5px 0 0 0;
 }
+
 .sidebar
 div {
   padding: 10px 30%;
@@ -23,17 +25,35 @@ a {
 .sidebar
 a:hover {
   color: #fff;
-  background-color: var(--green);
+  background-color: rgba(112, 182, 115, .5);
 }
+
 .sidebar-link-checked {
   background-color: var(--green);
 }
+
 a.sidebar-link-checked {
   color: #fff;
+  position: relative;
 }
+
+a.sidebar-link-checked::after {
+  position: absolute;
+  content: '';
+  border-top: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #f6f6f6;
+  top: calc(50% - 8px);
+  right: 0;
+}
+
 .sidebar-link {
   background-color: #fff;
 }
+
 a.sidebar-link {
   color: #636e72;
 }
+
+
