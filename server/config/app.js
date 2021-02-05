@@ -1,6 +1,6 @@
 module.exports = {
-  port: 5000,
-  host: '127.0.0.1',
+  port: process.env.NODE_ENV !== 'production' ? 5000 : 80,
+  host: '0.0.0.0',
   corsConf: {
     origin: '*',
     exposeHeaders: ['www-Authenticate', 'Server-Authorization'],

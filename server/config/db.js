@@ -8,14 +8,18 @@ const sequelize = new Sequelize(database, username, password, {
   dialect
 });
 
-(async function testConnect() {
+async function testDbConnect() {
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
+    return true;
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+    return false;
   }
-}());
+}
+
+testDbConnect();
 
 
 //配置数据库模型
@@ -90,6 +94,7 @@ const ProjectTable = sequelize.define('todo_project', {
 const secret = 'thisisasecret-yanxiaolazy';
 
 module.exports = {
+  testDbConnect,
   secret,
   sequelize,
   UsersTable,

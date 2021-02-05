@@ -1,8 +1,10 @@
+const path = require('path');
 const Koa = require('koa');
 const logger = require('koa-logger');
 const cors = require('koa2-cors');
 const bodyparser = require('koa-body');
 const koajwt = require('koa-jwt');
+const koaStatic = require('koa-static');
 const {port, host, corsConf} = require('./config/app');
 const route = require('./routes');
 const {secret} = require('./config/db');
@@ -16,8 +18,9 @@ app
   .use(logger())
   //解析请求数据
   .use(bodyparser({ multipart: true }))
+  .use(koaStatic(path.resolve(__dirname, '../build')))
   //jwt验证
-  .use(koajwt({secret}).unless({path: [/\/api\/login$/]}))
+  .use(koajwt({secret}).unless({path: [/\/api\/login$/, /(?!api)/]}))
   //路由配置
   .use(route.routes())
   .use(route.allowedMethods());

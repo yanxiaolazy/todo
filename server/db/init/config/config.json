@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "1234567890",
+    "username": "todo",
+    "password": "todo",
     "database": "todo",
-    "host": "127.0.0.1",
+    "host": "mysql.todo",
     "dialect": "mysql"
   }
 }

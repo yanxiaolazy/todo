@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const Router = require('@koa/router');
 const {
   login, 
@@ -11,31 +13,39 @@ const {
   newUser,
   deleteUser
 } = require('./middleware');
+const { getType } = require('mime');
 
-const router = new Router({prefix: '/api'});
+const router = new Router();
+
+router.get(/./, async (ctx, next) => {
+  const render = fs.readFileSync(path.resolve(__dirname, '../../build/index.html'));
+  ctx.type = getType('html');
+  ctx.body = render;
+  await next();
+});
 
 router
-  .get('/view/project', viewProject)
+  .get('/api/view/project', viewProject)
 //   .get('/view/date', viewDate);
-  .get('/view/file', viewFile)
-  .get('/view/users', viewAllUsers)
+  .get('/api/view/file', viewFile)
+  .get('/api/view/users', viewAllUsers)
 
 
 router
-  .post('/login', login)
+  .post('/api/login', login)
   // .post('/logout', logout)
-  .post('/upload', upload)
-  .post('/new/user', newUser)
-  .post('/new/project', newProject)
-  .post('/update/project', updateProject)
+  .post('/api/upload', upload)
+  .post('/api/new/user', newUser)
+  .post('/api/new/project', newProject)
+  .post('/api/update/project', updateProject)
   // .post('/verify/username', verifyUsername)
   // .post('/verify/token', verifyToken)
 
 
 // router
-  .delete('/delete/file', deleteFile)
+  .delete('/api/delete/file', deleteFile)
 //   .delete('/delete/project', deleteProject)
-  .delete('/delete/user', deleteUser);
+  .delete('/api/delete/user', deleteUser);
 
 
 module.exports = router;

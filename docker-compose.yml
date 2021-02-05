@@ -1,0 +1,38 @@
+version: "3"
+services: 
+  mysql:
+    image: mysql:5.7
+    container_name: mysql.todo
+    hostname: mysql.todo
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: root_password_can_you
+      MYSQL_DATABASE: todo
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: todo
+    ports: 
+      - 3306:3306
+  todo:
+    depends_on:
+      - mysql 
+    container_name: server.todo
+    hostname: server.todo
+    restart: always
+    # ports: 
+      # - 80:80
+    build: 
+      context: .
+  nginx:
+    image: nginx:latest
+    container_name: nginx.todo
+    hostname: nginx.todo
+    restart: always
+    depends_on:
+      - todo
+    ports: 
+      - 80:80
+    volumes: 
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+
+    
