@@ -38,13 +38,13 @@ export default function SideBar() {
         >
           <div>user</div>
         </Link>
-        <Link 
-          to='/setting'
-          className={`${prefix}-link${pathname === '/setting' ? '-checked' : ''}`}
-        >
-          <div>setting</div>
-        </Link>
       </>}
+      <Link 
+        to='/setting'
+        className={`${prefix}-link${pathname === '/setting' ? '-checked' : ''}`}
+      >
+        <div>setting</div>
+      </Link>
     </div>
   );
 }
