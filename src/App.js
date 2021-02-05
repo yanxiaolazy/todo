@@ -10,6 +10,7 @@ import ProjectSummary from "./ProjectSummary";
 import ViewProject from './ViewProject';
 import UsersLayout from "./UsersLayout";
 import CreateUser from "./CreateUser";
+import SettingLayout from "./SettingLayout";
 import { getAdmin, getToken } from "./utils/parse";
 
 const LayoutHeader = Layout.Header,
@@ -66,6 +67,7 @@ function App() {
               <Route exact path='/view' component={ProjectSummary} />
               <Route exact path='/view/:projectId(\d+)/edit' render={props => <EditProject isEdit={true} {...props}/>} />
               <Route path='/view/:projectId(\d+)' component={ViewProject} />
+              <Route exact path='/setting' component={SettingLayout} />
               {isAdmin && <>
                 <Route exact path='/user' component={UsersLayout} />
                 <Route exact path='/user/create-user' component={CreateUser} />

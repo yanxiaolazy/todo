@@ -3,7 +3,8 @@ const db = require('../../db');
 const status = require('../status');
 
 async function viewAllUsers(ctx, next) {
-  const result = await db.findAllUsers();
+  const query = ctx.request.query;
+  const result = await db.findAllUsers(query.tab);
 
   if (result.error) {
     ctx.status = 404;

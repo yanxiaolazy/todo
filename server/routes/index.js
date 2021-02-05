@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Router = require('@koa/router');
+const { getType } = require('mime');
 const {
   login, 
   upload, 
@@ -11,9 +12,9 @@ const {
   viewFile,
   viewAllUsers,
   newUser,
-  deleteUser
+  deleteUser,
+  updateUser
 } = require('./middleware');
-const { getType } = require('mime');
 
 const router = new Router();
 
@@ -38,6 +39,7 @@ router
   .post('/api/new/user', newUser)
   .post('/api/new/project', newProject)
   .post('/api/update/project', updateProject)
+  .post('/api/update/user', updateUser)
   // .post('/verify/username', verifyUsername)
   // .post('/verify/token', verifyToken)
 

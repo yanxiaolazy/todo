@@ -1,26 +1,45 @@
 const {UsersTable} = require('../config/db');
 
-async function findAllUsers() {
-  let results = null;
+async function findAllUsers(tab) {
+  let results = null,
+      where = {
+        username: tab
+      }
 
-  try {
-    results = await UsersTable.findAll();
-  } catch (error) {
-    return {error: 'search db error'};
-  }
+  if (tab) {
+    try {
+      results = await UsersTable.findAll({where});
 
-  if (results.length < 1) {
-    //默认有个'admin'用户
-    return {error: 'internal data storage error'};
-  }
+      if (results.length > 1) {
+        return {error: 'internal data storage error'};
+      }
 
-  const users = results.map(result => {
-    const {id, username, email, admin} = result.dataValues;
+      const {username, email} = results[0].dataValues;
 
-    return {id, username, email, admin};
-  });
+      return {users: {username, email}};
+    } catch (error) {
+      return {error: 'search db error'};
+    }
+  } else {
+    try {
+      results = await UsersTable.findAll();
 
-  return {users};
+      if (results.length < 1) {
+        //默认有个'admin'用户
+        return {error: 'internal data storage error'};
+      }
+    
+      const users = results.map(result => {
+        const {id, username, email, admin} = result.dataValues;
+    
+        return {id, username, email, admin};
+      });
+    
+      return {users};
+    } catch (error) {
+      return {error: 'search db error'};
+    }
+  }   
 }
 module.exports = findAllUsers;
 

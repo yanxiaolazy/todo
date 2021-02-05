@@ -39,6 +39,7 @@ export const newProjectApi = createApi(`${_baseURL}/new/project`, 'POST');
 export const newUserApi = createApi(`${_baseURL}/new/user`, 'POST');
 
 export const updateProjectApi = createApi(`${_baseURL}/update/project`, 'POST');
+export const updateUserApi = createApi(`${_baseURL}/update/user`, 'POST');
 
 export const verifyUsernameApi = createApi(`${_baseURL}/verify/username`, 'POST');
 export const verifyTokenApi = createApi(`${_baseURL}/verify/token`, 'POST');

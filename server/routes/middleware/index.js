@@ -8,6 +8,7 @@ const viewFile = require('./viewFile');
 const viewAllUsers = require('./viewAllUsers');
 const newUser = require('./newUser');
 const deleteUser = require('./deleteUser');
+const updateUser = require('./updateUser');
 
 module.exports = {
   login,
@@ -19,5 +20,6 @@ module.exports = {
   viewFile,
   viewAllUsers,
   newUser,
-  deleteUser
+  deleteUser,
+  updateUser
 }
