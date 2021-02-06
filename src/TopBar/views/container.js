@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
 import TopBar from  './component';
 import {actions as LoginActions} from '../../Login';
+import { removeToken } from "../../utils/parse";
 
 function deleteToken() {
-  sessionStorage.removeItem('token');
+  removeToken();
   return LoginActions.setLoginStatus(false)
 }
 function mapDispatchToProps(dispatch) {

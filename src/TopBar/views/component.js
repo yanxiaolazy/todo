@@ -1,5 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './style.css';
 
 const styles = {
@@ -15,6 +15,21 @@ const styles = {
 
 export default function TopBar({onLogout}) {
   const [openPannel, setOpenPannel] = useState(false);
+
+  useEffect(() => {
+    function clickEventCallback(e) {
+      const target = e.target;
+      
+      if (target.parentElement.className !== 'pannel') {
+        setOpenPannel(false);
+      }
+    }
+
+    if (openPannel) {
+      window.addEventListener('click', clickEventCallback);
+    }
+    return () => window.removeEventListener('click', clickEventCallback);
+  }, [openPannel]);
 
   function onClick() {
     setOpenPannel(prev => !prev);

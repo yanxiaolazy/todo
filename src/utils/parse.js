@@ -5,6 +5,9 @@ function getKeyValue(key) {
 function setKeyValue(key, value) {
   sessionStorage.setItem(key, value);
 }
+function romoveKeyValue(key) {
+  sessionStorage.removeItem(key);
+}
 //user
 export function getUser() {
   let username = getKeyValue('todo-login');
@@ -43,4 +46,7 @@ export function getToken() {
 }
 export function setToken(value) {
   setKeyValue('todo-token', value);
+}
+export function removeToken() {
+  romoveKeyValue('todo-token');
 }
