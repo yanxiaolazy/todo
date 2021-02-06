@@ -14,19 +14,19 @@ export default function SideBar() {
     <div className={`${prefix}`}>
       <Link 
         to='/' 
-        className={`${prefix}-link${pathname === '/' ? '-checked' : ''}`}
+        className={`${prefix}-link${/^\/$/.test(pathname) ? '-checked' : ''}`}
       >
         <div>home</div>
       </Link>
-      <Link 
+      {isAdmin && <Link 
         to='/new'
-        className={`${prefix}-link${pathname === '/new' ? '-checked' : ''}`}
+        className={`${prefix}-link${/^\/new/.test(pathname) ? '-checked' : ''}`}
       >
         <div>add</div>
-      </Link>
+      </Link>}
       <Link 
         to='/view'
-        className={`${prefix}-link${pathname === '/view' ? '-checked' : ''}`}
+        className={`${prefix}-link${/^\/view/.test(pathname) ? '-checked' : ''}`}
       >
         <div>view</div>
       </Link>
@@ -34,14 +34,14 @@ export default function SideBar() {
       {isAdmin && <>
         <Link 
           to='/user'
-          className={`${prefix}-link${pathname === '/user' ? '-checked' : ''}`}
+          className={`${prefix}-link${/^\/user/.test(pathname) ? '-checked' : ''}`}
         >
           <div>user</div>
         </Link>
       </>}
       <Link 
         to='/setting'
-        className={`${prefix}-link${pathname === '/setting' ? '-checked' : ''}`}
+        className={`${prefix}-link${/^\/setting/.test(pathname) ? '-checked' : ''}`}
       >
         <div>setting</div>
       </Link>
