@@ -27,11 +27,16 @@ module.exports = {
         allowNull:false
       },
       value: {
-        type: Sequelize.DataTypes.TEXT
+        type: Sequelize.DataTypes.TEXT,
+        allowNull: false
       },
       status: {
         type: Sequelize.DataTypes.STRING,
         defaultValue: 'Pending',//Completed Processing
+        allowNull:false
+      },
+      timeRange: {
+        type: Sequelize.DataTypes.TEXT,
         allowNull:false
       }
     });

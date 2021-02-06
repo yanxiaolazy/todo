@@ -2,34 +2,37 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Button, message, Select } from "antd";
+import { Button, message, Select, Skeleton, Spin } from "antd";
 import { actions as fileModuleActions } from "../../FileModule";
 import { actions as textModuleActions } from "../../TextModule";
 import { actions as moduleItemActions } from "../../ModuleItem";
 import { actions as editProjectActions } from "../../EditProject";
 import ViewFile from "../../ViewFile";
-import { getAdmin } from "../../utils/parse";
-import './style.css';
 import useGetProjectData from "../../components/useGetProjectData";
+import Helmet from "../../components/Helmet";
+import { getAdmin } from "../../utils/parse";
 import { updateProjectApi } from "../../utils/api";
+import './style.css';
 
 const prefix = 'view-project';
 
-const resolve = function (dispatch, history) {
+const resolve = function (dispatch, history, setSpinning) {
   return response => {
-    //reset 'project'
-    dispatch(editProjectActions.reset());
-    //reset 'moduleItem'
-    dispatch(moduleItemActions.reset());
-    //reset 'fileModule'
-    dispatch(fileModuleActions.reset());
-    //reset 'textModule'
-    dispatch(textModuleActions.reset());
+    setTimeout(() => {
+      //reset 'project'
+      dispatch(editProjectActions.reset());
+      //reset 'moduleItem'
+      dispatch(moduleItemActions.reset());
+      //reset 'fileModule'
+      dispatch(fileModuleActions.reset());
+      //reset 'textModule'
+      dispatch(textModuleActions.reset());
+      setSpinning(false);
+    }, 500);
     //router 跳转
     history.push('/view');
   }
 }
-const reject = error => console.log(error);
 
 export default function ViewProject() {
   const [modalOpen, setModalOpen] = useState(false),
@@ -39,7 +42,8 @@ export default function ViewProject() {
         match = useRouteMatch(),
         history = useHistory(), 
         dispatch = useDispatch(),
-        {project, moduleItem, fileModule, textModule} = useGetProjectData();    
+        {loading, project, moduleItem, fileModule, textModule} = useGetProjectData(),
+        [spinning, setSpinning] = useState(false)
 
   const onCheck = useCallback((moduleId, id, type) => {
 
@@ -169,31 +173,35 @@ export default function ViewProject() {
     const params = {};
     if (match.params.projectId) {
       params.id = match.params.projectId;
-
-      updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), reject);
+      setSpinning(true);
+      updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history, setSpinning));
     } else {
       message.warning('提交错误')
     }
   }
 
-  if (!project) {
-    return(<div></div>);
+  if (loading) {
+    return(<Skeleton active round paragraph={{rows: 6}}/>);
   }
 
   return(
     <div className={`animate-bottom ${prefix}`}>
-      <h2 className={`${prefix}-title`}>{project.projectTitle}</h2>
-      <div className={`${prefix}-edit`}>
-        <span onClick={handleEditClick}>Edit</span>
-      </div>
-      {isAdmin && <div className={`${prefix}-publish`}>
-        <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
-      </div>}
-      {modules}
-      {isAdmin && <div className={`${prefix}-publish`}>
-        <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
-      </div>}
-      <ViewFile {...{filename}} isOpen={modalOpen} onClick={handleModalOpen}/>
+      <Helmet title='View Project' />
+      <h1 className='todo-title'>View</h1>
+      <Spin {...{spinning}}>
+        <h2 className={`${prefix}-title`}>{project.projectTitle}</h2>
+        <div className={`${prefix}-edit`}>
+          <span onClick={handleEditClick}>Edit</span>
+        </div>
+        {isAdmin && <div className={`${prefix}-publish`}>
+          <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
+        </div>}
+        {modules}
+        {isAdmin && <div className={`${prefix}-publish`}>
+          <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
+        </div>}
+        <ViewFile {...{filename}} isOpen={modalOpen} onClick={handleModalOpen}/>
+      </Spin>
     </div>
   );
 }

@@ -9,8 +9,8 @@ async function newProject(ctx, next) {
   const result = await addNewProject(body.data);
 
   if (result.error) {
-    const response = Object.assign({}, status['404'], {params: {error: result.error}});
-    ctx.status = 404;
+    const response = Object.assign({}, status['502'], {params: {error: result.error}});
+    ctx.status = 502;
     ctx.type = 'json';
     ctx.body = response;
   } else {

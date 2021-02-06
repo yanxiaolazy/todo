@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+const log = require('loglevel');
 const {UsersTable} = require('../config/db');
 const createHash = require('../utils/createHash');
 
@@ -24,6 +25,7 @@ async function createUser(values) {
       return {exist: '用户名已存在/邮箱已存在'};
     }
   } catch (error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 
@@ -38,6 +40,7 @@ async function createUser(values) {
 
     return {text: '新建用户成功'};
   } catch(error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 }

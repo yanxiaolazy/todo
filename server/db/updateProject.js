@@ -1,6 +1,5 @@
+const log = require('loglevel');
 const {ProjectTable} = require('../config/db');
-
-module.exports = updateProject;
 
 async function updateProject(project, query) {
   if (!query) {
@@ -18,8 +17,12 @@ async function updateProject(project, query) {
       updateTime: new Date()
     }, {where});
   } catch(error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 
   return {text: 'update data success'}
 }
+
+module.exports = updateProject;
+

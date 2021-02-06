@@ -2,10 +2,10 @@ import { Skeleton, Spin, notification } from "antd";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import FormLayout from "../../FormLayout";
+import Helmet from "../../components/Helmet";
 import { viewUsersApi, updateUserApi } from "../../utils/api";
 import { getUser } from "../../utils/parse";
 import { regExpConfig } from '../../utils/regular';
-import "./style.css";
 
 const prefix = 'setting-layout';
 
@@ -54,6 +54,8 @@ export default function SettingLayout() {
 
   return(
     <div className={`${prefix}`}>
+      <Helmet title='Setting' />
+      <h1 className='todo-title'>Setting</h1>
       <Spin {...{spinning}}>
         <FormLayout 
           submitText='Update Profile' 

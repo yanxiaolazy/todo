@@ -1,6 +1,7 @@
 import { Empty, Skeleton, Button, Spin } from "antd";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Helmet from "../../components/Helmet";
 import { viewUsersApi, deleteUserApi } from "../../utils/api";
 import "./style.css";
 
@@ -85,6 +86,8 @@ export default function UsersLayout() {
 
   return(
     <div className={`${prefix} animate-bottom`}>
+      <Helmet title='Users' />
+      <h1 className='todo-title'>Users</h1>
       <div className={`${prefix}-create-btn`}><Button type='primary' htmlType='button' onClick={handleCreateUserBtn}>Add New</Button></div>
       <ul className={`${prefix}-titles`}>
         <li>ID</li>

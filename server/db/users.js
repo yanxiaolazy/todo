@@ -1,8 +1,8 @@
-const {UsersTable, secret} = require('../config/db');
 const {Op} = require('sequelize');
-const  jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const log = require('loglevel');
+const {UsersTable, secret} = require('../config/db');
 const createHash = require('../utils/createHash');
-
 
 async function login(username, password, email) {
   if (!username || !password || !email) {
@@ -15,6 +15,7 @@ async function login(username, password, email) {
   try {
     results = await UsersTable.findAll({where});
   } catch (error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 

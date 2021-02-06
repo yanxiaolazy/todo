@@ -25,13 +25,13 @@ export default function TextModule({
     if (quillValue) {
       setDebounceValue(quillValue);
     }
-  }, [quillValue, setDebounceValue, change]);
+  }, [quillValue, setDebounceValue]);
 
   useEffect(() => {
     if (change && debounceValue) {
       onChange(debounceValue);
     }
-  }, [debounceValue, onChange]);
+  }, [debounceValue, onChange, change]);
 
   //等到防抖数据回来再改变change状态，防止无法连续输入
   useEffect(() => {

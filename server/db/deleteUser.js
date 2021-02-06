@@ -1,3 +1,4 @@
+const log = require('loglevel');
 const { UsersTable } = require("../config/db");
 
 async function deleteUser(id) {
@@ -11,6 +12,7 @@ async function deleteUser(id) {
 
     return {text: `delete ${id}`};
   } catch (error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 }

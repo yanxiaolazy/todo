@@ -1,6 +1,7 @@
 import { Empty, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Helmet from "../../components/Helmet";
 import { viewProjectApi } from "../../utils/api";
 import "./style.css";
 
@@ -41,20 +42,24 @@ export default function ProjectSummary() {
     return(<Skeleton className={`${prefix}`} active loading round paragraph={{rows: 6}}/>);
   }
 
-
   if (!titles) {
     return(<div style={styles.empty}><Empty /></div>);
   }
   
   const views = titles.map(title => {
     const createTime = `${new Date(title.createTime).toLocaleDateString()}/${new Date(title.createTime).toLocaleTimeString()}`,
-          updateTime = `${new Date(title.updateTime).toLocaleDateString()}/${new Date(title.updateTime).toLocaleTimeString()}`;
+          updateTime = `${new Date(title.updateTime).toLocaleDateString()}/${new Date(title.updateTime).toLocaleTimeString()}`,
+          {start, end} = JSON.parse(title.timeRange),
+          startTime = `${new Date(start).toLocaleDateString()}`,
+          endTime = `${new Date(end).toLocaleDateString()}`
 
     return(
       <li key={title.id} className={`${prefix}-item`}>
-        <span><Link to={`/view/${title.id}`}>{title.projectTitle}</Link></span>
+        <span title={title.projectTitle}><Link to={`/view/${title.id}`}>{title.projectTitle}</Link></span>
         <span>{createTime}</span>
         <span>{updateTime}</span>
+        <span>{startTime}</span>
+        <span>{endTime}</span>
         <span>{title.status}</span>
       </li>
     );
@@ -62,10 +67,14 @@ export default function ProjectSummary() {
 
   return(
     <div className={`${prefix} animate-bottom`}>
+      <Helmet title='Project' />
+      <h1 className='todo-title'>Project</h1>
       <ul className={`${prefix}-titles`}>
         <li>Project</li>
         <li>Publish Time</li>
         <li>Update Time</li>
+        <li>Start Time</li>
+        <li>End Time</li>
         <li>Progress</li>
       </ul>
       <ul className={`${prefix}-items`}>

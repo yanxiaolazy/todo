@@ -84,6 +84,10 @@ const ProjectTable = sequelize.define('todo_project', {
     type: DataTypes.STRING,
     defaultValue: 'Pending',//Completed Processing
     allowNull:false
+  },
+  timeRange: {
+    type: DataTypes.TEXT,
+    allowNull:false
   }
 }, {
   freezeTableName: true,

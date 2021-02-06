@@ -1,5 +1,6 @@
 const fs = require('fs');
 const {resolve} = require('path');
+const log = require('loglevel');
 
 module.exports = deleteFile;
 
@@ -20,7 +21,7 @@ async function deleteFile(ctx, next) {
       ctx.body = {code: 200, msg: 'ok', params: {}, sucess: true};
     }
   } catch (error) {
-    // console.log(error)
+    log.error(error)
     ctx.status = 404;
     ctx.type = 'json';
     ctx.body = {code: 404, msg: 'not found', params: {}, sucess: true};

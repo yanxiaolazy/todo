@@ -1,6 +1,6 @@
 .view-project-module {
   border: 1px solid var(--green);
-  margin: 30px;
+  /* margin: 30px; */
   /* padding: 10px; */
   background-color: #fff;
 }

@@ -1,3 +1,4 @@
+const log = require('loglevel');
 const {UsersTable} = require('../config/db');
 const createHash = require('../utils/createHash');
 
@@ -14,6 +15,7 @@ async function updateUser(user) {
       updateTime: new Date()
     }, {where: {username}});
   } catch(error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 

@@ -11,6 +11,8 @@ import ViewProject from './ViewProject';
 import UsersLayout from "./UsersLayout";
 import CreateUser from "./CreateUser";
 import SettingLayout from "./SettingLayout";
+import CreateProject from "./CreateProject";
+import Home from './Home';
 import { getAdmin, getToken } from "./utils/parse";
 
 const LayoutHeader = Layout.Header,
@@ -62,8 +64,8 @@ function App() {
           </LayoutSider>
           <LayoutContent style={styles.content}>
             <Switch key='content'>
-              <Route exact path='/' />
-              <Route exact path='/new' component={EditProject} />
+              <Route exact path='/' component={Home}/>
+              <Route exact path='/new' component={CreateProject} />
               <Route exact path='/view' component={ProjectSummary} />
               <Route exact path='/view/:projectId(\d+)/edit' render={props => <EditProject isEdit={true} {...props}/>} />
               <Route path='/view/:projectId(\d+)' component={ViewProject} />

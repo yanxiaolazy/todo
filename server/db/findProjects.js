@@ -1,8 +1,9 @@
+const log = require('loglevel');
 const {ProjectTable} = require('../config/db');
 
 async function findProjects(query) {
-  let attributes = ['id', 'projectTitle', 'createTime', 'updateTime', 'status'];
-  let results,
+  let attributes = ['id', 'projectTitle', 'createTime', 'updateTime', 'status', 'timeRange'],
+      results = null,
       titles = null;
 
   //获取项目内容
@@ -12,6 +13,7 @@ async function findProjects(query) {
     try {
       results = await ProjectTable.findAll({where, attributes});
     } catch (error) {
+      log.error(error);
       return {error: 'search db error'};
     }
 
@@ -29,25 +31,26 @@ async function findProjects(query) {
   try {
     results = await ProjectTable.findAll({attributes});
   } catch (error) {
+    log.error(error);
     return {error: 'search db error'};
   }
 
   if (results.length > 0) {
     titles = results.map(m => {
-      const {dataValues: {id, projectTitle, createTime, updateTime, status}} = m;
+      const {dataValues: {id, projectTitle, createTime, updateTime, status, timeRange}} = m;
       return {
         id,
         projectTitle,
         createTime,
         updateTime,
-        status
+        status,
+        timeRange
       }
     });
   }
 
   return {titles};
 }
-
 
 module.exports = findProjects;
 

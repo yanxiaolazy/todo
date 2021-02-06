@@ -1,14 +1,14 @@
 const status = require('../status');
-const {findProjects} = require('../../db');
+const db = require('../../db');
 
 module.exports = viewProject;
 
 async function viewProject(ctx, next) {
   const query = ctx.request.query;
-  const result = await findProjects(query);
+  const result = await db.findProjects(query);
 
   if (result.error) {
-    const code = 404;
+    const code = 502;
     ctx.status = code;
     ctx.type = 'json';
     ctx.body = Object.assign({}, status[code], {params: {error: result.error}});

@@ -1,3 +1,4 @@
+const log = require('loglevel');
 const {UsersTable} = require('../config/db');
 
 async function findAllUsers(tab) {
@@ -18,6 +19,7 @@ async function findAllUsers(tab) {
 
       return {users: {username, email}};
     } catch (error) {
+      log.error(error);
       return {error: 'search db error'};
     }
   } else {
@@ -37,6 +39,7 @@ async function findAllUsers(tab) {
     
       return {users};
     } catch (error) {
+      log.error(error);
       return {error: 'search db error'};
     }
   }   

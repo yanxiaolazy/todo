@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Button, Empty, Input, Skeleton } from "antd";
 import ModuleItem from "../../ModuleItem";
 import useGetProjectData from "../../components/useGetProjectData";
+import Helmet from "../../components/Helmet";
 import './style.css';
 
 const prefix = 'edit-project';
@@ -66,6 +67,8 @@ export default function EditProject({
 
   return(
     <div className={`${prefix} animate-bottom`}>
+      <Helmet title='Edit Project' />
+      <h1 className='todo-title'>Edit</h1>
       <div className={`${prefix}-btns`}>
         <Button type='primary' htmlType='button' onClick={handleAddModuleClick}>Add Module</Button>
         <Button type='primary' htmlType='button' onClick={handlePublish}>publish</Button>
