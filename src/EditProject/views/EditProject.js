@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Button, Input, Skeleton } from "antd";
+import { Button, Empty, Input, Skeleton } from "antd";
 import ModuleItem from "../../ModuleItem";
 import useGetProjectData from "../../components/useGetProjectData";
 import './style.css';
@@ -19,7 +19,7 @@ export default function EditProject({
   const [projectTitle, setProjectTitle] = useState(null);
   const [isDisplay, setIsDisplay] = useState(false);
   const projectNameRef = useRef(null);
-  const {project} = useGetProjectData(isEdit);
+  const {loading, project} = useGetProjectData();
 
   useEffect(() => {
     if (projectNameRef?.current) {
@@ -56,8 +56,12 @@ export default function EditProject({
     addModuleItem(initModuleId);
   }
   //作为编辑组件判定
-  if (isEdit && !project.modules) {
+  if (isEdit && loading) {
     return(<Skeleton active round loading paragraph={{rows: 8}} className={`${prefix}-skeleton`}/>);
+  }
+
+  if (isEdit && !project.projectTitle) {
+    return(<Empty className={`${prefix}`}/>);
   }
 
   return(

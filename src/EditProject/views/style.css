@@ -1,5 +1,7 @@
 .edit-project {
-  margin: 30px;
+  /* margin: 30px; */
+  padding: 30px;
+  overflow-x: hidden;
 }
 .edit-project-skeleton {
   padding: 50px;

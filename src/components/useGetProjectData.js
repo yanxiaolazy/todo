@@ -7,16 +7,16 @@ import { actions as moduleItemActions } from "../ModuleItem";
 import { actions as fileModuleActions } from "../FileModule";
 import { actions as textModuleActions } from "../TextModule";
 
-const resolve = (fn) => {
-  return response => {
-    if (typeof fn !== 'function') return;
-    const parseData = JSON.parse(response.params.project);
-    if (parseData) {
-      fn(parseData);
-    }
+const resolve = (setProjectData, setLoading) => response => {
+  const parseData = JSON.parse(response.params.project);
+
+  if (parseData) {
+    setProjectData(parseData);
   }
+  
+  setLoading(false);
 }
-const reject = () => {};
+const reject = setLoading => () => setLoading(false);
 
 export default function useGetProjectData() {
   const [projectData, setProjectData] = useState(null),
@@ -25,12 +25,13 @@ export default function useGetProjectData() {
         moduleItem = useSelector(state => state.moduleItem),
         fileModule = useSelector(state => state.fileModule),
         textModule = useSelector(state =>state.textModule),
-        match = useRouteMatch()
+        match = useRouteMatch(),
+        [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (match.params.projectId) {
       const params = {id: match.params.projectId};
-      viewProjectApi({params})()(resolve(setProjectData), reject);
+      viewProjectApi({params})()(resolve(setProjectData, setLoading), reject);
     }
   }, [match]);
 
@@ -45,5 +46,5 @@ export default function useGetProjectData() {
     }
   }, [projectData, dispatch]);
 
-  return {project, moduleItem, fileModule, textModule};
+  return {loading, project, moduleItem, fileModule, textModule};
 }
