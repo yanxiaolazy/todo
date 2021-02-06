@@ -8,8 +8,8 @@ import { actions as textModuleActions } from "../../TextModule";
 import { newProjectApi, updateProjectApi } from "../../utils/api";
 import { message } from "antd";
 
-const resolve = function (dispatch, history) {
-  return response => {
+const resolve = (dispatch, history) => response => {
+  setTimeout(() => {//避免`router`没有跳转之前，重置数据，导致render `Empty` component
     //reset 'project'
     dispatch(actions.reset());
     //reset 'moduleItem'
@@ -18,11 +18,10 @@ const resolve = function (dispatch, history) {
     dispatch(fileModuleActions.reset());
     //reset 'textModule'
     dispatch(textModuleActions.reset());
-    //router 跳转
-    history.push('/view');
-  }
+  }, 500);
+  //router 跳转
+  history.push('/view');
 }
-const reject = error => console.log(error);
 
 function mapStateToProps(state, ownProps) {
   const {isEdit} = ownProps;
@@ -73,9 +72,9 @@ function mapDispatchToProps(dispatch, ownProps) {
       if (match.params.projectId) {
         params.id = match.params.projectId;
 
-        updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), reject);
+        updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history));
       } else {
-        newProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), reject);
+        newProjectApi({params})({data: {...editProject}})(resolve(dispatch, history));
       }
     }
   }
