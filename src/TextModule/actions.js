@@ -15,16 +15,6 @@ export function reset() {
   }
 }
 
-export function addInfo(moduleId, id, username, lastTime) {
-  return {
-    type: actionTypes.ADD_INFO,
-    moduleId,
-    id,
-    username,
-    lastTime
-  }
-}
-
 export function init(init) {
   return {
     type: actionTypes.INIT,
