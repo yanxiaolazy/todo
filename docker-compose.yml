@@ -24,6 +24,8 @@ services:
       # - 80:80
     build: 
       context: .
+    volumes: 
+      - static:/server/static
   nginx:
     image: nginx:latest
     container_name: nginx.todo
@@ -35,6 +37,8 @@ services:
       - 80:80
     volumes: 
       - ./configuration/nginx/nginx.conf:/etc/nginx/nginx.conf
+volumes: 
+  static:
 
 
     
