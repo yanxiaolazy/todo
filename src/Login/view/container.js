@@ -16,8 +16,10 @@ function mapDispatchToProps(dispatch, ownProps) {
   const resolve = response => {
     const {params} = response;
 
-    dispatch(actions.setLoading(false));
-    dispatch(actions.setLoginStatus(true));
+    setTimeout(() => {
+      dispatch(actions.setLoading(false));
+      dispatch(actions.setLoginStatus(true));
+    }, 500);
     setToken(params.token);
     setAdmin(params.admin);
     history.push('/');
