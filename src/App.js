@@ -21,14 +21,27 @@ const LayoutHeader = Layout.Header,
 
 const styles = {
   header: {
-    background: 'rgba(112, 182, 115, .8)',
-    color: '#fff'
+    background: 'rgb(112, 182, 115)',
+    color: '#fff',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    zIndex: 999
   },
   sider: {
-    minHeight: 'calc(100vh - 64px)'
+    minHeight: 'calc(100vh - 64px)',
+    position: 'fixed',
+    left: 0,
+    top: 64,
+    overflow: 'auto',
+    zIndex: 999
   },
   content: {
-    background: '#f6f6f6'
+    background: '#f6f6f6',
+    marginLeft: '200px',
+    marginTop: '64px',
+    minHeight: 'calc(100vh - 64px)'
   }
 }
 
