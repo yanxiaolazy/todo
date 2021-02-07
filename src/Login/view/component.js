@@ -1,6 +1,7 @@
 import { Button, Checkbox, Form, Input, Spin } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
+import Helmet from "../../components/Helmet";
 import {regExpConfig} from "../../utils/regular";
 import './style.css';
 
@@ -10,6 +11,7 @@ export default function Login({loading, onFinish}) {
 
   return(
     <div className='login'>
+      <Helmet title='Login' />
       <QueueAnim delay={300} type='bottom'>
         <Spin spinning={loading} key='login'>
           <Form 

@@ -1,9 +1,12 @@
 .view-project-module {
   border: 1px solid var(--green);
-  /* margin: 30px; */
-  /* padding: 10px; */
+  border-bottom: none;
   background-color: #fff;
 }
+.view-project-module:last-child {
+  border-bottom: 1px solid var(--green);
+}
+
 .view-project-module-title {
   border-bottom: 1px solid rgba(100, 111, 115, .4);
 }
