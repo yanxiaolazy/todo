@@ -10,6 +10,7 @@ const wrapperCol = {
 }
 
 export default function FormLayout({
+  disabled,
   initialValues,
   usernameDisabled,
   passwordRules,
@@ -60,7 +61,7 @@ export default function FormLayout({
           <Input.Password type='password' prefix={<LockOutlined/>} placeholder='请输入用户密码'/>
         </FormItem>
         <FormItem>
-          <Button type='primary' htmlType='submit'>{submitText}</Button>
+          <Button {...{disabled}} type='primary' htmlType='submit'>{submitText}</Button>
         </FormItem>
       </Form>
     </div>
@@ -68,6 +69,7 @@ export default function FormLayout({
 }
 
 FormLayout.defaultProps = {
+  disabled: false,
   usernameDisabled: false,
   passwordRules: [
     {required: true, message: '长度必须在6-16之间', min: 6, max: 16},

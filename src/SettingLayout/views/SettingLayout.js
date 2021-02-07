@@ -18,16 +18,19 @@ const resolveSettingLayout = setUser => response => {
 }
 
 const resolveUpdateUser = (history, setSpinning) => response => {
-  setSpinning(false);
   notification.success({message: 'Profile updated', description: response.params.text, placement: 'topLeft'});
-  setTimeout(history.push, 1500, '/setting')
+  history.push('/setting');
+  setTimeout(() => {
+    setSpinning(false);
+  }, 500);
 }
 const rejectUpdateUser = setSpinning => () => setSpinning(false);
 
 export default function SettingLayout() {
   const [user, setUser] = useState(null);
   const [spinning, setSpinning] = useState(false),
-        history = useHistory();
+        history = useHistory(),
+        [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
     viewUsersApi({params: {tab: getUser()}})()(resolveSettingLayout(setUser))
@@ -37,9 +40,10 @@ export default function SettingLayout() {
     const {password} = values;
     if (password) {
       setSpinning(true);
+      setDisabled(true);
       updateUserApi()({user: values})(resolveUpdateUser(history, setSpinning), rejectUpdateUser(setSpinning));
     } else {
-      notification.success({message: '', description: 'Please input password before submitting', placement: 'topLeft'});
+      notification.warning({message: '', description: 'Please input password before submitting', placement: 'topLeft'});
     }
   }
 
@@ -62,7 +66,7 @@ export default function SettingLayout() {
           usernameDisabled 
           initialValues={user} 
           onFinish={updateUser} 
-          {...{passwordRules}}
+          {...{passwordRules, disabled}}
         />
       </Spin>
     </div>
