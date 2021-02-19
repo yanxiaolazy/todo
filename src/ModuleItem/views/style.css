@@ -44,17 +44,3 @@ span:first-child {
   border-radius: 5px;
   margin: 20px;
 }
-
-.module-item-delete-module {
-  display: inline-block;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
-  opacity: .7;
-  transition: opacity .5s;
-  font-size: 15px;
-}
-.module-item-delete-module:hover {
-  opacity: .98;
-}

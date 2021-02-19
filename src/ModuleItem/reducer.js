@@ -80,18 +80,6 @@ function recordId(state, action) {
   return temp;
 }
 
-function deleteModule(state, action) {
-  const temp = state.concat();
-
-  for(let key in temp) {
-    if (temp[key].moduleId === action.moduleId) {
-      state.splice(key, 1);
-    }
-  }
-
-  return state.concat();
-}
-
 export default function reducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_TEXT_MODULE:
@@ -106,8 +94,6 @@ export default function reducer(state = [], action) {
       return action.init
     case actionTypes.RECORD_ID:
       return recordId(state, action)
-    case actionTypes.DELETE_MODULE:
-      return deleteModule(state, action)
     default:
       return state
   }

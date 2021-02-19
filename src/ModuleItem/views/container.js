@@ -2,9 +2,7 @@ import {connect} from 'react-redux';
 import ModuleItem from "./component";
 import * as actions from "../actions";
 import generateId from "../../utils/generateId";
-import { actions as fileModuleActions } from "../../FileModule";
-import { actions as textModuleActions } from "../../TextModule";
-import { actions as editProjectActions } from "../../EditProject";
+import {actions as fileModuleActions} from "../../FileModule";
 
 function getModuleItem(state, moduleId) {
   let textModules, id, title;
@@ -51,12 +49,6 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     onSaveModuleTitle(moduleTitle) {
       dispatch(actions.addModuleTitle(moduleId, moduleTitle));
-    },
-    onDeleteModule() {
-      dispatch(actions.deleteModule(moduleId));
-      dispatch(fileModuleActions.deleteModule(moduleId));
-      dispatch(textModuleActions.deleteModule(moduleId));
-      dispatch(editProjectActions.deleteModule(moduleId));
     }
   }
 }

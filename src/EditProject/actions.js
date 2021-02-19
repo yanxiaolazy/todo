@@ -33,10 +33,3 @@ export function recordModuleId(moduleId) {
     moduleId
   }
 }
-
-export function deleteModule(moduleId) {
-  return {
-    type: actionTypes.DELETE_MODULE,
-    moduleId
-  }
-}

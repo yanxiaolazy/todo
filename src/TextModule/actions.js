@@ -47,10 +47,3 @@ export function changeTodoStatus(moduleId, id, status) {
     status
   }
 }
-
-export function deleteModule(moduleId) {
-  return {
-    type: actionTypes.DELETE_MODULE,
-    moduleId
-  }
-}
