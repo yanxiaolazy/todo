@@ -1,4 +1,5 @@
 const createHash = require('../../../utils/createHash');
+const { UsersTable } = require('../../../config/db');
 
 'use strict';
 
@@ -13,18 +14,24 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+   const username = 'admin',
+         results = await UsersTable.findAll({where: {username}})
 
+   if (results.length === 0) {
     return await queryInterface.bulkInsert('users', [
       {
-        id: 0,
-        username: 'rookie',
+        id: 1,
+        username,
         password: createHash('admin'),
-        email: 'rookie@heltec.cn',
+        email: 'admin@admin.admin',
         createTime: new Date(),
         updateTime: new Date(),
         admin: true
       }
-    ])
+    ]);
+   } else {
+     console.log('seeder already exists');
+   }
   },
 
   down: async (queryInterface, Sequelize) => {
