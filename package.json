@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@koa/router": "^10.0.0",
+    "crypto-random-string": "^3.3.1",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.1",
     "koa-body": "^4.2.0",
@@ -54,7 +55,6 @@
     "antd": "^4.12.3",
     "axios": "^0.21.1",
     "craco-less": "^1.17.1",
-    "crypto-random-string": "^3.3.1",
     "moment": "^2.29.1",
     "nodemon": "^2.0.7",
     "rc-queue-anim": "^1.8.5",
