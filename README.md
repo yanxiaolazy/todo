@@ -52,6 +52,7 @@ $ yarn run build
 
 ```bash
 $ docker-compose up -d --build
+$ docker-compose restart
 ```
 
 **每次更新项目后都需要重复这个过程** 
