@@ -22,7 +22,7 @@ async function upload(ctx, next) {
       //将_path存入数据库？
 
       ctx.type = 'json';
-      ctx.body = Object.assign({}, status['200'], params: {uploadTime, uploader, todoStatus, file: basename(_path)})
+      ctx.body = Object.assign({}, status['200'], {params: {uploadTime, uploader, todoStatus, file: basename(_path)}})
     } else {
       if (!isExist) {
         throw new Error(`'${_basePath}' is not a valid folder`);
