@@ -8,8 +8,8 @@ async function login(ctx, next) {
         result = await db.login(body.login.username, body.login.password, body.login.email);
   
   if (result.error) {
-    const response = Object.assign({}, status['404'], {params: {error: result.error}});
-    ctx.status = 404;
+    const response = Object.assign({}, status['502'], {params: {error: result.error}});
+    ctx.status = 502;
     ctx.type = 'json';
     ctx.body = response;
   } else {

@@ -9,9 +9,9 @@ async function updateProject(ctx, next) {
   let result = await db.updateProject(body.data, query);
 
   if (result.error) {
-    ctx.status = 404
+    ctx.status = 502
     ctx.type = 'json';
-    ctx.body = Object.assign({}, status['404'], {params: {error: result.error}});
+    ctx.body = Object.assign({}, status['502'], {params: {error: result.error}});
   } else {
     ctx.type = 'json';
     ctx.body = Object.assign({}, status['200'], {params: {text: result.text}});

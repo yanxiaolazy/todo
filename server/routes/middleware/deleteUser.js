@@ -9,11 +9,11 @@ async function deleteUser(ctx, next) {
   if (result.error) {
     ctx.status = 502;
     ctx.type = getType('json');
-    ctx.body = Object.assign(status['502'], {params: {error: result.error}});
+    ctx.body = Object.assign({}, status['502'], {params: {error: result.error}});
   } else {
     ctx.status = 200;
     ctx.type = getType('json');
-    ctx.body = Object.assign(status['200'], {params: {text: result.text}});
+    ctx.body = Object.assign({}, status['200'], {params: {text: result.text}});
   }
   await next();
 }

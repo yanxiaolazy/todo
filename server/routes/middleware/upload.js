@@ -1,5 +1,6 @@
 const fs = require('fs');
 const {resolve, extname, basename} = require('path');
+const status = require('../status');
 
 module.exports = upload;
 
@@ -21,7 +22,7 @@ async function upload(ctx, next) {
       //将_path存入数据库？
 
       ctx.type = 'json';
-      ctx.body = {code: 200, msg: 'ok', params: {uploadTime, uploader, todoStatus, file: basename(_path)}, sucess: true};
+      ctx.body = Object.assign({}, status['200'], params: {uploadTime, uploader, todoStatus, file: basename(_path)})
     } else {
       if (!isExist) {
         throw new Error(`'${_basePath}' is not a valid folder`);
@@ -32,7 +33,7 @@ async function upload(ctx, next) {
     console.log(error);
     ctx.status = 502;
     ctx.type = 'json';
-    ctx.body = {code: 502, msg: 'bad gateway', params: {}, sucess: true};
+    ctx.body = Object.assign({}, status['502']);
   }
 
   await next();

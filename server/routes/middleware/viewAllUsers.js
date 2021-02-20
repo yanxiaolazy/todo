@@ -7,12 +7,12 @@ async function viewAllUsers(ctx, next) {
   const result = await db.findAllUsers(query.tab);
 
   if (result.error) {
-    ctx.status = 404;
+    ctx.status = 502;
     ctx.type = mime.getType('json');
-    ctx.body = Object.assign(status['404'], {params: {error:result.error}});
+    ctx.body = Object.assign({}, status['502'], {params: {error:result.error}});
   } else {
     ctx.type = mime.getType('json');
-    ctx.body = Object.assign(status['200'], {params: {users: result.users}});
+    ctx.body = Object.assign({}, status['200'], {params: {users: result.users}});
   }
 
   await next();

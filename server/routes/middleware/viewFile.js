@@ -8,7 +8,6 @@ module.exports = viewFile;
 async function viewFile(ctx, next) {
   const query = ctx.request.query,
         {tab} = query;
-  console.log(tab);
 
   if (!tab) {
     ctx.type = 404;

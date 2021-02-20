@@ -15,7 +15,7 @@ async function newProject(ctx, next) {
     ctx.body = response;
   } else {
     ctx.type = 'json';
-    ctx.body = status['200'];
+    ctx.body = Object.assign({}, status['200'], {params: {info: result.text}});
   }
 
   await next();

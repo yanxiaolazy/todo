@@ -7,9 +7,9 @@ async function updateUser(ctx, next) {
 
   if (result.error) {
     ctx.status = 502;
-    ctx.body = Object.assign(status['502'], {params: {error: result.error}});
+    ctx.body = Object.assign({}, status['502'], {params: {error: result.error}});
   } else {
-    ctx.body = Object.assign(status['200'], {params: {text: result.text}});
+    ctx.body = Object.assign({}, status['200'], {params: {text: result.text}});
   }
 
   await next();
