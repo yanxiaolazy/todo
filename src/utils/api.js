@@ -1,39 +1,20 @@
 import { createApi } from "./ajax";
 import { baseConfig } from "./ajax";
 
-const _baseURL = '/api',
-      deleteFileConfig = {
-        params: {
-
-        }
-      },
-      deleteProjectConfig = {
-        params: {
-
-        }
-      },
-      viewProjectConfig = {
-        params: {
-
-        }
-      },
-      deleteUserConfig = {
-        params: {
-
-        }
-      };
+const _baseURL = '/api';
 
 export const loginApi = createApi(`${_baseURL}/login`, 'POST');
 export const logoutApi = createApi(`${_baseURL}/logout`, 'POST');
 
-export const deleteFileApi = createApi(`${_baseURL}/delete/file`, 'DELETE', deleteFileConfig);
-export const deleteProjectApi = createApi(`${_baseURL}/delete/project`, 'DELETE', deleteProjectConfig);
-export const deleteUserApi = createApi(`${_baseURL}/delete/user`, 'DELETE', deleteUserConfig);
+export const deleteFileApi = createApi(`${_baseURL}/delete/file`, 'DELETE');
+export const deleteProjectApi = createApi(`${_baseURL}/delete/project`, 'DELETE');
+export const deleteUserApi = createApi(`${_baseURL}/delete/user`, 'DELETE');
 
-export const viewProjectApi = createApi(`${_baseURL}/view/project`, 'GET', viewProjectConfig);
+export const viewProjectApi = createApi(`${_baseURL}/view/project`, 'GET');
 export const viewDateApi = createApi(`${_baseURL}/view/date`, 'GET');
 export const viewFileApi = createApi(`${_baseURL}/view/file`, 'GET');
 export const viewUsersApi = createApi(`${_baseURL}/view/users`, 'GET');
+export const viewAllMediaApi = createApi(`${_baseURL}/view/media`, 'GET');
 
 export const newProjectApi = createApi(`${_baseURL}/new/project`, 'POST');
 export const newUserApi = createApi(`${_baseURL}/new/user`, 'POST');

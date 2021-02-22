@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
+
 import Login, { actions as loginAction } from "./Login";
 import EditProject from "./EditProject";
 import TopBar from './TopBar';
@@ -13,6 +14,8 @@ import CreateUser from "./CreateUser";
 import SettingLayout from "./SettingLayout";
 import CreateProject from "./CreateProject";
 import Home from './Home';
+import MediaLayout from "./MediaLayout";
+
 import { getAdmin, getToken } from "./utils/parse";
 
 const LayoutHeader = Layout.Header,
@@ -78,12 +81,13 @@ function App() {
           <LayoutContent style={styles.content}>
             <Switch key='content'>
               <Route exact path='/' component={Home}/>
-              <Route exact path='/new' component={CreateProject} />
               <Route exact path='/view' component={ProjectSummary} />
               <Route exact path='/view/:projectId(\d+)/edit' render={props => <EditProject isEdit={true} {...props}/>} />
               <Route path='/view/:projectId(\d+)' component={ViewProject} />
               <Route exact path='/setting' component={SettingLayout} />
               {isAdmin && <>
+                <Route exact path='/new' component={CreateProject} />
+                <Route exact path='/media' component={MediaLayout} />
                 <Route exact path='/user' component={UsersLayout} />
                 <Route exact path='/user/create-user' component={CreateUser} />
               </>}

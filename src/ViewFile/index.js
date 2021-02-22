@@ -45,7 +45,7 @@ export default function ViewFile({filename, isOpen, onClick}) {
       setFileSrc(<div className={`${prefix}-image`}><img src={`${fileBase64}`} alt=''/></div>);
       setStyleWidth(900);
     } else if (fileUrl) {
-      setFileSrc(<div className={`${prefix}-file`}><a href={fileUrl} download target='__blank'>下载 {filename}</a></div>);
+      setFileSrc(<div className={`${prefix}-file`}><a href={fileUrl} download={`${filename}`} target='__blank'>下载 {filename}</a></div>);
       setStyleWidth(520);
     } else {
       setFileSrc(<div><h3>不支持的格式</h3></div>);

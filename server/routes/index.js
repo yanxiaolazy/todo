@@ -13,7 +13,8 @@ const {
   viewAllUsers,
   newUser,
   deleteUser,
-  updateUser
+  updateUser,
+  viewAllMedias
 } = require('./middleware');
 
 const router = new Router();
@@ -30,6 +31,7 @@ router
 //   .get('/view/date', viewDate);
   .get('/api/view/file', viewFile)
   .get('/api/view/users', viewAllUsers)
+  .get('/api/view/media', viewAllMedias)
 
 
 router
@@ -44,7 +46,7 @@ router
   // .post('/verify/token', verifyToken)
 
 
-// router
+router
   .delete('/api/delete/file', deleteFile)
 //   .delete('/delete/project', deleteProject)
   .delete('/api/delete/user', deleteUser);
