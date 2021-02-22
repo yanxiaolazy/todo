@@ -23,7 +23,7 @@ module.exports = {
         id: 1,
         username,
         password: createHash('admin'),
-        email: 'admin@admin.admin',
+        email: 'admin@admin',
         createTime: new Date(),
         updateTime: new Date(),
         admin: true
