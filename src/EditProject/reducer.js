@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import deleteModule from "../utils/deleteModule";
 
 function addModuleItem(state, action) {
   const temp = state?.concat() || [];
@@ -23,6 +24,8 @@ export default function reducer(state = {}, action) {
       return {...action.init}
     case actionTypes.RECORD_MODULE_ID:
       return {...state, moduleId: action.moduleId}
+    case actionTypes.DELETE_MODULE:
+      return {...state, modules: deleteModule(state.modules, action)}
     default:
       return state;
   }

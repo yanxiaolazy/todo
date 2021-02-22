@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import deleteModule from "../utils/deleteModule";
 
 //action.file是个'fileList'数组
 function addFileModule(state, action) {
@@ -81,6 +82,8 @@ export default function reducer(state = [], action) {
       return action.init
     case actionTypes.CHANGE_TODO_STATUS:
       return changeTodoStatus(state, action)
+    case actionTypes.DELETE_FILEMODULE:
+      return deleteModule(state, action)
     default:
       return state
   }

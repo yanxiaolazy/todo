@@ -13,7 +13,8 @@ export default function ModuleItem({
   title,
   textModules, 
   onClick,
-  onSaveModuleTitle
+  onSaveModuleTitle,
+  onDeleteModule
 }) {
   const [isDisplay, setIsDisplay] = useState(false);
   const [moduleTitle, setModuleTitle] = useState(null);
@@ -39,6 +40,7 @@ export default function ModuleItem({
 
   return(
     <Card key='module-item' className={`${prefix} animate-bottom`}>
+      <div onClick={onDeleteModule} className={`${prefix}-delete-module`}><span>删除</span></div>
       <div className='add-title'>
         {isDisplay ? 
         <div className={`${prefix}-title add-title-display`}>

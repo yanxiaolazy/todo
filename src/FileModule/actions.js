@@ -48,3 +48,10 @@ export function changeTodoStatus(moduleId, filename, status) {
   }
 }
 
+export function deleteModule(moduleId) {
+  return {
+    type: actionTypes.DELETE_FILEMODULE,
+    moduleId
+  }
+}
+

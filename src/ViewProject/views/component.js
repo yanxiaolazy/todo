@@ -105,9 +105,9 @@ export default function ViewProject() {
                 );
               })
             }
-            <div className={`${prefix}-module-text`}>
+            {text?.textList && <div className={`${prefix}-module-text`}>
               {
-                text?.textList.map((list, index) => {
+                text.textList.map((list, index) => {
                   const time = new Date(parseInt(list.lastTime)),
                   timeString = time.toLocaleTimeString(),
                   dateString = time.toLocaleDateString();
@@ -138,7 +138,7 @@ export default function ViewProject() {
                   )
                 })
               }
-            </div>
+            </div>}
           </div>
         );
       });

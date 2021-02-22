@@ -7,9 +7,6 @@
   border-bottom: 1px solid var(--green);
 }
 
-.view-project-module-title {
-  border-bottom: 1px solid rgba(100, 111, 115, .4);
-}
 .view-project-module-file {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -50,4 +47,8 @@ span {
 }
 .view-project-module-text>div {
   word-wrap: break-word;
+}
+
+.view-project-module>div:nth-child(2) {
+  border-top: 1px solid rgba(100, 111, 115, .4);
 }

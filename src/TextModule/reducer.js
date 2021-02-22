@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import deleteModule from "../utils/deleteModule";
 
 function addText(state, action) {
   const temp = state.concat();
@@ -109,6 +110,8 @@ export default function reducer(state = [], action) {
       return addStatus(state, action)
     case actionTypes.CHANGE_TODO_STATUS:
       return changeTodoStatus(state, action)
+    case actionTypes.DELETE_MODULE:
+      return deleteModule(state, action)
     default:
       return state
   }

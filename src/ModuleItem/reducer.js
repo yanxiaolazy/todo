@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import deleteModule from "../utils/deleteModule";
 
 function addList(state, id) {
   // 之所以这里是个`?.`操作符，是因为，如果先添加标题会先生成一个`moduleId` 此时为`undefined`
@@ -94,6 +95,8 @@ export default function reducer(state = [], action) {
       return action.init
     case actionTypes.RECORD_ID:
       return recordId(state, action)
+    case actionTypes.DELETE_MODULE:
+      return deleteModule(state, action)
     default:
       return state
   }
