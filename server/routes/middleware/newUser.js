@@ -10,13 +10,14 @@ async function newUser(ctx, next) {
     ctx.status = 502;
     ctx.type = mime.getType('json');
     ctx.body = Object.assign({}, status['502'], {params: {error: result.error}});
-  } else if (result.exist) {
+  } else if (result.info) {
     ctx.status = 400;
     ctx.type = mime.getType('json');
-    ctx.body = Object.assign({}, status['400'], {params: {exist: result.exist}});
+    ctx.body = Object.assign({}, status['400'], {params: {info: result.info}});
   } else {
+    ctx.status = 200;
     ctx.type = mime.getType('json');
-    ctx.body = Object({}, status['200'], {params: {info: result.text}});
+    ctx.body = Object.assign({}, status['200'], {params: {info: result.text}});
   }
 }
 

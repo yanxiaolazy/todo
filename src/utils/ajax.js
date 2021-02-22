@@ -217,13 +217,13 @@ export function request(url, method, data, config) {
       if (error.response) {
         const response = error.response;
         if (response.status === 400) {
-          message.error(`${response.data.params.exist}`);
+          message.error(response.data.params.info);
         } else if (response.status === 401) {
-          message.error('没有权限');
+          message.error(response.data.params.info);
         } else if (response.status === 403) {
-          message.error('请求被禁止');
+          message.error(response.data.params.info);
         } else if (response.status === 404) {
-          message.error('请求资源不存在');
+          message.error(response.data.params.info);
         } else {
           message.error(`Error ${response.data.msg}`);
         }

@@ -25,7 +25,7 @@ async function login(username, password, email) {
   } 
 
   if (results.length === 0) {
-    return {error: 'wrong user name or password'};
+    return {info: 'wrong user name or password'};
   }
 
   const {dataValues} = results[0],
@@ -39,7 +39,7 @@ async function login(username, password, email) {
     }
   }
 
-  return {error: 'wrong user name or password'};
+  return {info: 'wrong user name or password'};
 }
 
 function createToken(username) {

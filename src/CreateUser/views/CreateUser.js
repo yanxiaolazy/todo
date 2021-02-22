@@ -2,11 +2,13 @@ import { useHistory } from 'react-router-dom';
 import FormLayout from '../../FormLayout';
 import Helmet from "../../components/Helmet";
 import { newUserApi } from '../../utils/api';
+import { notification } from 'antd';
 
 const prefix = 'create-user';
 
 const resolveCreateUser = history => response => {
   if (response.params) {
+    notification.success({message: response.params.info, placement: 'topLeft'});
     history.push('/user');
   }
 }

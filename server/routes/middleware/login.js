@@ -12,6 +12,11 @@ async function login(ctx, next) {
     ctx.status = 502;
     ctx.type = 'json';
     ctx.body = response;
+  } else if (result.info) {
+    const response = Object.assign({}, status['404'], {params: {info: result.info}});
+    ctx.status = 404;
+    ctx.type = 'json';
+    ctx.body = response;
   } else {
     const params = {
       admin: result.admin, 

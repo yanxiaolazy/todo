@@ -22,7 +22,7 @@ async function createUser(values) {
     const results = await UsersTable.findAll({where});
 
     if (results.length > 0) {
-      return {exist: '用户名已存在/邮箱已存在'};
+      return {info: '用户名已存在/邮箱已存在'};
     }
   } catch (error) {
     log.error(error);
@@ -30,14 +30,14 @@ async function createUser(values) {
   }
 
   try {
-    UsersTable.create({
+    await UsersTable.create({
       username,
       email,
       password: createHash(password),
       createTime: new Date(),
       updateTime: new Date()
     });
-
+    
     return {text: '新建用户成功'};
   } catch(error) {
     log.error(error);
