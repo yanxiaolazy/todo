@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import ReactQuill from 'react-quill';
+
 import 'react-quill/dist/quill.snow.css';
-import { useEffect, useState } from 'react';
-import useDebounce from "../../components/useDebounce";
 import './style.css';
 
 const styles = {
@@ -9,6 +9,23 @@ const styles = {
     height: 250
   }
 }
+const modules = {
+  toolbar: [
+    [{ 'header': [1, 2, 3, 4, 5, false] }],
+    ['bold', 'italic', 'underline','strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}],
+    ['link', 'image'],
+    ['clean']
+  ],
+}
+
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image'
+]
+
 export default function TextModule({
   value, 
   username, 
@@ -17,38 +34,17 @@ export default function TextModule({
   onChange, 
   onDelete
 }) {
-  const [debounceValue, setDebounceValue] = useDebounce(500);
-  const [quillValue, setQuillValue] = useState(value),
-        [change, setChange] = useState(false)
-
-  useEffect(() =>{
-    if (quillValue) {
-      setDebounceValue(quillValue);
-    }
-  }, [quillValue, setDebounceValue]);
-
-  useEffect(() => {
-    if (change && debounceValue) {
-      onChange(debounceValue);
-    }
-  }, [debounceValue, onChange, change]);
-
-  //等到防抖数据回来再改变change状态，防止无法连续输入
-  useEffect(() => {
-    if (debounceValue) {
-      setChange(true);
-    }
-    return () => setChange(false);
-  }, [debounceValue]);
+  const [quillValue, setQuillValue] = useState(value)
 
   function handleChange(text) {
     setQuillValue(text);
+    onChange(text)
   }
 
   return(
     <div className='text-module animate-bottom'>
       <div className='delete-container' onClick={onDelete}><span>删除</span></div>
-      <ReactQuill onChange={handleChange} value={quillValue} style={styles.quill}/>
+      <ReactQuill onChange={handleChange} value={quillValue} style={styles.quill} {...{modules, formats}}/>
       {lastTime && <div className='upload-info text-module-info'>
         <span className='uploader'>编辑者：{username}</span>
         <span className='upload-time'>最后一次更改时间：{`${new Date(lastTime).toLocaleDateString()}/${new Date(lastTime).toLocaleTimeString()}`}</span>
