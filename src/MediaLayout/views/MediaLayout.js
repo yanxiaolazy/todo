@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Empty, Image, Pagination, Skeleton, Spin } from "antd";
+import { Image } from "antd";
 import { FileOutlined } from "@ant-design/icons";
 
-import Helmet from "../../components/Helmet";
 import MediaTable from "../../components/MediaTable";
+import ContainerLayer from "../../components/ContainerLayer";
 import { viewAllMediaApi, viewFileApi } from "../../utils/api";
 
 import './style.css';
@@ -40,7 +40,8 @@ export default function MediaLayout() {
         [fileUrl, setFileURL] = useState([]),
         [deleteFlag, setDeleteFlag] = useState(false),
         [total, setTotal] = useState(0),
-        [current, setCurrent] = useState(1)
+        [current, setCurrent] = useState(1),
+        [isEmpty, setIsEmpty] = useState(true)
 
   useEffect(() => {
     viewAllMediaApi()()(viewAllMediaResolve, viewAllMediaReject);
@@ -58,6 +59,12 @@ export default function MediaLayout() {
       });
     }
   }, [results]);
+
+  useEffect(() => {
+    if (fileUrl.length != 0) {
+      setIsEmpty(false);
+    }
+  }, [fileUrl]);
 
   function viewAllMediaResolve(response) {
     if (response) {
@@ -100,29 +107,22 @@ export default function MediaLayout() {
     } else {
       return(<a href={url} className={`${prefix}-file`} download={`${filename}`} target='__blank'><FileOutlined /></a>);
     }
-    
   }
 
-  if (loading) {
-    return(<Skeleton round active paragraph={{rows: 6}}/>)
-  }
-
-  if (fileUrl.length == 0) {
-    return(<Empty />);
-  }
   return(
-    <div className={`${prefix} animate-bottom`}>
-      <Helmet title='Media'/>
-      <h1 className='todo-title'>Media</h1>
-      <Spin {...{spinning}}>
-        <MediaTable
-          {...{prefix, setSpinning, setDeleteFlag, total, current}} 
-          onChange={pageChange}
-          fileDatas={fileUrl}
-          component={fileComonent} 
-        />
-      </Spin>
-    </div>
+    <ContainerLayer 
+      className={prefix}
+      title='Media'
+      h1Content='Media'
+      {...{loading, spinning, isEmpty}}
+    >
+      <MediaTable
+        {...{prefix, setSpinning, setDeleteFlag, total, current}} 
+        onChange={pageChange}
+        fileDatas={fileUrl}
+        component={fileComonent} 
+      />
+    </ContainerLayer>
   );
 }
 

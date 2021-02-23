@@ -1,5 +1,6 @@
-import { Modal } from "antd";
 import { useState, useEffect } from "react";
+import { Modal } from "antd";
+
 import { viewFileApi } from "../utils/api";
 import "./style.css";
 

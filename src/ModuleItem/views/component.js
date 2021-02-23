@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Input, Card} from "antd";
-import './style.css';
+
 import ShowFiles from "../../ShowFiles";
 import FileModule from "../../FileModule";
 import TextModule from "../../TextModule";
+
+import './style.css';
 
 const prefix = 'module-item';
 

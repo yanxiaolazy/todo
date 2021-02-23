@@ -1,7 +1,7 @@
-import { Empty, Skeleton, Button, Spin } from "antd";
+import { Button } from "antd";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Helmet from "../../components/Helmet";
+import ContainerLayer from "../../components/ContainerLayer";
 import { viewUsersApi, deleteUserApi } from "../../utils/api";
 import "./style.css";
 
@@ -11,11 +11,11 @@ const resolveViewLayout = (setAllUsers, setLoading) => response => {
   if (typeof setAllUsers !== 'function') return;
   if (!response.params) return;
   setAllUsers(response.params.users);
-  setLoading(false);
+  setTimeout(setLoading, 500, false);
 }
 
 const rejectViewLayout = setLoading => error => {
-  setLoading(false);
+  setTimeout(setLoading, 500, false);
 }
 
 const resolveDeleteUser = (id, setViewList, setSpinning) => () => {
@@ -41,7 +41,8 @@ export default function UsersLayout() {
         [loading, setLoading] = useState(true),
         history = useHistory(),
         [spinning, setSpinning] = useState(false),
-        [viewList, setViewList] = useState(null)
+        [viewList, setViewList] = useState(null),
+        [isEmpty, setIsEmpty] = useState(true)
 
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function UsersLayout() {
           </li>
         );
       });
-
+      setIsEmpty(false);
       setViewList(views);
     }
   }, [allUsers])
@@ -76,30 +77,25 @@ export default function UsersLayout() {
     deleteUserApi({params: {id: target.id}})()(resolveDeleteUser(target.id, setViewList, setSpinning), rejectDeleteUser(setSpinning));
   }
 
-  if (loading) {
-    return(<Skeleton className={`${prefix}`} active loading round paragraph={{rows: 6}}/>)
-  }
-
-  if (!allUsers) {
-    return(<Empty className={`${prefix} animate-bottom`}/>);
-  }
-
   return(
-    <div className={`${prefix} animate-bottom`}>
-      <Helmet title='Users' />
-      <h1 className='todo-title'>Users</h1>
+    <ContainerLayer
+      title='Users'
+      h1Content='Users'
+      className={prefix}
+      {...{spinning, loading, isEmpty}}
+    >
       <div className={`${prefix}-create-btn`}><Button type='primary' htmlType='button' onClick={handleCreateUserBtn}>Add New</Button></div>
-      <ul className={`${prefix}-titles`}>
-        <li>ID</li>
-        <li>UserName</li>
-        <li>Email</li>
-        <li>Role</li>
-      </ul>
-      <Spin spinning={spinning}>
+      <div className='animate-bottom'>
+        <ul className={`${prefix}-titles`}>
+          <li>ID</li>
+          <li>UserName</li>
+          <li>Email</li>
+          <li>Role</li>
+        </ul>
         <ul className={`${prefix}-items`}>
           {viewList}
         </ul>
-      </Spin>
-    </div>
+      </div>
+    </ContainerLayer>
   );
 }

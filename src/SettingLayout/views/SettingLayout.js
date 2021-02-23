@@ -1,21 +1,26 @@
-import { Skeleton, Spin, notification } from "antd";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { notification } from "antd";
+
 import FormLayout from "../../FormLayout";
-import Helmet from "../../components/Helmet";
+import ContainerLayer from "../../components/ContainerLayer";
+
 import { viewUsersApi, updateUserApi } from "../../utils/api";
 import { getUser } from "../../utils/parse";
 import { regExpConfig } from '../../utils/regular';
 
 const prefix = 'setting-layout';
 
-const resolveSettingLayout = setUser => response => {
+const resolveSettingLayout = (setUser, setLoading) => response => {
   const {params} = response;
 
   if (params.users) {
     setUser(params.users);
   }
+
+  setTimeout(setLoading, 500, false);
 }
+const rejectSettingLayout = setLoading => () =>  setTimeout(setLoading, 500, false);
 
 const resolveUpdateUser = (history, setSpinning) => response => {
   notification.success({message: 'Profile updated', description: response.params.text, placement: 'topLeft'});
@@ -30,10 +35,11 @@ export default function SettingLayout() {
   const [user, setUser] = useState(null);
   const [spinning, setSpinning] = useState(false),
         history = useHistory(),
-        [disabled, setDisabled] = useState(false)
+        [disabled, setDisabled] = useState(false),
+        [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    viewUsersApi({params: {tab: getUser()}})()(resolveSettingLayout(setUser))
+    viewUsersApi({params: {tab: getUser()}})()(resolveSettingLayout(setUser, setLoading), rejectSettingLayout(setLoading));
   }, []);
 
   function updateUser(values) {
@@ -52,24 +58,21 @@ export default function SettingLayout() {
     {pattern: regExpConfig.strongPwd3, message: '必须是字母和数字的组合，可以使用特殊字符，长度在6-16之间'}
   ];
 
-  if (!user) {
-    return(<Skeleton className={`${prefix}`} active round paragraph={{rows: 6}}/>)
-  }
-
   return(
-    <div className={`${prefix}`}>
-      <Helmet title='Setting' />
-      <h1 className='todo-title'>Setting</h1>
-      <Spin {...{spinning}}>
-        <FormLayout 
-          submitText='Update Profile' 
-          usernameDisabled 
-          initialValues={user} 
-          onFinish={updateUser} 
-          {...{passwordRules, disabled}}
-        />
-      </Spin>
-    </div>
+    <ContainerLayer 
+      className={`${prefix}`}
+      title='Setting'
+      h1Content='Setting'
+      {...{loading, spinning}}
+    >
+      <FormLayout 
+        submitText='Update Profile' 
+        usernameDisabled 
+        initialValues={user} 
+        onFinish={updateUser} 
+        {...{passwordRules, disabled}}
+      />
+    </ContainerLayer>
   );
 }
 

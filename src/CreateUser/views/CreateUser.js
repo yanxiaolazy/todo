@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import FormLayout from '../../FormLayout';
-import Helmet from "../../components/Helmet";
+import ContainerLayer from '../../components/ContainerLayer';
 import { newUserApi } from '../../utils/api';
 import { notification } from 'antd';
 
@@ -21,10 +21,12 @@ export default function CreateUser() {
   }
 
   return(
-    <div className={`${prefix}`}>
-      <Helmet title='Add User'/>
-      <h1 className='todo-title'>New User</h1>
+    <ContainerLayer
+      title='Add User'
+      className={prefix}
+      h1Content='New User'
+    >
       <FormLayout onFinish={handleCreateUser} submitText='Add New User'/>
-    </div>
+    </ContainerLayer>
   );
 }

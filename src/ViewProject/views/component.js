@@ -2,14 +2,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Button, message, Select, Skeleton, Spin } from "antd";
+import { Button, notification, Select, } from "antd";
+
+import ViewFile from "../../ViewFile";
+import useGetProjectData from "../../components/useGetProjectData";
+import ContainerLayer from "../../components/ContainerLayer";
+
 import { actions as fileModuleActions } from "../../FileModule";
 import { actions as textModuleActions } from "../../TextModule";
 import { actions as moduleItemActions } from "../../ModuleItem";
 import { actions as editProjectActions } from "../../EditProject";
-import ViewFile from "../../ViewFile";
-import useGetProjectData from "../../components/useGetProjectData";
-import Helmet from "../../components/Helmet";
 import { getAdmin } from "../../utils/parse";
 import { updateProjectApi } from "../../utils/api";
 import './style.css';
@@ -155,7 +157,7 @@ export default function ViewProject() {
     setFilename(e.target.dataset.filename)
   }
 
-  function onPublish() {
+  function onUpdate() {
     const editProject ={
       projectTitle: project.projectTitle,
       moduleId: project.moduleId,
@@ -165,43 +167,35 @@ export default function ViewProject() {
       textModule
     };
 
-    if (!project.projectTitle) {
-      message.warning('标题是必要的');
-      return;
-    }
-
     const params = {};
     if (match.params.projectId) {
       params.id = match.params.projectId;
       setSpinning(true);
       updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history, setSpinning));
     } else {
-      message.warning('提交错误')
+      notification.warning({message: '提交错误', placement: 'topLeft'});
     }
   }
 
-  if (loading) {
-    return(<Skeleton active round paragraph={{rows: 6}}/>);
-  }
-
   return(
-    <div className={`animate-bottom ${prefix}`}>
-      <Helmet title='View Project' />
-      <h1 className='todo-title'>View</h1>
-      <Spin {...{spinning}}>
-        <h2 className={`${prefix}-title`}>{project.projectTitle}</h2>
-        <div className={`${prefix}-edit`}>
-          <span onClick={handleEditClick}>Edit</span>
-        </div>
-        {isAdmin && <div className={`${prefix}-publish`}>
-          <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
-        </div>}
-        {modules}
-        {isAdmin && <div className={`${prefix}-publish`}>
-          <Button type='primary' htmlType='button' onClick={onPublish}>update</Button>  
-        </div>}
-        <ViewFile {...{filename}} isOpen={modalOpen} onClick={handleModalOpen}/>
-      </Spin>
-    </div>
+    <ContainerLayer 
+      className={prefix}
+      title='View Project'
+      h1Content='View'
+      {...{loading, spinning}}
+    >
+      <h2 className={`${prefix}-title`}>{project.projectTitle}</h2>
+      <div className={`${prefix}-edit`}>
+        <span onClick={handleEditClick}>Edit</span>
+      </div>
+      {isAdmin && <div className={`${prefix}-publish`}>
+        <Button type='primary' htmlType='button' onClick={onUpdate}>update</Button>  
+      </div>}
+      {modules}
+      {isAdmin && <div className={`${prefix}-publish`}>
+        <Button type='primary' htmlType='button' onClick={onUpdate}>update</Button>  
+      </div>}
+      <ViewFile {...{filename}} isOpen={modalOpen} onClick={handleModalOpen}/>
+    </ContainerLayer>
   );
 }

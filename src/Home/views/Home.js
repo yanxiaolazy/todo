@@ -1,15 +1,17 @@
-import Helmet from "../../components/Helmet";
+import ContainerLayer from "../../components/ContainerLayer";
 
 const prefix = 'home';
 
 export default function Home() {
   
   return(
-    <div className={`${prefix}`}>
-      <Helmet title='Dashboard' />
-      <h1 className='todo-title'>Dashboard</h1>
+    <ContainerLayer 
+      className={`${prefix}`}
+      title='Dashboard'
+      h1Content='Dashboard'
+    >
       正在完善...
-    </div>
+    </ContainerLayer>
   );
 }
 
