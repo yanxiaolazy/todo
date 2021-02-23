@@ -3,6 +3,7 @@ import TextModule from './component';
 import * as actions from '../actions';
 import { getUser } from "../../utils/parse";
 import { actions as moduleItemActions } from "../../ModuleItem";
+import debounce from "../../utils/debounce";
 
 function getTextModule(state, moduleId, id, type) {
   let temp;
@@ -41,7 +42,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   const {id, moduleId} = ownProps;
 
   return {
-    onChange(text) {
+    onChange: debounce(text => {
       const payload = {
         text, 
         username: getUser(), 
@@ -49,7 +50,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         todoStatus: 'pending'
       }
       dispatch(actions.addValue(moduleId, id, payload));
-    },
+    }, 500),
     onDelete() {
       dispatch(moduleItemActions.deleteTextModule(moduleId, id));
       dispatch(actions.deleteText(moduleId, id));

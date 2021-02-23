@@ -14,9 +14,9 @@ const resolve = (setProjectData, setLoading) => response => {
     setProjectData(parseData);
   }
   
-  setLoading(false);
+  setTimeout(setLoading, 500, false);
 }
-const reject = setLoading => () => setLoading(false);
+const reject = setLoading => () => setTimeout(setLoading, 500, false);
 
 export default function useGetProjectData() {
   const [projectData, setProjectData] = useState(null),

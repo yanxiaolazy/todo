@@ -5,8 +5,7 @@ import * as actions from "../actions";
 import { actions as moduleItemActions } from "../../ModuleItem";
 import { actions as fileModuleActions } from "../../FileModule";
 import { actions as textModuleActions } from "../../TextModule";
-import { newProjectApi, updateProjectApi } from "../../utils/api";
-import { message } from "antd";
+import { updateProjectApi } from "../../utils/api";
 
 const resolve = (dispatch, history) => response => {
   setTimeout(() => {//避免`router`没有跳转之前，重置数据，导致render `Empty` component
@@ -49,7 +48,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     onAddProjectTitle(projectTitle) {
       dispatch(actions.addProjectTitle(projectTitle));
     },
-    onPublish(props) {//处理数据提交，和重置
+    onPublish(props, setSpinning) {//处理数据提交，和重置
       //数据提交给后台
       //do something
       const {project, moduleItem, fileModule, textModule} = props;
@@ -63,19 +62,10 @@ function mapDispatchToProps(dispatch, ownProps) {
         textModule
       };
 
-      if (!project.projectTitle) {
-        message.warning('标题是必要的');
-        return;
-      }
-
-      const params = {};
-      if (match.params.projectId) {
-        params.id = match.params.projectId;
-
-        updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history));
-      } else {
-        newProjectApi({params})({data: {...editProject}})(resolve(dispatch, history));
-      }
+      const params = {
+        id: match.params.projectId
+      };
+      updateProjectApi({params})({data: {...editProject}})(resolve(dispatch, history), () => setTimeout(setSpinning, 500, false));
     }
   }
 }
