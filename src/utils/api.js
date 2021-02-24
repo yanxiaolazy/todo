@@ -2,6 +2,9 @@ import { createApi } from "./ajax";
 import { baseConfig } from "./ajax";
 
 const _baseURL = '/api';
+const _config = {
+  timeout: 5000
+}
 
 export const loginApi = createApi(`${_baseURL}/login`, 'POST');
 export const logoutApi = createApi(`${_baseURL}/logout`, 'POST');
@@ -12,7 +15,7 @@ export const deleteUserApi = createApi(`${_baseURL}/delete/user`, 'DELETE');
 
 export const viewProjectApi = createApi(`${_baseURL}/view/project`, 'GET');
 export const viewDateApi = createApi(`${_baseURL}/view/date`, 'GET');
-export const viewFileApi = createApi(`${_baseURL}/view/file`, 'GET');
+export const viewFileApi = createApi(`${_baseURL}/view/file`, 'GET', _config);
 export const viewUsersApi = createApi(`${_baseURL}/view/users`, 'GET');
 export const viewAllMediaApi = createApi(`${_baseURL}/view/media`, 'GET');
 
