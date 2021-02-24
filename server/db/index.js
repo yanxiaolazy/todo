@@ -6,6 +6,7 @@ const findAllUsers = require('./findAllUsers');
 const createUser = require('./createUser');
 const deleteUser = require('./deleteUser');
 const updateUser = require('./updateUser');
+const deleteProject = require('./deleteProject');
 
 module.exports = {
   login,
@@ -15,5 +16,6 @@ module.exports = {
   findAllUsers,
   createUser,
   deleteUser,
-  updateUser
+  updateUser,
+  deleteProject
 }

@@ -10,6 +10,7 @@ const newUser = require('./newUser');
 const deleteUser = require('./deleteUser');
 const updateUser = require('./updateUser');
 const viewAllMedias = require('./viewAllMedias');
+const deleteProject = require('./deleteProject');
 
 module.exports = {
   login,
@@ -23,5 +24,6 @@ module.exports = {
   newUser,
   deleteUser,
   updateUser,
-  viewAllMedias
+  viewAllMedias,
+  deleteProject
 }

@@ -14,7 +14,8 @@ const {
   newUser,
   deleteUser,
   updateUser,
-  viewAllMedias
+  viewAllMedias,
+  deleteProject
 } = require('./middleware');
 
 const router = new Router();
@@ -28,7 +29,7 @@ router.get(/./, async (ctx, next) => {
 
 router
   .get('/api/view/project', viewProject)
-//   .get('/view/date', viewDate);
+//   .get('/api/view/date', viewDate);
   .get('/api/view/file', viewFile)
   .get('/api/view/users', viewAllUsers)
   .get('/api/view/media', viewAllMedias)
@@ -36,19 +37,19 @@ router
 
 router
   .post('/api/login', login)
-  // .post('/logout', logout)
+  // .post('/api/logout', logout)
   .post('/api/upload', upload)
   .post('/api/new/user', newUser)
   .post('/api/new/project', newProject)
   .post('/api/update/project', updateProject)
   .post('/api/update/user', updateUser)
-  // .post('/verify/username', verifyUsername)
-  // .post('/verify/token', verifyToken)
+  // .post('/api/verify/username', verifyUsername)
+  // .post('/api/verify/token', verifyToken)
 
 
 router
   .delete('/api/delete/file', deleteFile)
-//   .delete('/delete/project', deleteProject)
+  .delete('/api/delete/project', deleteProject)
   .delete('/api/delete/user', deleteUser);
 
 

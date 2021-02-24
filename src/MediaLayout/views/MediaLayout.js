@@ -63,6 +63,8 @@ export default function MediaLayout() {
   useEffect(() => {
     if (fileUrl.length != 0) {
       setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
     }
   }, [fileUrl]);
 

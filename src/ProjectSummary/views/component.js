@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { notification } from "antd";
 import ContainerLayer from "../../components/ContainerLayer";
-import { viewProjectApi } from "../../utils/api";
+import { deleteProjectApi, viewProjectApi } from "../../utils/api";
+import { getAdmin } from "../../utils/parse";
 import "./style.css";
 
 const resolveProjectSummary = (setProjects, setLoading) => response => {
   if (response) {
     setProjects(response.params);
   }
+  if (typeof setLoading !== 'function') return;
+
   setTimeout(setLoading, 500, false);
 };
 const rejectProjectSummary = setLoading => () => setTimeout(setLoading, 500, false);
@@ -18,7 +22,8 @@ export default function ProjectSummary() {
   const [projects, setProjects] = useState(null),
         [titles, setTitles] = useState(null),
         [loading, setLoading] = useState(true),
-        [isEmpty, setIsEmpty] = useState(true)
+        [isEmpty, setIsEmpty] = useState(true),
+        [spinning, setSpinning] = useState(false)
 
   useEffect(() => {
     viewProjectApi()()(resolveProjectSummary(setProjects, setLoading), rejectProjectSummary(setLoading));
@@ -27,7 +32,7 @@ export default function ProjectSummary() {
   useEffect(() => {
     if (projects) {
       const {titles} = projects;
-      
+
       setTitles(titles);
     }
   }, [projects]);
@@ -35,9 +40,28 @@ export default function ProjectSummary() {
   useEffect(() => {
     if (titles?.length > 0) {
       setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
     }
   }, [titles]);
-  
+
+  function onDeleteClick(id) {
+    const deleteFn = deleteProjectApi({params: {tab: id}})();
+
+    return () => {
+      setSpinning(true);
+
+      deleteFn(
+        response => {
+        if (response.params) {
+          notification.info({message: 'Success', description: response.params.info, placement: 'topLeft'});
+          viewProjectApi()()(resolveProjectSummary(setProjects));
+        }
+        setTimeout(setSpinning, 500, false);
+      }, () => setTimeout(setSpinning, 500, false));
+    }
+  }
+  const isAdmin = getAdmin();
   const views = titles?.map(title => {
     const createTime = `${new Date(title.createTime).toLocaleDateString()}/${new Date(title.createTime).toLocaleTimeString()}`,
           updateTime = `${new Date(title.updateTime).toLocaleDateString()}/${new Date(title.updateTime).toLocaleTimeString()}`,
@@ -53,6 +77,7 @@ export default function ProjectSummary() {
         <span>{startTime}</span>
         <span>{endTime}</span>
         <span>{title.status}</span>
+        {isAdmin &&<span onClick={onDeleteClick(title.id)} className={`${prefix}-delete`}>Delete</span>}
       </li>
     );
   });
@@ -62,7 +87,7 @@ export default function ProjectSummary() {
       title='Project'
       className={prefix}
       h1Content='Project'
-      {...{loading, isEmpty}}
+      {...{loading, isEmpty, spinning}}
     >
       <div className='animate-bottom'>
         <ul className={`${prefix}-titles`}>

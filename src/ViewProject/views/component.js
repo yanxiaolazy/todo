@@ -149,6 +149,7 @@ export default function ViewProject() {
   }, [project, moduleItem, fileModule, textModule, isAdmin, onCheck]);
 
   function handleEditClick() {
+    setSpinning(true);
     history.push(`/view/${match.params.projectId}/edit`)
   }
 
