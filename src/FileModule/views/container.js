@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { uploadApi, deleteFileApi } from "../../utils/api";
 import FileModule from "./component";
 import * as actions from "../actions";
+import { notification } from "antd";
 
 function getFileModule(state, moduleId, type) {
   const temp = state.concat();
@@ -28,7 +29,13 @@ function mapDispatchToProps(dispatch, ownProps) {
       return uploadApi;
     },
     onChange(files) {
-      dispatch(actions.addFile(moduleId, id, files.fileList));
+      const fileList = files.fileList.filter(file => {
+        if (file.status === 'error') {
+          notification.error({message: 'Error', description: `\`${file.name}\` upload failed`, placement: 'topLeft'})
+        }
+        return file.status !== 'error'
+      });
+      setTimeout(dispatch, 200, actions.addFile(moduleId, id, fileList));
     },
     async onRemove(file) {
       let isRemove = false;
