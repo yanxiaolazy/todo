@@ -31,7 +31,7 @@ export default function useGetProjectData() {
   useEffect(() => {
     if (match.params.projectId) {
       const params = {id: match.params.projectId};
-      viewProjectApi({params})()(resolve(setProjectData, setLoading), reject);
+      viewProjectApi({params})()(resolve(setProjectData, setLoading), reject(setLoading));
     }
   }, [match]);
 
