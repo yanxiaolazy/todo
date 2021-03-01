@@ -10,18 +10,7 @@
 .view-project-module-file {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-}
-.view-project-module-file>div {
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 40px;
-}
-.view-project-module-file>div
-span {
-  color: var(--theme-color);
-  cursor: pointer;
-  padding: 0 5px;
+  align-items: center;
 }
 
 .view-project-module-title,
@@ -51,4 +40,18 @@ span {
 
 .view-project-module>div:nth-child(2) {
   border-top: 1px solid rgba(100, 111, 115, .4);
+}
+
+.view-project-image {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 40px;
+}
+.view-project-image 
+span {
+  opacity: .6;
+  cursor: pointer;
 }
