@@ -52,10 +52,9 @@ export default function MediaLayout() {
       results.forEach(file => {
         let saveData = viewImage(file, setFileURL);
 
-        if (!/\.(jpg|bmp|gif|ico|jpeg|png)$/.test(file)) {
-          saveData = downloadFile(file, setFileURL);
-        }
-        viewFileApi({params: {tab: file}, responseType: 'arraybuffer'})()(saveData, () => {});      
+        if (/\.(jpg|bmp|gif|ico|jpeg|png)$/.test(file)) {
+          viewFileApi({params: {tab: file}, responseType: 'arraybuffer'})()(saveData);
+        }      
       });
     }
   }, [results]);
@@ -107,7 +106,7 @@ export default function MediaLayout() {
     if (/\.(jpg|bmp|gif|ico|jpeg|png)/.test(filename)) {
       return(<Image src={url} className={`${prefix}-image`} />);
     } else {
-      return(<a href={url} className={`${prefix}-file`} download={`${filename}`} target='__blank'><FileOutlined /></a>);
+      return(<a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} className={`${prefix}-file`} download={`${filename}`} target='__blank'><FileOutlined /></a>);
     }
   }
 

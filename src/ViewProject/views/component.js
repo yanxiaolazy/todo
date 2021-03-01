@@ -83,7 +83,7 @@ export default function ViewProject() {
                 const status = params.todoStatus === 'pending' ? '待审核' : params.todoStatus === '已通过' ? '已通过': '未通过';
                 return(
                   <div key={index} className={`${prefix}-module-file`}>
-                    <div>
+                    <div className={`${prefix}-image`}>
                       <span onClick={handleModalOpen} data-filename={params.file}>{params.file}</span>
                     </div>
                     <span className='uploader'>上传人：{params.uploader}</span>
@@ -149,13 +149,12 @@ export default function ViewProject() {
   }, [project, moduleItem, fileModule, textModule, isAdmin, onCheck]);
 
   function handleEditClick() {
-    setSpinning(true);
     history.push(`/view/${match.params.projectId}/edit`)
   }
 
   function handleModalOpen(e) {
     setModalOpen(prev => !prev);
-    setFilename(e.target.dataset.filename)
+    setFilename(e?.target.dataset.filename);
   }
 
   function onUpdate() {
@@ -196,7 +195,7 @@ export default function ViewProject() {
       {isAdmin && <div className={`${prefix}-publish`}>
         <Button type='primary' htmlType='button' onClick={onUpdate}>update</Button>  
       </div>}
-      <ViewFile {...{filename}} isOpen={modalOpen} onClick={handleModalOpen}/>
+      <ViewFile {...{filename}} isOpen={modalOpen} onClose={handleModalOpen}/>
     </ContainerLayer>
   );
 }

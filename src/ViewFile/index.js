@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { Modal } from "antd";
+import { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import { Spin } from "antd";
 
 import { viewFileApi } from "../utils/api";
 import "./style.css";
@@ -20,12 +21,15 @@ function downloadFile(setFileURL) {
 }
 
 const prefix = 'view-file';
+const modalRoot = document.body;
 
-export default function ViewFile({filename, isOpen, onClick}) {
+
+export default function ViewFile({filename, isOpen, onClose}) {
   const [fileBase64, setFileBase64] = useState(null),
-        [fileUrl, setFileURL] = useState(''),
-        [styleWidth, setStyleWidth] = useState(520),
-        [fileSrc, setFileSrc] = useState(null)
+        // [fileUrl, setFileURL] = useState(''),
+        [fileSrc, setFileSrc] = useState(null),
+        modalRef = useRef(),
+        [spinning, setSpinning] = useState(true);
 
   useEffect(() => {
     if (filename) {
@@ -34,35 +38,51 @@ export default function ViewFile({filename, isOpen, onClick}) {
       };
       let saveData = viewImage(setFileBase64);
 
-      if (!/\.(jpg|bmp|gif|ico|jpeg|png)$/.test(filename)) {
-        saveData = downloadFile(setFileURL);
+      if (/\.(jpg|bmp|gif|ico|jpeg|png)$/.test(filename)) {
+        viewFileApi({params, responseType: 'arraybuffer'})()(saveData);
       }
-      viewFileApi({params, responseType: 'arraybuffer'})()(saveData, () => {});
     }
   }, [filename]);
 
   useEffect(() => {
     if (fileBase64 && /\.(jpg|bmp|gif|ico|jpeg|png)$/.test(filename)) {
       setFileSrc(<div className={`${prefix}-image`}><img src={`${fileBase64}`} alt=''/></div>);
-      setStyleWidth(900);
-    } else if (fileUrl) {
-      setFileSrc(<div className={`${prefix}-file`}><a href={fileUrl} download={`${filename}`} target='__blank'>下载 {filename}</a></div>);
-      setStyleWidth(520);
     } else {
-      setFileSrc(<div><h3>不支持的格式</h3></div>);
-      setStyleWidth(520);
-    }
-  }, [fileBase64, filename, fileUrl]);
+      setFileSrc(<div className={`${prefix}-file`} ><a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} download={`${filename}`} >下载 {filename}</a></div>);
+    } 
+  }, [fileBase64, filename]);
 
-  return(
-    <Modal 
-      className={`${prefix} ${prefix}-${styleWidth}`}
-      visible={isOpen}
-      onOk={onClick}
-      maskClosable
-      onCancel={onClick}
-    >
-      {fileSrc}
-    </Modal>
+  useEffect(() => {
+    if (modalRef.current) {
+      window.addEventListener('click', handleMask);
+    }
+  }, [modalRef]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(setSpinning, 500, false);
+    }
+  }, [isOpen]);
+
+  function handleMask(e) {
+    const target = e.target;
+
+    if (target.id == 'mask' || target.id == 'close') {
+      onClose();
+      setSpinning(true);
+    }
+  }
+  
+  return ReactDOM.createPortal(
+    <div ref={modalRef} id='mask' className={`${prefix}`} style={{display: isOpen ? 'flex' : 'none'}} >
+      <Spin {...{spinning}} />
+      {!spinning && <>
+        <div className={`${prefix}-tools`}>
+          <span id='close'>X</span>
+        </div>
+        {fileSrc}
+      </>}
+    </div>,
+    modalRoot
   );
 }
