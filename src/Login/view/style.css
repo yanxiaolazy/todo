@@ -12,3 +12,9 @@
   background-color: transparent;
   padding: 40px 50px 15px 50px;
 }
+.login-title {
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 40px;
+}

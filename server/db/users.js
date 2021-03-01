@@ -5,11 +5,11 @@ const {UsersTable, secret} = require('../config/db');
 const createHash = require('../utils/createHash');
 
 async function login(username, password, email) {
-  if (!username || !password || !email) {
+  if (!username || !password) {
     return {error: 'not valid username or password or email'}
   }
 
-  const where = {[Op.and]: [{username}, {email}]};
+  const where = {[Op.and]: [{username}]};
   let results;
   
   try {
@@ -35,7 +35,8 @@ async function login(username, password, email) {
   if (createHash(password, salt) === dataValues.password) {
     return {
       token: createToken(username), 
-      admin: dataValues.admin
+      admin: dataValues.admin,
+      email: dataValues.email
     }
   }
 

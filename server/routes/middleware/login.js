@@ -20,7 +20,8 @@ async function login(ctx, next) {
   } else {
     const params = {
       admin: result.admin, 
-      token: result.token
+      token: result.token,
+      email: result.email
     };
 
     const response = Object.assign({}, status['200'], {params});

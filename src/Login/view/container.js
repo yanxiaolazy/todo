@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Login from "./component";
 import * as actions from "../actions";
 import {loginApi} from "../../utils/api";
-import { setToken, setLogin, setAdmin } from "../../utils/parse";
+import { setToken, setLogin, setAdmin, setEmail } from "../../utils/parse";
 
 function mapStateToProps(state) {
   return {
@@ -22,6 +22,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     }, 500);
     setToken(params.token);
     setAdmin(params.admin);
+    setEmail(params.email);
     history.push('/');
   }
   const reject = () => {
