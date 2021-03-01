@@ -5,6 +5,7 @@ import Helmet from "../../components/Helmet";
 import './style.css';
 
 const FormItem = Form.Item;
+const prefix = 'login';
 
 export default function Login({loading, onFinish}) {
 
@@ -20,18 +21,19 @@ export default function Login({loading, onFinish}) {
             scrollToFirstError
             initialValues={{remember: false}}
           >
+            <div className={`${prefix}-title`}><p>Login</p></div>
             <FormItem
               name='username'
               rules={[{required:true}]}
             >
               <Input autoFocus prefix={<UserOutlined />} placeholder='请输入用户名' type='text'/>
             </FormItem>
-            <FormItem
+            {/* <FormItem
               name='email'
               rules={[{required: true}]}
             >
               <Input prefix={<MailOutlined />} type='email' placeholder='请输入邮箱'/>
-            </FormItem>
+            </FormItem> */}
             <FormItem
               name='password'
               rules={[{required: true}]}

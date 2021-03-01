@@ -24,6 +24,10 @@ export function setLogin(value) {
   setKeyValue('todo-login', JSON.stringify(value));
 }
 
+export function removeLogin() {
+  romoveKeyValue('todo-login');
+}
+
 //admin
 export function getAdmin() {
   const login = getKeyValue('todo-login');
@@ -49,4 +53,14 @@ export function setToken(value) {
 }
 export function removeToken() {
   romoveKeyValue('todo-token');
+}
+
+//email
+export function setEmail(email) {
+  const key = 'todo-login';
+  const login = getKeyValue(key);
+
+  if (!login) return;
+
+  setKeyValue(key, JSON.stringify({...JSON.parse(login), email}));
 }
