@@ -3,7 +3,7 @@
 ### Installation
 
 ```bash
-$ git clone https://github.com/yanxiaolazy/todo
+$ git clone https://github.com/yanxiaolazy/todo.git
 ```
 
 ### Development
