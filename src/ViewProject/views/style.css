@@ -43,22 +43,9 @@
   border-top: 1px solid rgba(100, 111, 115, .4);
 }
 
-/* .view-project-image {
-  display: flex;
-  flex-flow: column nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 40px;
-}
-.view-project-image 
-span {
-  opacity: .6;
-  cursor: pointer;
-} */
-
 .view-project-title,
 .view-project-module-title,
+.view-project-module-text,
 .view-project-module-file>span {
   overflow: hidden;
   text-overflow: ellipsis;
