@@ -2,6 +2,7 @@
   border: 1px solid var(--green);
   border-bottom: none;
   background-color: #fff;
+  min-width: 800px;
 }
 .view-project-module:last-child {
   border-bottom: 1px solid var(--green);
@@ -42,7 +43,7 @@
   border-top: 1px solid rgba(100, 111, 115, .4);
 }
 
-.view-project-image {
+/* .view-project-image {
   display: flex;
   flex-flow: column nowrap;
   overflow-x: hidden;
@@ -54,4 +55,16 @@
 span {
   opacity: .6;
   cursor: pointer;
+} */
+
+.view-project-title,
+.view-project-module-title,
+.view-project-module-file>span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.view-project-title,
+.view-project-module-title {
+  max-width: 800px;
 }
