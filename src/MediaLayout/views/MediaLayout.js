@@ -4,29 +4,30 @@ import { FileOutlined } from "@ant-design/icons";
 
 import MediaTable from "../../components/MediaTable";
 import ContainerLayer from "../../components/ContainerLayer";
+
 import { viewAllMediaApi, viewFileApi } from "../../utils/api";
 
 import './style.css';
 
 const prefix = 'media-layout';
 
-function viewImage(file, setFileURL) {
+function viewImage(filename, setFileURL) {
   return response => {
     setFileURL(prev => {
-      const temp = prev.concat();
-      temp.push({[`${file}`]: `data:image/png;base64,${btoa(new Uint8Array(response).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`});
+      const temp = [...prev];
+      temp.push({[`${filename}`]: `data:image/png;base64,${btoa(new Uint8Array(response).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`});
       return temp;
     });
   }
 }
 
-function downloadFile(file, setFileURL) {
+function downloadFile(filename, setFileURL) {
   return response => {
     const blob = new Blob([response], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
     const URL = window.URL.createObjectURL(blob);
     setFileURL(prev => {
       const temp = prev.concat();
-      temp.push({[`${file}`]: URL});
+      temp.push({[`${filename}`]: URL});
       return temp;
     });
     window.URL.revokeObjectURL(blob);
@@ -36,10 +37,10 @@ function downloadFile(file, setFileURL) {
 export default function MediaLayout() {
   const [spinning, setSpinning] = useState(false),
         [loading, setLoading] = useState(true),
-        [results, setResults] = useState(null),
+        [allFiles, setAllFiles] = useState(null),
         [fileUrl, setFileURL] = useState([]),
         [deleteFlag, setDeleteFlag] = useState(false),
-        [total, setTotal] = useState(0),
+        [fileNumber, setFileNumber] = useState(0),
         [current, setCurrent] = useState(1),
         [isEmpty, setIsEmpty] = useState(true)
 
@@ -48,16 +49,18 @@ export default function MediaLayout() {
   }, [deleteFlag]);
 
   useEffect(() => {
-    if (results && initFileUrl()) {
-      results.forEach(file => {
-        let saveData = viewImage(file, setFileURL);
+    if (allFiles && initFileUrl()) {
+      allFiles.forEach(filename => {
+        let saveData = viewImage(filename, setFileURL);
 
-        if (/\.(jpg|bmp|gif|ico|jpeg|png)$/.test(file)) {
-          viewFileApi({params: {tab: file}, responseType: 'arraybuffer'})()(saveData);
-        }      
+        if (/\.(jpg|bmp|gif|ico|jpeg|png)$/i.test(filename)) {
+          viewFileApi({params: {tab: filename}, responseType: 'arraybuffer'})()(saveData);
+        } else {
+          setFileURL([{[`${filename}`]: filename}]);
+        }     
       });
     }
-  }, [results]);
+  }, [allFiles]);
 
   useEffect(() => {
     if (fileUrl.length != 0) {
@@ -70,8 +73,8 @@ export default function MediaLayout() {
   function viewAllMediaResolve(response) {
     if (response) {
       const {params: {data, total}} = response;
-      setResults(data);
-      setTotal(total);
+      setAllFiles(data);
+      setFileNumber(total);
     }
   
     setTimeout(setLoading, 500, false);
@@ -92,7 +95,7 @@ export default function MediaLayout() {
       function (response) {
         const {params: {data}} = response;
 
-        setResults(data);
+        setAllFiles(data);
         setCurrent(page);
         setTimeout(setLoading, 500, false);
       },
@@ -102,11 +105,11 @@ export default function MediaLayout() {
     );
   }
 
-  function fileComonent(url, filename) {
-    if (/\.(jpg|bmp|gif|ico|jpeg|png)/.test(filename)) {
+  function fileComonent(filename, url) {
+    if (/\.(jpg|bmp|gif|ico|jpeg|png)/i.test(filename)) {
       return(<Image src={url} className={`${prefix}-image`} />);
     } else {
-      return(<a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} className={`${prefix}-file`} download={`${filename}`} target='__blank'><FileOutlined /></a>);
+      return(<a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} className={`${prefix}-file`} download={`${filename}`}><FileOutlined /></a>);
     }
   }
 
@@ -118,10 +121,11 @@ export default function MediaLayout() {
       {...{loading, spinning, isEmpty}}
     >
       <MediaTable
-        {...{prefix, setSpinning, setDeleteFlag, total, current}} 
+        {...{prefix, setSpinning, setDeleteFlag, current}} 
         onChange={pageChange}
         fileDatas={fileUrl}
         component={fileComonent} 
+        total={fileNumber}
       />
     </ContainerLayer>
   );

@@ -40,7 +40,7 @@ function MediaView({
 
           return(
             <div className={`${prefix}-media-view`} key={index}>
-              <div className={`${prefix}-media-view-item`}>{component(entries[1], entries[0])}</div>
+              <div className={`${prefix}-media-view-item`}>{component(entries[0], entries[1])}</div>
               <span>{entries[0]}</span>
               <span onClick={onDelete(entries[0])} className={`${prefix}-media-view-delete`}>Delete</span>
             </div>

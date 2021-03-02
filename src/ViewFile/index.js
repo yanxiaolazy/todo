@@ -38,14 +38,14 @@ export default function ViewFile({filename, isOpen, onClose}) {
       };
       let saveData = viewImage(setFileBase64);
 
-      if (/\.(jpg|bmp|gif|ico|jpeg|png)$/.test(filename)) {
+      if (/\.(jpg|bmp|gif|ico|jpeg|png)$/i.test(filename)) {
         viewFileApi({params, responseType: 'arraybuffer'})()(saveData);
       }
     }
   }, [filename]);
 
   useEffect(() => {
-    if (fileBase64 && /\.(jpg|bmp|gif|ico|jpeg|png)$/.test(filename)) {
+    if (fileBase64 && /\.(jpg|bmp|gif|ico|jpeg|png)$/i.test(filename)) {
       setFileSrc(<div className={`${prefix}-image`}><img src={`${fileBase64}`} alt=''/></div>);
     } else {
       setFileSrc(<div className={`${prefix}-file`} ><a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} download={`${filename}`} >下载 {filename}</a></div>);
