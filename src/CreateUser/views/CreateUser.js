@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { notification } from 'antd';
+
 import FormLayout from '../../FormLayout';
 import ContainerLayer from '../../components/ContainerLayer';
+
 import { newUserApi } from '../../utils/api';
-import { notification } from 'antd';
-import { useState } from 'react';
+import { getAdmin } from '../../utils/parse';
 
 const prefix = 'create-user';
 
@@ -17,7 +20,8 @@ const resolveCreateUser = (history, setSpinning) => response => {
 
 export default function CreateUser() {
   const history = useHistory(),
-        [spinning, setSpinning] = useState(false);
+        [spinning, setSpinning] = useState(false),
+        [isAdmin] = useState(getAdmin)
 
   function handleCreateUser(values) {
     setSpinning(true);
@@ -31,7 +35,7 @@ export default function CreateUser() {
       h1Content='New User'
       {...{spinning}}
     >
-      <FormLayout onFinish={handleCreateUser} submitText='Add New User'/>
+      <FormLayout {...{isAdmin}} onFinish={handleCreateUser} submitText='Add New User'/>
     </ContainerLayer>
   );
 }

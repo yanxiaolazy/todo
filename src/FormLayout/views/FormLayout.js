@@ -10,6 +10,7 @@ const wrapperCol = {
 }
 
 export default function FormLayout({
+  isAdmin,
   disabled,
   initialValues,
   usernameDisabled,
@@ -52,6 +53,14 @@ export default function FormLayout({
         >
           <Input type='email' prefix={<MailOutlined />} placeholder='请输入用户邮箱'/>
         </FormItem>
+        {isAdmin ? 
+        <FormItem
+          label='Password'
+          name='password'
+          {...{wrapperCol}}
+        >
+          <Input.Password type='password' prefix={<LockOutlined/>} placeholder='请输入用户密码'/>
+        </FormItem> :
         <FormItem
           label='Password'
           name='password'
@@ -59,7 +68,7 @@ export default function FormLayout({
           rules={passwordRules}
         >
           <Input.Password type='password' prefix={<LockOutlined/>} placeholder='请输入用户密码'/>
-        </FormItem>
+        </FormItem>}
         <FormItem>
           <Button {...{disabled}} type='primary' htmlType='submit'>{submitText}</Button>
         </FormItem>
@@ -69,6 +78,7 @@ export default function FormLayout({
 }
 
 FormLayout.defaultProps = {
+  isAdmin: false,
   disabled: false,
   usernameDisabled: false,
   passwordRules: [
