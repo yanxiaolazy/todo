@@ -83,9 +83,9 @@ export default function ViewProject() {
                 const status = params.todoStatus === 'pending' ? '待审核' : params.todoStatus === '已通过' ? '已通过': '未通过';
                 return(
                   <div key={index} className={`${prefix}-module-file`}>
-                    <div className={`${prefix}-image`}>
-                      <span onClick={handleModalOpen} data-filename={params.file}>{params.file}</span>
-                    </div>
+                    {/* <div className={`${prefix}-image`}> */}
+                    <span onClick={handleModalOpen} data-filename={params.file}>{params.file}</span>
+                    {/* </div> */}
                     <span className='uploader'>上传人：{params.uploader}</span>
                     <span className='upload-time'>上传时间：{`${dateString} ${timeString}`}</span>
                     <span className={`approval-status approval-status-${params.todoStatus === 'pending' ? 'pending' : params.todoStatus === '已通过'  ? 'pass' : 'not-pass'}`}>{status}</span>

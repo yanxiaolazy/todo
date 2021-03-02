@@ -7,7 +7,7 @@
 .project-summary
 .project-summary-items {
   overflow-x: hidden;
-  min-width: 1200px;
+  min-width: 800px;
   border: 1px solid rgba(178, 190, 195, .5);
 }
 .project-summary
@@ -15,7 +15,7 @@
   line-height: 60px;
   padding: 0 30px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr) 50px;
+  grid-template-columns: repeat(7, 1fr);
 }
 .project-summary
 .project-summary-items>li:nth-child(even) {
@@ -25,9 +25,9 @@
 .project-summary
 .project-summary-titles {
   overflow-x: hidden;
-  min-width: 1200px;
+  min-width: 800px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr) 50px;
+  grid-template-columns: repeat(7, 1fr);
   padding: 0 30px;
   background-color: #fff;
   line-height: 40px;
@@ -36,7 +36,7 @@
 }
 
 .project-summary-item 
-span:first-child {
+span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

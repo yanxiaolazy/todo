@@ -4,6 +4,7 @@
 
 .edit-project-add-modules {
   overflow: hidden;
+  min-width: 800px;
 }
 
 .edit-project-add-modules>div:last-child {

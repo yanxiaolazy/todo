@@ -7,7 +7,7 @@
 .users-layout
 .users-layout-items {
   overflow-x: hidden;
-  min-width: 1200px;
+  min-width: 800px;
   border: 1px solid rgba(178, 190, 195, .5);
   padding: 0;
   margin: 0;
@@ -29,7 +29,7 @@
 .users-layout
 .users-layout-titles {
   overflow-x: hidden;
-  min-width: 1200px;
+  min-width: 800px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 0 30px;
@@ -50,4 +50,12 @@
 
 .users-layout-delete:hover {
   opacity: .7;
+}
+
+.users-layout-item
+span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 16px;
 }
