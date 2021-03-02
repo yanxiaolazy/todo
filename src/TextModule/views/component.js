@@ -12,6 +12,7 @@ const styles = {
 const modules = {
   toolbar: [
     [{ 'header': [1, 2, 3, 4, 5, false] }],
+    [{'color': []}],
     ['bold', 'italic', 'underline','strike', 'blockquote'],
     [{'list': 'ordered'}, {'list': 'bullet'}],
     ['link', 'image'],
@@ -20,7 +21,7 @@ const modules = {
 }
 
 const formats = [
-  'header',
+  'header','color',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
   'link', 'image'
