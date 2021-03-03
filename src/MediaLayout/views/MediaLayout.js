@@ -6,6 +6,7 @@ import MediaTable from "../../components/MediaTable";
 import ContainerLayer from "../../components/ContainerLayer";
 
 import { viewAllMediaApi, viewFileApi } from "../../utils/api";
+import { baseURL } from "../../utils/config";
 
 import './style.css';
 
@@ -109,7 +110,7 @@ export default function MediaLayout() {
     if (/\.(jpg|bmp|gif|ico|jpeg|png)/i.test(filename)) {
       return(<Image src={url} className={`${prefix}-image`} />);
     } else {
-      return(<a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} className={`${prefix}-file`} download={`${filename}`}><FileOutlined /></a>);
+      return(<a href={`${baseURL}/api/view/file?tab=${encodeURIComponent(filename)}`} className={`${prefix}-file`} download={`${filename}`}><FileOutlined /></a>);
     }
   }
 

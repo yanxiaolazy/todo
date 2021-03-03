@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Spin } from "antd";
 
 import { viewFileApi } from "../utils/api";
+import { baseURL } from '../utils/config';
 import "./style.css";
 
 function viewImage(setFileBase64) {
@@ -48,7 +49,7 @@ export default function ViewFile({filename, isOpen, onClose}) {
     if (fileBase64 && /\.(jpg|bmp|gif|ico|jpeg|png)$/i.test(filename)) {
       setFileSrc(<div className={`${prefix}-image`}><img src={`${fileBase64}`} alt=''/></div>);
     } else {
-      setFileSrc(<div className={`${prefix}-file`} ><a href={`http://localhost:5000/api/view/file?tab=${encodeURIComponent(filename)}`} download={`${filename}`} >下载 {filename}</a></div>);
+      setFileSrc(<div className={`${prefix}-file`} ><a href={`${baseURL}/api/view/file?tab=${encodeURIComponent(filename)}`} download={`${filename}`} >下载 {filename}</a></div>);
     } 
   }, [fileBase64, filename]);
 

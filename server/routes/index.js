@@ -29,23 +29,17 @@ router.get(/./, async (ctx, next) => {
 
 router
   .get('/api/view/project', viewProject)
-//   .get('/api/view/date', viewDate);
   .get('/api/view/file', viewFile)
   .get('/api/view/users', viewAllUsers)
   .get('/api/view/media', viewAllMedias)
 
-
 router
   .post('/api/login', login)
-  // .post('/api/logout', logout)
   .post('/api/upload', upload)
   .post('/api/new/user', newUser)
   .post('/api/new/project', newProject)
   .post('/api/update/project', updateProject)
   .post('/api/update/user', updateUser)
-  // .post('/api/verify/username', verifyUsername)
-  // .post('/api/verify/token', verifyToken)
-
 
 router
   .delete('/api/delete/file', deleteFile)

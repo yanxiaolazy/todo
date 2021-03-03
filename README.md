@@ -41,6 +41,16 @@ $ yarn run dev
 ```bash
 $ yarn install
 ```
+创建配置文件`config.js` 
+用于导出一个有效的后端`url` 
+```bash
+$ vim ./src/utils/config.js
+```
+输入如下的内容
+```js
+export const baseURL = 'http://localhost:5000';//此处放上部署的url，以供登录等操作
+```
+
 
 打包项目
 

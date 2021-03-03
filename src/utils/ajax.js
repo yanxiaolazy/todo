@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import axios from "axios";
 import { getToken, removeLogin, removeToken } from "./parse";
+import { baseURL } from "./config";
 
 console.log('Using environment "' + process.env.NODE_ENV + '".');
 export const baseConfig = {
@@ -13,7 +14,7 @@ export const baseConfig = {
   // `baseURL` will be prepended to `url` unless `url` is absolute.
   // It can be convenient to set `baseURL` for an instance of axios to pass relative URLs
   // to methods of that instance.
-  baseURL: process.env.NODE_ENV === 'development'? 'http://localhost:5000' : 'http://localhost',
+  baseURL,
 
   // `transformRequest` allows changes to the request data before it is sent to the server
   // This is only applicable for request methods 'PUT', 'POST', 'PATCH' and 'DELETE'
