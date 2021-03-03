@@ -1,6 +1,6 @@
-import { message } from "antd";
+import { notification } from "antd";
 import axios from "axios";
-import { getToken } from "./parse";
+import { getToken, removeLogin, removeToken } from "./parse";
 
 console.log('Using environment "' + process.env.NODE_ENV + '".');
 export const baseConfig = {
@@ -216,21 +216,20 @@ export function request(url, method, data, config) {
     .catch(error => {
       if (error.response) {
         const response = error.response;
-        if (response.status === 400) {
-          message.error(response.data.params.info);
+
+        if (response.status === 400 || response.status === 403 || response.status === 404) {
+          notification.error({message: 'Error', description: `${response.status} ${response.data.params.info}`, placement: 'topLeft', duration: null});
         } else if (response.status === 401) {
-          message.error(response.data.params.info);
-        } else if (response.status === 403) {
-          message.error(response.data.params.info);
-        } else if (response.status === 404) {
-          message.error(response.data.params.info);
+          notification.error({message: 'Error', description: `${response.status} ${response.data.params.info}`, placement: 'topLeft', duration: null});
+          removeToken();
+          removeLogin();
         } else {
-          message.error(`Error ${response.data.msg}`);
+          notification.error({message: 'Error', description: `${response.status} ${response.data?.msg || error.message}`, placement: 'topLeft', duration: null});
         }
       } else if (error.request) {
-        message.error(`Error ${error.message}`);
+        notification.error({message: 'Error', description: error.message, placement: 'topLeft', duration: null});
       } else {
-        message.error(`Error ${error.message}`);
+        notification.error({message: 'Error', description: error.message, placement: 'topLeft', duration: null});
       }
 
       if (typeof reject === 'function') {

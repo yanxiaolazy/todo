@@ -5,7 +5,7 @@ module .exports = login;
 
 async function login(ctx, next) {
   const body = ctx.request.body,
-        result = await db.login(body.login.username, body.login.password, body.login.email);
+        result = await db.login(body.login.username, body.login.password, body.login.remember);
   
   if (result.error) {
     const response = Object.assign({}, status['502'], {params: {error: result.error}});

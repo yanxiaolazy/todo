@@ -57,3 +57,8 @@ $ docker-compose restart
 
 **每次更新项目后都需要重复这个过程** 
 
+### Not implemented
+* logout
+* project progress
+* home page
+
