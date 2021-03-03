@@ -8,6 +8,7 @@ const koaStatic = require('koa-static');
 const {port, host, corsConf} = require('./config/app');
 const route = require('./routes');
 const {secret} = require('./config/db');
+const verifyToken = require('./db/verifyToken');
 
 const app = new Koa();
 
@@ -20,7 +21,9 @@ app
   .use(bodyparser({ multipart: true }))
   .use(koaStatic(path.resolve(__dirname, '../build')))
   //jwt验证
-  .use(koajwt({secret}).unless({path: [/\/api\/login$/, /(?!api)/]}))
+  .use(koajwt({secret}).unless({path: [/\/api\/login$/]}))
+  //对验证jwt后进行进一步处理
+  .use(verifyToken)
   //路由配置
   .use(route.routes())
   .use(route.allowedMethods());

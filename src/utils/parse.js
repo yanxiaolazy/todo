@@ -1,12 +1,14 @@
+import Cookies from "js-cookie";
+
 function getKeyValue(key) {
-  return sessionStorage.getItem(key);
+  return Cookies.get(key);
 }
 
 function setKeyValue(key, value) {
-  sessionStorage.setItem(key, value);
+  Cookies.set(key, value);
 }
 function romoveKeyValue(key) {
-  sessionStorage.removeItem(key);
+  Cookies.remove(key);
 }
 //user
 export function getUser() {
@@ -32,7 +34,7 @@ export function removeLogin() {
 export function getAdmin() {
   const login = getKeyValue('todo-login');
   //未登录状态时，没有 `admin`
-  return JSON.parse(login)?.admin;
+  return typeof login === 'undefined' || JSON.parse(login)?.admin;
 }
 
 export function setAdmin(value) {

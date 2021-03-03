@@ -4,7 +4,7 @@ const log = require('loglevel');
 const {UsersTable, secret} = require('../config/db');
 const createHash = require('../utils/createHash');
 
-async function login(username, password, email) {
+async function login(username, password, remember) {
   if (!username || !password) {
     return {error: 'not valid username or password or email'}
   }
@@ -34,7 +34,7 @@ async function login(username, password, email) {
 
   if (createHash(password, salt) === dataValues.password) {
     return {
-      token: createToken(username), 
+      token: createToken(username, remember), 
       admin: dataValues.admin,
       email: dataValues.email
     }
@@ -43,10 +43,10 @@ async function login(username, password, email) {
   return {info: 'wrong user name or password'};
 }
 
-function createToken(username) {
+function createToken(username, remember) {
   const payload = {
-    expiresIn: '24h',
-    notBefore: 0,
+    expiresIn: remember ? '48h' : '24h',
+    notBefore: Date.now(),
     audience: 'yanxiaolazy',
     issuer: 'yanxiaolazy',
     subject: 'yanxiaolazy',
