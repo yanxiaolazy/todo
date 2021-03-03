@@ -25,3 +25,4 @@ yarn-error.log*
 .eslintcache
 /server/static/upload/*
 !/server/static/upload/todo.png
+/src/utils/config.js
