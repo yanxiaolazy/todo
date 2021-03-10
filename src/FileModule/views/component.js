@@ -20,6 +20,7 @@ export default function FileModule({
       {...{onCancel, onOk}}
     >
       <Upload
+        accept='image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         listType='text'
         multiple={true}
         // withCredentials
