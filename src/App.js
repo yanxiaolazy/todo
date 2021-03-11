@@ -16,8 +16,10 @@ import CreateProjectLayout from "./CreateProjectLayout";
 import Home from './Home';
 import MediaLayout from "./MediaLayout";
 import NotFound from "./NotFound";
+import ErrorBoundary from './components/ErrorBoundary';
 
 import { getAdmin, getToken } from "./utils/parse";
+import { loggerErrorApi } from './utils/api';
 
 const LayoutHeader = Layout.Header,
       LayoutSider = Layout.Sider,
@@ -47,6 +49,10 @@ const styles = {
     marginTop: '64px',
     minHeight: 'calc(100vh - 64px)'
   }
+}
+
+function handleError(error) {
+  loggerErrorApi()(error)();
 }
 
 function App() {
@@ -80,20 +86,22 @@ function App() {
             <SideBar key='sider'/>
           </LayoutSider>
           <LayoutContent style={styles.content}>
-            <Switch key='content'>
-              <Route exact path='/' component={Home}/>
-              <Route exact path='/view' component={ProjectSummary} />
-              <Route exact path='/view/:projectId(\d+)/edit' component={EditProject} />
-              <Route path='/view/:projectId(\d+)' component={ViewProject} />
-              <Route exact path='/setting' component={SettingLayout} />
-              {isAdmin && <>
-                <Route exact path='/new' component={CreateProjectLayout} />
-                <Route exact path='/media' component={MediaLayout} />
-                <Route exact path='/user' component={UsersLayout} />
-                <Route exact path='/user/create-user' component={CreateUser} />
-              </>}
-              <Route component={NotFound} />
-            </Switch>
+            <ErrorBoundary onLogger={handleError}>
+              <Switch key='content'>
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/view' component={ProjectSummary} />
+                <Route exact path='/view/:projectId(\d+)/edit' component={EditProject} />
+                <Route path='/view/:projectId(\d+)' component={ViewProject} />
+                <Route exact path='/setting' component={SettingLayout} />
+                {isAdmin && <>
+                  <Route exact path='/new' component={CreateProjectLayout} />
+                  <Route exact path='/media' component={MediaLayout} />
+                  <Route exact path='/user' component={UsersLayout} />
+                  <Route exact path='/user/create-user' component={CreateUser} />
+                </>}
+                <Route component={NotFound} />
+              </Switch>
+            </ErrorBoundary>
           </LayoutContent>
         </Layout>
       </Layout>}

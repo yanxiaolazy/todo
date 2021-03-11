@@ -30,4 +30,6 @@ export const verifyTokenApi = createApi(`${_baseURL}/verify/token`, 'POST');
 
 export const uploadApi = `${baseConfig.baseURL}${_baseURL}/upload`;
 
+export const loggerErrorApi = createApi(`${_baseURL}/logger`, 'POST');
+
 

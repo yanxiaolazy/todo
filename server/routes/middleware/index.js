@@ -11,6 +11,7 @@ const deleteUser = require('./deleteUser');
 const updateUser = require('./updateUser');
 const viewAllMedias = require('./viewAllMedias');
 const deleteProject = require('./deleteProject');
+const loggerError = require('./loggerError');
 
 module.exports = {
   login,
@@ -25,5 +26,6 @@ module.exports = {
   deleteUser,
   updateUser,
   viewAllMedias,
-  deleteProject
+  deleteProject,
+  loggerError
 }

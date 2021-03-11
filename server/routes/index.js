@@ -15,7 +15,8 @@ const {
   deleteUser,
   updateUser,
   viewAllMedias,
-  deleteProject
+  deleteProject,
+  loggerError
 } = require('./middleware');
 
 const router = new Router();
@@ -40,6 +41,7 @@ router
   .post('/api/new/project', newProject)
   .post('/api/update/project', updateProject)
   .post('/api/update/user', updateUser)
+  .post('/api/logger', loggerError)
 
 router
   .delete('/api/delete/file', deleteFile)
